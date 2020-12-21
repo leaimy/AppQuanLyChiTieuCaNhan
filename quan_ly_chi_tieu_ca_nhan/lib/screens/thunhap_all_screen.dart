@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 
-class OutcomeAllScreen extends StatelessWidget {
+class IncomeAllScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

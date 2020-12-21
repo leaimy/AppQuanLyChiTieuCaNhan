@@ -6,9 +6,16 @@ class TransactionItem extends StatelessWidget {
   final IconData icon;
   final String amount;
   final String title;
+  final Color textColor;
 
-  TransactionItem(
-      {this.barColor, this.icon, this.iconColor, this.amount, this.title});
+  TransactionItem({
+    this.barColor,
+    this.icon,
+    this.iconColor,
+    this.amount,
+    this.title,
+    this.textColor = Colors.red,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +58,9 @@ class TransactionItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '-${this.amount} VND',
+                  '${this.amount} VND',
                   style: TextStyle(
-                    color: Colors.red,
+                    color: textColor,
                     fontSize: 17.0,
                     fontWeight: FontWeight.bold,
                   ),
