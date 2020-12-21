@@ -81,13 +81,13 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       ThongKeItem(
                         textName: 'Số mục tiêu\nhoàn thành',
-                        textNumber: '2.500.000 VND',
+                        textNumber: '3',
                         colorName: Colors.blue[400],
                         colorNumber: Colors.pink[300],
                       ),
                       ThongKeItem(
                         textName: 'Số mục tiêu\nchưa hoàn thành',
-                        textNumber: '2.300.000 VND',
+                        textNumber: '2',
                         colorName: Colors.orange[400],
                         colorNumber: Colors.green[600],
                       ),
