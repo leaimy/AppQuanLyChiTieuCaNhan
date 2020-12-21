@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/lich_su_chi_tieu_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_chi_tieu_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/thunhap_all_screen.dart';
 
 void main() {
   runApp(HomePage());
@@ -12,7 +13,7 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
-          child: TietKiemScreen(),
+          child: OutcomeAllScreen(),
         ),
       ),
     );
