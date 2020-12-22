@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -188,14 +189,22 @@ class AddIncomeScreen extends StatelessWidget {
                         children: [
                           Text(
                             'Ngày bắt đầu:',
+                            textAlign: TextAlign.left,
                             style: kTitleTextStyle,
                           ),
-                          SizedBox(height: 10.0),
-                          TextField(
+                          DateTimePicker(
                             textAlign: TextAlign.center,
-                            keyboardType: TextInputType.datetime,
-                            decoration: kTextFieldDecoration.copyWith(
-                                hintText: 'Ngày bắt đầu'),
+                            dateMask: 'dd/MM/yyyy',
+                            type: DateTimePickerType.date,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                            initialValue: DateTime.now().toString(),
+                            onChanged: (val) => print(val),
+                            validator: (val) {
+                              print(val);
+                              return null;
+                            },
+                            onSaved: (val) => print(val),
                           ),
                         ],
                       ),
@@ -208,13 +217,21 @@ class AddIncomeScreen extends StatelessWidget {
                             'Ngày kết thúc:',
                             style: kTitleTextStyle,
                           ),
-                          SizedBox(height: 10.0),
-                          TextField(
+                          DateTimePicker(
                             textAlign: TextAlign.center,
-                            keyboardType: TextInputType.datetime,
-                            decoration: kTextFieldDecoration.copyWith(
-                              hintText: 'Ngày kết thúc',
-                            ),
+                            dateMask: 'dd/MM/yyyy',
+                            type: DateTimePickerType.date,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                            initialValue: DateTime.now()
+                                .add(Duration(days: 1))
+                                .toString(),
+                            onChanged: (val) => print(val),
+                            validator: (val) {
+                              print(val);
+                              return null;
+                            },
+                            onSaved: (val) => print(val),
                           ),
                         ],
                       ),
