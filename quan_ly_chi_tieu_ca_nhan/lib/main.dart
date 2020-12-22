@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: IncomeDetailPage(),
+      home: ThemMucTieuScreen(),
     );
   }
 }
