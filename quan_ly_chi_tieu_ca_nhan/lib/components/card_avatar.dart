@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class CardAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    int rand = Random().nextInt(10);
+
     return Card(
       elevation: 10.0,
       child: Padding(
@@ -13,9 +17,7 @@ class CardAvatar extends StatelessWidget {
               width: 70.0,
               height: 70.0,
               child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  "https://hoatuoivannam.com/wp-content/uploads/2019/02/hoa-hai-duong-dep-nhat-13.jpg",
-                ),
+                backgroundImage: AssetImage('images/avatar$rand.png'),
               ),
             ),
             Text(
