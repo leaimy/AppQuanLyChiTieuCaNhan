@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class AddOutcome extends StatelessWidget {
+class AddIncomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           child: ListView(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             children: [
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Tiêu đề:',
-                      style: kTitleTextStyle,
-                    ),
-                    SizedBox(height: 10.0),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      decoration: kTextFieldDecoration.copyWith(
-                        hintText: 'Nhập tiêu đề khoản chi tiêu',
-                      ),
-                    )
-                  ],
+              Text(
+                'Nhập số tiền cần quản lý:',
+                style: kTitleTextStyle,
+              ),
+              SizedBox(height: 10.0),
+              TextField(
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                decoration: kTextFieldDecoration.copyWith(
+                  hintText: 'Nhập số tiền cần quản lý',
                 ),
               ),
               SizedBox(height: 30.0),
@@ -34,7 +29,7 @@ class AddOutcome extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nhóm chi tiêu',
+                      'Nhóm thu nhập',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
@@ -74,7 +69,7 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Học tập'),
+                                    Text('Ba mẹ'),
                                   ],
                                 ),
                                 Radio(
@@ -105,7 +100,7 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Xã hội'),
+                                    Text('Học bổng'),
                                   ],
                                 ),
                                 Radio(
@@ -136,7 +131,7 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Thực phẩm'),
+                                    Text('Công việc'),
                                   ],
                                 ),
                                 Radio(
@@ -184,25 +179,44 @@ class AddOutcome extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30.0),
+              SizedBox(height: 15),
               Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      'Số tiền:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        letterSpacing: 1.3,
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Ngày bắt đầu:',
+                            style: kTitleTextStyle,
+                          ),
+                          SizedBox(height: 10.0),
+                          TextField(
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.datetime,
+                            decoration: kTextFieldDecoration.copyWith(
+                                hintText: 'Ngày bắt đầu'),
+                          ),
+                        ],
                       ),
                     ),
-                    SizedBox(height: 10.0),
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: kTextFieldDecoration.copyWith(
-                        hintText: 'Nhập số tiền đã chi',
+                    SizedBox(width: 10.0),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Ngày kết thúc:',
+                            style: kTitleTextStyle,
+                          ),
+                          SizedBox(height: 10.0),
+                          TextField(
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.datetime,
+                            decoration: kTextFieldDecoration.copyWith(
+                              hintText: 'Ngày kết thúc',
+                            ),
+                          ),
+                        ],
                       ),
                     )
                   ],
@@ -216,11 +230,13 @@ class AddOutcome extends StatelessWidget {
                   color: Colors.blueAccent,
                   borderRadius: BorderRadius.circular(30.0),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     minWidth: 200.0,
                     height: 42.0,
                     child: Text(
-                      'Thêm chi tiêu mới',
+                      'Thêm quản lý thu nhập mới',
                       style: TextStyle(
                         color: Colors.white,
                       ),
