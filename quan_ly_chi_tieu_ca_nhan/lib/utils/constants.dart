@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const kTextFieldDecoration = InputDecoration(
   hintText: 'Enter a text',
+  hintStyle: TextStyle(fontFamily: 'Lobster'),
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -25,5 +26,6 @@ const kSendButtonTextStyle = TextStyle(
 const kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontSize: 16.0,
-  letterSpacing: 1.3,
+  letterSpacing: 1.0,
+  fontFamily: 'Lobster',
 );

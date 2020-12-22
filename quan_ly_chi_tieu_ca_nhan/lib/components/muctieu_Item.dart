@@ -43,17 +43,30 @@ class MuctieuItem extends StatelessWidget {
           Expanded(
             child: Text(
               textName,
-              style: TextStyle(fontSize: 18.0, color: textColor),
+              style: TextStyle(
+                fontSize: 18.0,
+                color: textColor,
+                fontFamily: 'Lobster',
+              ),
             ),
           ),
-          Card(
+          Material(
             elevation: 5.0,
-            child: Icon(
-              icon,
-              size: 50.0,
-              color: iconColor,
+            shape: CircleBorder(),
+            child: Container(
+              height: 40.0,
+              width: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50.0),
+                color: Colors.white,
+              ),
+              child: Icon(
+                icon,
+                color: iconColor,
+                size: 20.0,
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

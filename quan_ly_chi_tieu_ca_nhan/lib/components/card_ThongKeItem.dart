@@ -20,7 +20,8 @@ class ThongKeItem extends StatelessWidget {
             style: TextStyle(
               color: colorName,
               fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+              // fontWeight: FontWeight.bold,
+              fontFamily: 'Lobster',
             ),
             textAlign: TextAlign.center,
           ),
@@ -30,6 +31,7 @@ class ThongKeItem extends StatelessWidget {
               color: colorNumber,
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Lobster',
             ),
           )
         ],
