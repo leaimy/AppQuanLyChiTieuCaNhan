@@ -188,6 +188,25 @@ class IncomeDetailPage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Trang chủ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Bỏ heo',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Chi tiêu',
+          ),
+        ],
+        //currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        //onTap: _onItemTapped,
+      ),
     );
   }
 }

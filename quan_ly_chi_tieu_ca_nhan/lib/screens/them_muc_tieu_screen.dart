@@ -1,5 +1,7 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemMucTieuScreen extends StatelessWidget {
@@ -146,23 +148,46 @@ class ThemMucTieuScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        'Ngày bắt đầu',
-                        style: kTitleTextStyle,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Container(
-                        height: 40.0,
-                        width: 150.0,
-                        child: DateTimePicker(
-                          initialValue: '',
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Ngày bắt đầu',
+                          style: kTitleTextStyle,
+                        ),
+                        DateTimePicker(
+                          textAlign: TextAlign.center,
+                          dateMask: 'dd/MM/yyyy',
+                          type: DateTimePickerType.date,
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2100),
-                          // dateLabelText: 'Date',
+                          initialValue: DateTime.now().toString(),
+                          onChanged: (val) => print(val),
+                          validator: (val) {
+                            print(val);
+                            return null;
+                          },
+                          onSaved: (val) => print(val),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 10.0),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Ngày kết thúc',
+                          style: kTitleTextStyle,
+                        ),
+                        DateTimePicker(
+                          textAlign: TextAlign.center,
+                          dateMask: 'dd/MM/yyyy',
+                          type: DateTimePickerType.date,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                          initialValue:
+                              DateTime.now().add(Duration(days: 1)).toString(),
                           onChanged: (val) => print(val),
                           validator: (val) {
                             print(val);
@@ -170,33 +195,8 @@ class ThemMucTieuScreen extends StatelessWidget {
                           },
                           onSaved: (val) => print(val),
                         ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        'Ngày kết thúc',
-                        style: kTitleTextStyle,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Container(
-                        height: 40.0,
-                        width: 150.0,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            hintText: "Nhập ngày kết thúc",
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -251,24 +251,8 @@ class ThemMucTieuScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Bỏ heo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Chi tiêu',
-          ),
-        ],
-        //currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        //onTap: _onItemTapped,
+      bottomNavigationBar: BottomNavigator(
+        selectedIndex: 1,
       ),
     );
   }
