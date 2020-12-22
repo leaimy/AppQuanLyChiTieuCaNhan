@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_muc_tieu_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/tietkiem_screen.dart';
 
 void main() {
   runApp(HomePage());
