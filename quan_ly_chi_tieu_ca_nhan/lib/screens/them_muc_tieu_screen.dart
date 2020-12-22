@@ -10,6 +10,14 @@ class ThemMucTieuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Thêm mục tiêu tiết kiệm',
+          style: TextStyle(
+            fontFamily: 'Lobster',
+          ),
+        ),
+      ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -72,7 +80,14 @@ class ThemMucTieuScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 10.0),
-                                  Text('Ngày'),
+                                  Text(
+                                    'Ngày',
+                                    style: TextStyle(
+                                      fontFamily: 'Lobster',
+                                      fontSize: 18.0,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
                                 ],
                               ),
                               Radio(
@@ -102,7 +117,14 @@ class ThemMucTieuScreen extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 10.0),
-                                  Text('Tuần'),
+                                  Text(
+                                    'Tuần',
+                                    style: TextStyle(
+                                      fontFamily: 'Lobster',
+                                      fontSize: 18.0,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
                                 ],
                               ),
                               Radio(
