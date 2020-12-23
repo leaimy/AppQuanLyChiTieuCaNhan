@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_chi_tieu_screen.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_thu_nhap_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/thunhap_detail_screen.dart';
 
 class IncomeAllScreen extends StatelessWidget {
   @override
@@ -74,6 +76,12 @@ class IncomeAllScreen extends StatelessWidget {
                       barColor: Colors.lightBlue,
                       icon: Icons.add,
                       iconColor: Colors.green,
+                      onItemPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return IncomeDetailPage();
+                        }));
+                      },
                     ),
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
@@ -81,6 +89,12 @@ class IncomeAllScreen extends StatelessWidget {
                       barColor: Colors.lightBlue,
                       icon: Icons.add,
                       iconColor: Colors.green,
+                      onItemPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return IncomeDetailPage();
+                        }));
+                      },
                     ),
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
@@ -88,6 +102,12 @@ class IncomeAllScreen extends StatelessWidget {
                       barColor: Colors.lightBlue,
                       icon: Icons.add,
                       iconColor: Colors.green,
+                      onItemPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return IncomeDetailPage();
+                        }));
+                      },
                     ),
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
@@ -95,6 +115,12 @@ class IncomeAllScreen extends StatelessWidget {
                       barColor: Colors.lightBlue,
                       icon: Icons.add,
                       iconColor: Colors.green,
+                      onItemPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return IncomeDetailPage();
+                        }));
+                      },
                     ),
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
@@ -102,35 +128,25 @@ class IncomeAllScreen extends StatelessWidget {
                       barColor: Colors.lightBlue,
                       icon: Icons.add,
                       iconColor: Colors.green,
+                      onItemPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return IncomeDetailPage();
+                        }));
+                      },
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 10.0),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: Material(
-                  elevation: 5.0,
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: MaterialButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return AddIncomeScreen();
-                      }));
-                    },
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text(
-                      'Thêm quản lý thu nhập mới',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              NutBam(
+                  textName: 'Thêm chi tiêu mới',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return AddOutcome();
+                    }));
+                  })
             ],
           ),
         ),

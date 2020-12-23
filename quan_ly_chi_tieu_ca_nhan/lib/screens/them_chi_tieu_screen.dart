@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class AddOutcome extends StatelessWidget {
@@ -209,25 +210,11 @@ class AddOutcome extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30.0),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Material(
-                  elevation: 5.0,
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: MaterialButton(
-                    onPressed: () {},
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text(
-                      'Thêm chi tiêu mới',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              NutBam(
+                  textName: 'Thêm chi tiêu',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  })
             ],
           ),
         ),

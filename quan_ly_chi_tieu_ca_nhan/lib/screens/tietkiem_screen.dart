@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tiet_muc_tieu_tiet_kiem_screen.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_muc_tieu_screen.dart';
 
@@ -90,34 +91,14 @@ class TietKiemScreen extends StatelessWidget {
                   ),
                 ],
               )),
-              FlatButton(
+              NutBam(
+                textName: 'Thêm mục tiêu tiết kiệm',
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ThemMucTieuScreen();
                   }));
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: Colors.pink[600],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 50.0,
-                      vertical: 10.0,
-                    ),
-                    child: Text(
-                      'Thêm mục tiêu tiết kiệm',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        // fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'Lobster',
-                      ),
-                    ),
-                  ),
-                ),
-              )
+              ),
             ],
           ),
         ),

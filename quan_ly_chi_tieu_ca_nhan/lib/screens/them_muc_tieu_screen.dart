@@ -2,6 +2,8 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/tietkiem_screen.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemMucTieuScreen extends StatelessWidget {
@@ -228,27 +230,12 @@ class ThemMucTieuScreen extends StatelessWidget {
             ),
             SizedBox(height: 5.0),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: NutBam(
+                  textName: 'Xác nhận thêm',
                   onPressed: () {
                     Navigator.pop(context);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: Text(
-                    'Xác nhận thêm',
-                    style: TextStyle(
-                      fontFamily: 'Lobster',
-                      fontSize: 18.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
+                  }),
             )
           ],
         ),
