@@ -227,7 +227,7 @@ class AddOutcome extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
