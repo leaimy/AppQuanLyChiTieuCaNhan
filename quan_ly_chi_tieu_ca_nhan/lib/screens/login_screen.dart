@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_in_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_up_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({
@@ -42,7 +44,12 @@ class LoginScreen extends StatelessWidget {
                   color: Colors.pink[200],
                   borderRadius: BorderRadius.circular(30.0),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return SignUpScreen();
+                      }));
+                    },
                     minWidth: 150.0,
                     height: 42.0,
                     child: Text(
@@ -65,7 +72,12 @@ class LoginScreen extends StatelessWidget {
                 color: Colors.pink[200],
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SignInScreen();
+                    }));
+                  },
                   minWidth: 150.0,
                   height: 42.0,
                   child: Text(

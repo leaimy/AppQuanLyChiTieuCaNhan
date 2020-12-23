@@ -7,10 +7,11 @@ class CardAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     int rand = Random().nextInt(10);
 
-    return Card(
+    return Material(
       elevation: 10.0,
+      borderRadius: BorderRadius.circular(20.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
             Container(
@@ -21,7 +22,7 @@ class CardAvatar extends StatelessWidget {
               ),
             ),
             Text(
-              'Ha Nguyen Thi',
+              'Xin chào Heo con',
               style: TextStyle(
                 fontSize: 20.0,
                 fontFamily: 'Lobster',

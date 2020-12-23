@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({
@@ -125,7 +126,13 @@ class SignInScreen extends StatelessWidget {
                                     color: Colors.pink[200],
                                     borderRadius: BorderRadius.circular(30.0),
                                     child: MaterialButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return HomeScreen();
+                                        }));
+                                      },
                                       minWidth: 150.0,
                                       height: 42.0,
                                       child: Text(

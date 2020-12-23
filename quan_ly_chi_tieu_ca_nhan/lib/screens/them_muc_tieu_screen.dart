@@ -234,7 +234,9 @@ class ThemMucTieuScreen extends StatelessWidget {
                 color: Colors.blueAccent,
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   minWidth: 200.0,
                   height: 42.0,
                   child: Text(
@@ -250,9 +252,6 @@ class ThemMucTieuScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigator(
-        selectedIndex: 1,
       ),
     );
   }
