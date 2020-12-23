@@ -22,7 +22,10 @@ class CardAvatar extends StatelessWidget {
             ),
             Text(
               'Ha Nguyen Thi',
-              style: TextStyle(fontSize: 20.0),
+              style: TextStyle(
+                fontSize: 20.0,
+                fontFamily: 'Lobster',
+              ),
             ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceAround,
