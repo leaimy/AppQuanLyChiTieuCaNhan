@@ -72,9 +72,9 @@ CREATE TABLE ChiTietTietKiem
 (
      Id INT PRIMARY KEY IDENTITY(1,1),
      MucTieuTietKiem_Id INT REFERENCES (Id),
-     TrangThai BIT DEFAULT 0,
-     SoTien DECIMAL,
-     Ngay DATETIME
+     TrangThai BIT NOT NULL DEFAULT 0,
+     SoTien DECIMAL NOT NULL,
+     Ngay DATETIME NOT NULL
 );
 ```
 
@@ -82,7 +82,7 @@ Bảng chi tiết kế hoạch tiết kiệm, giúp người dùng theo dõi tr�
 
 Khi 1 kế hoạch tiết kiệm được tạo ra, chương trình sẽ tự động tạo 1 danh sách các chi tiết tiết tiệm, mặc định đặt trạng thái bằng 0. Đồng thời, căn cứ theo kế hoạch tiết kiệm theo ngày hoặc theo tuần mà chương trình tự động chia đều số tiền để chèn vào và chèn ngày tương ứng để nhắc nhở người dùng bỏ ống heo.
 
-### 4. Quản lý khoản thu
+### 4. Quản lý số tiền hiện có
 
 ```sql
 CREATE TABLE QuanLyTienHienCo 
@@ -93,7 +93,7 @@ CREATE TABLE QuanLyTienHienCo
     SoTienDaSuDung DECIMAL NOT NULL DEFAULT 0,
     NgayBD DATETIME NOT NULL,
     NgayKT DATETIME NOT NULL,
-    TrangThai BIT DEFAULT 0,
+    TrangThai BIT NOT NULL DEFAULT 0,
     CreatedAt DATETIME DEFAULT GETDATE()
 );
 ```
@@ -104,7 +104,7 @@ Trong khoảng thời gian này, người dùng có thể nhập thêm các ngu�
 
 Với bảng này, người dùng sẽ biết được với khoản tiền trong 1 thời gian nhất định, mình đã sử dụng hết bao nhiêu, còn lại bao nhiêu, có bao nhiêu ngày chi tiêu vượt quá hạn mức,...
 
-### 5. Chi tiết khoản thu
+### 5. Chi tiết nguồn thu
 
 ```sql
 CREATE TABLE ChiTietNguonThu
