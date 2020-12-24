@@ -99,7 +99,7 @@ class ChiTietMucTieuTietKiemScreen extends StatelessWidget {
               ),
               Card(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
                     children: [
                       Padding(

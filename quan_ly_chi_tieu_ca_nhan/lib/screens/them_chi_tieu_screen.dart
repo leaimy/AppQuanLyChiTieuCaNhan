@@ -36,11 +36,7 @@ class AddOutcome extends StatelessWidget {
                   children: [
                     Text(
                       'Nhóm chi tiêu',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        letterSpacing: 1.3,
-                      ),
+                      style: kTitleTextStyle,
                     ),
                     SizedBox(height: 15.0),
                     Container(
@@ -75,7 +71,13 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Học tập'),
+                                    Text(
+                                      'Học tập',
+                                      style: TextStyle(
+                                        fontFamily: 'Lobster',
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -106,7 +108,13 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Xã hội'),
+                                    Text(
+                                      'Xã hội',
+                                      style: TextStyle(
+                                        fontFamily: 'Lobster',
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -137,7 +145,13 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Thực phẩm'),
+                                    Text(
+                                      'Thực phẩm',
+                                      style: TextStyle(
+                                        fontFamily: 'Lobster',
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -168,7 +182,13 @@ class AddOutcome extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Khác'),
+                                    Text(
+                                      'Khác',
+                                      style: TextStyle(
+                                        fontFamily: 'Lobster',
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -192,11 +212,7 @@ class AddOutcome extends StatelessWidget {
                   children: [
                     Text(
                       'Số tiền:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        letterSpacing: 1.3,
-                      ),
+                      style: kTitleTextStyle,
                     ),
                     SizedBox(height: 10.0),
                     TextField(

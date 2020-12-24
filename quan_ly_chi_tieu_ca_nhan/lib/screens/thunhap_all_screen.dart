@@ -4,8 +4,8 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_chi_tieu_screen.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_thu_nhap_screen.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/thunhap_detail_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class IncomeAllScreen extends StatelessWidget {
   @override
@@ -60,11 +60,7 @@ class IncomeAllScreen extends StatelessWidget {
               SizedBox(height: 20.0),
               Text(
                 'Danh sách chi tiết các khoản thu:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                  letterSpacing: 1.3,
-                ),
+                style: kTitleTextStyle,
               ),
               SizedBox(height: 10.0),
               Expanded(
@@ -73,7 +69,7 @@ class IncomeAllScreen extends StatelessWidget {
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
                       textColor: Colors.blue,
-                      barColor: Colors.lightBlue,
+                      barColor: Colors.pink[200],
                       icon: Icons.add,
                       iconColor: Colors.green,
                       onItemPressed: () {
@@ -86,7 +82,7 @@ class IncomeAllScreen extends StatelessWidget {
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
                       textColor: Colors.blue,
-                      barColor: Colors.lightBlue,
+                      barColor: Colors.pink[200],
                       icon: Icons.add,
                       iconColor: Colors.green,
                       onItemPressed: () {
@@ -99,7 +95,7 @@ class IncomeAllScreen extends StatelessWidget {
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
                       textColor: Colors.blue,
-                      barColor: Colors.lightBlue,
+                      barColor: Colors.pink[200],
                       icon: Icons.add,
                       iconColor: Colors.green,
                       onItemPressed: () {
@@ -112,7 +108,7 @@ class IncomeAllScreen extends StatelessWidget {
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
                       textColor: Colors.blue,
-                      barColor: Colors.lightBlue,
+                      barColor: Colors.pink[200],
                       icon: Icons.add,
                       iconColor: Colors.green,
                       onItemPressed: () {
@@ -125,7 +121,7 @@ class IncomeAllScreen extends StatelessWidget {
                     MuctieuItem(
                       textName: '01/12/2020 - 31/12/2020',
                       textColor: Colors.blue,
-                      barColor: Colors.lightBlue,
+                      barColor: Colors.pink[200],
                       icon: Icons.add,
                       iconColor: Colors.green,
                       onItemPressed: () {

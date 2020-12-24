@@ -1,0 +1,39 @@
+CREATE DATABASE QuanLyChiTieu
+GO 
+
+USE QuanLyChiTieu
+GO
+
+CREATE TABLE NguoiDung
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Email VARCHAR(100) NOT NULL,
+    MatKhau VARCHAR(100) NOT NULL,
+    TenHienThi NVARCHAR(100) NOT NULL,
+    Avatar VARCHAR(100) NOT NULL,
+    DateCreated DATETIME DEFAULT GETDATE()
+)
+GO
+
+CREATE TABLE TietKiem
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    NguoiDung_Id INT REFERENCES NguoiDung(Id),
+    TenMucTieu NVARCHAR(200) NOT NULL,
+    MoTa NVARCHAR(200),
+    SoTienTietKiem DECIMAL NOT NULL,
+    NgayBD DATETIME NOT NULL,
+    NgayKT DATETIME NOT NULL,
+    TrangThai BIT DEFAULT 0,
+    LoaiTietKiem VARCHAR(50) NOT NULL,
+    DateCreated DATETIME DEFAULT GETDATE()
+)
+GO
+
+CREATE TABLE ChiTietTietKiem
+(
+     Id INT PRIMARY KEY IDENTITY(1,1),
+     TietKiem_Id INT REFERENCES TietKiem(Id),
+     TrangThai BIT,
+     DateCreated DATETIME DEFAULT GETDATE()
+)

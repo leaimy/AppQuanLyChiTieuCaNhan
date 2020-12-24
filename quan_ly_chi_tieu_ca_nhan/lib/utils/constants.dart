@@ -25,7 +25,8 @@ const kSendButtonTextStyle = TextStyle(
 
 const kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
-  fontSize: 16.0,
+  fontSize: 18.0,
   letterSpacing: 1.0,
   fontFamily: 'Lobster',
+  color: Color(0xFFF48FB1),
 );
