@@ -68,11 +68,10 @@ Lưu trữ thông tin về kế hoạch tiết kiệm của người dùng. Ngư
 ### 3. Chi tiết kế hoạch tiết kiệm
 
 ```sql
-
 CREATE TABLE ChiTietTietKiem
 (
      Id INT PRIMARY KEY IDENTITY(1,1),
-     TietKiem_Id INT REFERENCES TietKiem(Id),
+     MucTieuTietKiem_Id INT REFERENCES (Id),
      TrangThai BIT DEFAULT 0,
      SoTien DECIMAL,
      Ngay DATETIME
@@ -86,7 +85,7 @@ Khi 1 kế hoạch tiết kiệm được tạo ra, chương trình sẽ tự đ
 ### 4. Quản lý khoản thu
 
 ```sql
-CREATE TABLE QuanLyKhoanThu 
+CREATE TABLE QuanLyTienHienCo 
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
     NguoiDung_Id INT REFERENCES NguoiDung,
@@ -99,19 +98,19 @@ CREATE TABLE QuanLyKhoanThu
 );
 ```
 
-Quản lý khoản thu của người dùng trong 1 thời gian nhất định. Trong khoảng thời gian này, chương trình sẽ tính ra hạn mức chi tiêu để sử dụng cho mỗi ngày. Người dùng dựa vào hạn mức chi tiêu để quyết định số tiền bỏ ra, nếu chi tiêu của ngày vượt hạn mức của ngày đó thì chương trình sẽ thông báo cho người dùng.
+Quản lý số tiền hiện có của người dùng trong 1 khoảng thời gian nhất định. Trong khoảng thời gian này, chương trình sẽ tính ra hạn mức chi tiêu để sử dụng cho mỗi ngày. Người dùng dựa vào hạn mức chi tiêu để quyết định số tiền bỏ ra, nếu chi tiêu của ngày vượt hạn mức của ngày đó thì chương trình sẽ thông báo cho người dùng.
 
-Trong khoảng thời gian quản lý khoản thu, người dùng có thể nhập thêm nguồn thu nhập khác vào, khoản tiền này sẽ được cộng dồn. Đồng thời, hạn mức chi tiêu theo ngày cũng sẽ được tăng lên tùy theo khoản thu nhập được cộng vào.
+Trong khoảng thời gian này, người dùng có thể nhập thêm các nguồn thu nhập khác vào, khoản tiền này sẽ được cộng dồn vào số tiền hiện có. Đồng thời, hạn mức chi tiêu theo ngày cũng sẽ được tăng lên tùy theo khoản thu nhập được cộng vào.
 
-Với bảng này, người dùng sẽ biết được với khoản tiền trong thời gian nhất định, mình đã sử dụng hết bao nhiêu, còn lại bao nhiêu, có bao nhiêu ngày chi tiêu vượt quá hạn mức,...
+Với bảng này, người dùng sẽ biết được với khoản tiền trong 1 thời gian nhất định, mình đã sử dụng hết bao nhiêu, còn lại bao nhiêu, có bao nhiêu ngày chi tiêu vượt quá hạn mức,...
 
 ### 5. Chi tiết khoản thu
 
 ```sql
-CREATE TABLE ChiTietKhoanThu
+CREATE TABLE ChiTietNguonThu
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    ThuNhap_Id INT REFERENCES QuanLyKhoanThu(Id),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(Id),
     Nhom VARCHAR(100) NOT NULL DEFAULT 'other',
     SoTien DECIMAL NOT NULL,
     CreatedAt DATETIME DEFAULT GETDATE()
@@ -130,16 +129,16 @@ Bảng theo dõi chi tiết các khoản thu trong 1 khoảng thời gian. Gồm
 CREATE TABLE ChiTieu
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    ThuNhap_Id INT REFERENCES QuanLyKhoanThu(id),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(id),
     HanMucChiTieu DECIMAL NOT NULL,
     TongChi DECIMAL NOT NULL,
     Ngay DATETIME NOT NULL
 );
 ```
 
-Quản lý chi tiêu, giúp người dùng theo dõi các khoản chi theo từng ngày từ ngày bắt đầu đến ngày kết thúc của kế hoạch quản lý khoản thu.
+Quản lý chi tiêu, giúp người dùng theo dõi các khoản chi theo từng ngày từ ngày bắt đầu đến ngày kết thúc của 1 kế hoạch quản lý tiền hiện có.
 
-- Khi 1 kế hoạch quản lý khoản thu được tạo ra, chương trình sẽ tự động tạo 1 danh sách chi tiêu từ ngày bắt đầu đến ngày kết thúc và gán ngày tương ứng vào thuộc tính "Ngay". 
+- Khi 1 kế hoạch quản lý tiền hiện có được tạo ra, chương trình sẽ tự động tạo 1 danh sách chi tiêu từ ngày bắt đầu đến ngày kết thúc và gán ngày tương ứng vào thuộc tính "Ngay". 
 
 - Hạn mức chi tiêu sẽ được tự động tính dựa trên Số tiền hiện có ở bảng quản lý khoản thu.
 
@@ -168,5 +167,3 @@ Theo dõi chi tiết chi tiêu của 1 ngày. Người dùng theo dõi và quả
 - Nhom: việc chi tiêu thuộc về nhóm nào
 
 - SoTien: số tiền đã chi
-
-

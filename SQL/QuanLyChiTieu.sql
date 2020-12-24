@@ -11,44 +11,74 @@ CREATE TABLE NguoiDung
     MatKhau VARCHAR(100) NOT NULL,
     TenHienThi NVARCHAR(100) NOT NULL,
     Avatar VARCHAR(100) NOT NULL,
-    DateCreated DATETIME DEFAULT GETDATE()
-)
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO
 
-CREATE TABLE TietKiem
+CREATE TABLE MucTieuTietKiem
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
     NguoiDung_Id INT REFERENCES NguoiDung(Id),
     TenMucTieu NVARCHAR(200) NOT NULL,
     MoTa NVARCHAR(200),
-    SoTienTietKiem DECIMAL NOT NULL,
+    SoTienCanTietKiem DECIMAL NOT NULL,
+    SoTienDaTietKiemDuoc DECIMAL NOT NULL,
     NgayBD DATETIME NOT NULL,
     NgayKT DATETIME NOT NULL,
     TrangThai BIT DEFAULT 0,
     LoaiTietKiem VARCHAR(50) NOT NULL,
-    DateCreated DATETIME DEFAULT GETDATE()
-)
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO
 
 CREATE TABLE ChiTietTietKiem
 (
      Id INT PRIMARY KEY IDENTITY(1,1),
-     TietKiem_Id INT REFERENCES TietKiem(Id),
-     TrangThai BIT,
-     DateCreated DATETIME DEFAULT GETDATE()
-)
-GO
+     MucTieuTietKiem_Id INT REFERENCES MucTieuTietKiem(Id),
+     TrangThai BIT DEFAULT 0,
+     SoTien DECIMAL,
+     Ngay DATETIME
+);
 
-CREATE TABLE ThuNhap 
+CREATE TABLE QuanLyTienHienCo 
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
     NguoiDung_Id INT REFERENCES NguoiDung,
-    TongThu DECIMAL NOT NULL DEFAULT 0,
+    SoTienHienCo DECIMAL NOT NULL DEFAULT 0,
+    SoTienDaSuDung DECIMAL NOT NULL DEFAULT 0,
     NgayBD DATETIME NOT NULL,
     NgayKT DATETIME NOT NULL,
     TrangThai BIT DEFAULT 0,
-    SoDu DECIMAL NOT NULL DEFAULT 0,
-    DateCreated DATETIME DEFAULT GETDATE()
-)
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE ChiTietNguonThu
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(Id),
+    Nhom VARCHAR(100) NOT NULL DEFAULT 'other',
+    SoTien DECIMAL NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO
 
+CREATE TABLE ChiTieu
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(id),
+    HanMucChiTieu DECIMAL NOT NULL,
+    TongChi DECIMAL NOT NULL,
+    Ngay DATETIME NOT NULL
+);
+GO
+
+CREATE TABLE ChiTietChiTieu 
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    ChiTieu_Id INT REFERENCES ChiTieu(Id),
+    Ten NVARCHAR(200) NOT NULL,
+    Nhom VARCHAR(100) NOT NULL DEFAULT 'other',
+    SoTien DECIMAL NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+GO
