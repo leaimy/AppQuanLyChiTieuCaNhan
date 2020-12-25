@@ -30,3 +30,8 @@ const kTitleTextStyle = TextStyle(
   fontFamily: 'Lobster',
   color: Color(0xFFF48FB1),
 );
+
+const kPaddingMainPage = EdgeInsets.symmetric(
+  vertical: 20.0,
+  horizontal: 10.0,
+);
