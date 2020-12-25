@@ -22,11 +22,14 @@ class CardAvatar extends StatelessWidget {
                 backgroundImage: AssetImage('images/avatar$rand.png'),
               ),
             ),
-            Text(
-              'Xin chào Heo con',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontFamily: 'Lobster',
+            SizedBox(width: 15.0),
+            Flexible(
+              child: Text(
+                'Xin chào Heo con đáng yêu siêu dễ thương',
+                style: TextStyle(
+                  fontSize: 17.0,
+                  fontFamily: 'Lobster',
+                ),
               ),
             ),
           ],
