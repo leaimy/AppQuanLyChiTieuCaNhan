@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/lich_su_chi_tieu_page.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_khoan_thu_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/lich_su_chi_tieu_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_khoan_thu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class QuanLyTienChiTietPage extends StatelessWidget {

@@ -4,8 +4,8 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_muc_tieu_tiet_kiem_chi_tiet_page.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_muc_tieu_tiet_kiem_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tiet_kiem/quan_ly_muc_tieu_tiet_kiem_chi_tiet_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tiet_kiem/them_muc_tieu_tiet_kiem_page.dart';
 
 class QuanLyMucTieuTietKiemTatCaPage extends StatelessWidget {
   @override

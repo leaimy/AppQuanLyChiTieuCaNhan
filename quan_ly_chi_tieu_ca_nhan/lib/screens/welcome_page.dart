@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_in_page.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_up_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/nguoi_dung/sign_in_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/nguoi_dung/sign_up_page.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
