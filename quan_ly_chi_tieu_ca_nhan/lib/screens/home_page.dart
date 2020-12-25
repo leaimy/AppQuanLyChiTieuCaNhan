@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_avatar.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({
-    Key key,
-  }) : super(key: key);
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

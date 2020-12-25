@@ -1,16 +1,9 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/tietkiem_screen.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class ThemMucTieuScreen extends StatelessWidget {
-  const ThemMucTieuScreen({
-    Key key,
-  }) : super(key: key);
-
+class ThemMucTieuTietKiemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

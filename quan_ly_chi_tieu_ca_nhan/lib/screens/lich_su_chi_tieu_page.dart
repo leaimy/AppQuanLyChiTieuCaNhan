@@ -3,7 +3,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/outcome_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class OutcomeHistory extends StatelessWidget {
+class LichSuChiTieuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

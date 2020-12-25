@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_in_screen.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_up_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_in_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/sign_up_page.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({
-    Key key,
-  }) : super(key: key);
-
+class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return SignUpScreen();
+                        return SignUpPage();
                       }));
                     },
                     minWidth: 150.0,
@@ -75,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SignInScreen();
+                      return SignInPage();
                     }));
                   },
                   minWidth: 150.0,

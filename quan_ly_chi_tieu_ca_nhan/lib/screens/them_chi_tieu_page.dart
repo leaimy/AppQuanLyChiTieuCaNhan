@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class AddOutcome extends StatelessWidget {
+class ThemChiTieuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

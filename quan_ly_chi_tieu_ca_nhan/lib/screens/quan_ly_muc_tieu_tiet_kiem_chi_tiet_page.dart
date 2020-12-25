@@ -7,11 +7,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_icon_box.dart';
 var ngayBD = new DateTime(2020, 10, 20);
 var ngayKT = new DateTime(2020, 12, 25);
 
-class ChiTietMucTieuTietKiemScreen extends StatelessWidget {
-  const ChiTietMucTieuTietKiemScreen({
-    Key key,
-  }) : super(key: key);
-
+class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

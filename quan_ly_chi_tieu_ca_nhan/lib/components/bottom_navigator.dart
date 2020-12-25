@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/thunhap_all_screen.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/tietkiem_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien_tat_ca_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_muc_tieu_tiet_kiem_tat_ca_page.dart';
 
 class BottomNavigator extends StatelessWidget {
   final int selectedIndex;
@@ -14,15 +14,15 @@ class BottomNavigator extends StatelessWidget {
     _onItemTapped(selectedIndex) {
       if (selectedIndex == 0) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return HomeScreen();
+          return HomePage();
         }));
       } else if (selectedIndex == 1) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return TietKiemScreen();
+          return QuanLyMucTieuTietKiemTatCaPage();
         }));
       } else if (selectedIndex == 2) {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return IncomeAllScreen();
+          return QuanLyTienTatCaPage();
         }));
       }
     }

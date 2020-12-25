@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class AddIncomeScreen extends StatelessWidget {
+class ThemKhoanThuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

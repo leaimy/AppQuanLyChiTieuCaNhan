@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/login_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/welcome_page.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({
-    Key key,
-  }) : super(key: key);
-
+class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,7 +168,7 @@ class SignUpScreen extends StatelessWidget {
                                         Navigator.push(context,
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          return LoginScreen();
+                                          return WelcomePage();
                                         }));
                                       },
                                       minWidth: 150.0,

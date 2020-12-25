@@ -3,11 +3,11 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_chi_tieu_screen.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/thunhap_detail_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_chi_tieu_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class IncomeAllScreen extends StatelessWidget {
+class QuanLyTienTatCaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +75,7 @@ class IncomeAllScreen extends StatelessWidget {
                       onItemPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return IncomeDetailPage();
+                          return QuanLyTienChiTietPage();
                         }));
                       },
                     ),
@@ -88,7 +88,7 @@ class IncomeAllScreen extends StatelessWidget {
                       onItemPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return IncomeDetailPage();
+                          return QuanLyTienChiTietPage();
                         }));
                       },
                     ),
@@ -101,7 +101,7 @@ class IncomeAllScreen extends StatelessWidget {
                       onItemPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return IncomeDetailPage();
+                          return QuanLyTienChiTietPage();
                         }));
                       },
                     ),
@@ -114,7 +114,7 @@ class IncomeAllScreen extends StatelessWidget {
                       onItemPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return IncomeDetailPage();
+                          return QuanLyTienChiTietPage();
                         }));
                       },
                     ),
@@ -127,7 +127,7 @@ class IncomeAllScreen extends StatelessWidget {
                       onItemPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return IncomeDetailPage();
+                          return QuanLyTienChiTietPage();
                         }));
                       },
                     ),
@@ -140,7 +140,7 @@ class IncomeAllScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return AddOutcome();
+                      return ThemChiTieuPage();
                     }));
                   })
             ],

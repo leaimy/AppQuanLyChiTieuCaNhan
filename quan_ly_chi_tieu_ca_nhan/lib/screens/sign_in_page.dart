@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
 
-class SignInScreen extends StatelessWidget {
-  const SignInScreen({
-    Key key,
-  }) : super(key: key);
-
+class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +126,7 @@ class SignInScreen extends StatelessWidget {
                                         Navigator.push(context,
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          return HomeScreen();
+                                          return HomePage();
                                         }));
                                       },
                                       minWidth: 150.0,

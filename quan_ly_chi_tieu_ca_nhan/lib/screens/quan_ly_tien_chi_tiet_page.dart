@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/lich_su_chi_tieu_screen.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_thu_nhap_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/lich_su_chi_tieu_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_khoan_thu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class IncomeDetailPage extends StatelessWidget {
+class QuanLyTienChiTietPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +37,7 @@ class IncomeDetailPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return AddIncomeScreen();
+                                return ThemKhoanThuPage();
                               }),
                             );
                           },
@@ -166,7 +166,7 @@ class IncomeDetailPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return OutcomeHistory();
+                      return LichSuChiTieuPage();
                     }));
                   })
             ],

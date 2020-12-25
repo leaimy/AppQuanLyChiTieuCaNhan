@@ -4,14 +4,10 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/bottom_navigator.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tiet_muc_tieu_tiet_kiem_screen.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_muc_tieu_screen.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_muc_tieu_tiet_kiem_chi_tiet_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/them_muc_tieu_tiet_kiem_page.dart';
 
-class TietKiemScreen extends StatelessWidget {
-  const TietKiemScreen({
-    Key key,
-  }) : super(key: key);
-
+class QuanLyMucTieuTietKiemTatCaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +68,7 @@ class TietKiemScreen extends StatelessWidget {
                     onItemPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return ChiTietMucTieuTietKiemScreen();
+                        return QuanLyMucTieuTietKiemChiTietPage();
                       }));
                     },
                   ),
@@ -85,7 +81,7 @@ class TietKiemScreen extends StatelessWidget {
                     onItemPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return ChiTietMucTieuTietKiemScreen();
+                        return QuanLyMucTieuTietKiemChiTietPage();
                       }));
                     },
                   ),
@@ -95,7 +91,7 @@ class TietKiemScreen extends StatelessWidget {
                 textName: 'Thêm mục tiêu tiết kiệm',
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ThemMucTieuScreen();
+                    return ThemMucTieuTietKiemPage();
                   }));
                 },
               ),
