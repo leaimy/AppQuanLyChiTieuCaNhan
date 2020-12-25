@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_muc_tieu_item.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_icon_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
 
 var ngayBD = new DateTime(2020, 10, 20);
 var ngayKT = new DateTime(2020, 12, 25);
