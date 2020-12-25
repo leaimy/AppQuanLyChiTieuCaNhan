@@ -100,6 +100,31 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      width: 350.0,
+                      height: 1.0,
+                      child: const DecoratedBox(
+                        decoration:
+                            const BoxDecoration(color: Color(0xFFE0E0E0)),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ThongKeItem(
+                          textName: 'Hạn mức chi tiêu',
+                          textNumber: '50.000',
+                          colorName: Colors.blueAccent,
+                          colorNumber: Colors.lightBlueAccent,
+                        ),
+                        ThongKeItem(
+                          textName: 'Số ngày vượt',
+                          textNumber: '5',
+                          colorName: Colors.red,
+                          colorNumber: Colors.red,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -189,7 +214,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
               ),
               SizedBox(height: 30.0),
               NutBam(
-                textName: 'Xem chi tiết các khoản chi',
+                textName: 'Xem lịch sử chi tiêu',
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return LichSuChiTieuPage();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/outcome_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
@@ -19,6 +20,36 @@ class LichSuChiTieuPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card(
+                elevation: 5.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ThongKeItem(
+                      textName: 'Tổng chi',
+                      textNumber: '410.000',
+                      colorName: Colors.red,
+                      colorNumber: Colors.red,
+                    ),
+                    SizedBox(width: 10.0),
+                    GestureDetector(
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.pinkAccent,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return ThemChiTieuPage();
+                          }),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15.0),
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
                 child: Text('Ngày:', style: kTitleTextStyle),
@@ -121,19 +152,6 @@ class LichSuChiTieuPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10.0, width: double.infinity),
-              Container(
-                width: double.infinity,
-                child: NutBam(
-                  textName: 'Thêm chi tiêu mới',
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ThemChiTieuPage();
-                    }));
-                  },
-                ),
-              )
             ],
           ),
         ),

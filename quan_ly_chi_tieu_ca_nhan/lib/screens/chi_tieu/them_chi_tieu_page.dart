@@ -6,8 +6,13 @@ class ThemChiTieuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Thêm 1 chi tiêu mới'),
+      ),
       body: SafeArea(
         child: Container(
+          color: Colors.white,
+          padding: kPaddingMainPage,
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
             children: [
@@ -23,7 +28,7 @@ class ThemChiTieuPage extends StatelessWidget {
                     TextField(
                       textAlign: TextAlign.center,
                       decoration: kTextFieldDecoration.copyWith(
-                        hintText: 'Nhập tiêu đề khoản chi tiêu',
+                        hintText: 'Nhập tiêu đề khoản chi',
                       ),
                     )
                   ],
@@ -35,7 +40,7 @@ class ThemChiTieuPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nhóm chi tiêu',
+                      'Nhóm chi tiêu:',
                       style: kTitleTextStyle,
                     ),
                     SizedBox(height: 15.0),
