@@ -157,7 +157,7 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
                         ) {
                           // print(now);
                           if (isToday) {
-                            return RoundedIconBox(
+                            return CircleDateBox(
                               text: now.day.toString(),
                               color: Colors.green,
                             );
@@ -171,7 +171,7 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
                               if (now.month == ngayBD.month &&
                                   now.day < ngayBD.day) return null;
 
-                              return RoundedIconBox(
+                              return CircleDateBox(
                                 text: now.day.toString(),
                                 color: Colors.pink[100],
                               );

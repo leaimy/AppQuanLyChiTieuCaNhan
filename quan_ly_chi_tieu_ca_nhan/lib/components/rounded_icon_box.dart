@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RoundedIconBox extends StatelessWidget {
+class CircleDateBox extends StatelessWidget {
   final String text;
   final Color color;
 
-  RoundedIconBox({this.text, this.color = Colors.white});
+  CircleDateBox({this.text, this.color = Colors.white});
 
   @override
   Widget build(BuildContext context) {
