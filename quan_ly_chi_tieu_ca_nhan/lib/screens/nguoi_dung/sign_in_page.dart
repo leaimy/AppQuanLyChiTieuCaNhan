@@ -1,15 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/welcome_page.dart';
 
 class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -18,7 +15,8 @@ class SignInPage extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Column(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: ListView(
             children: [
               SizedBox(height: 50.0, width: double.infinity),
               Text(
@@ -30,14 +28,13 @@ class SignInPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Expanded(child: Container()),
+              SizedBox(height: 50.0, width: double.infinity),
               Opacity(
                 opacity: 0.8,
                 child: Material(
                   elevation: 10.0,
                   borderRadius: BorderRadius.circular(30.0),
                   child: Container(
-                    width: 350.0,
                     padding: EdgeInsets.symmetric(
                       horizontal: 20.0,
                       vertical: 30.0,
@@ -111,7 +108,7 @@ class SignInPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 15.0, width: double.infinity),
+                            SizedBox(height: 20.0, width: double.infinity),
                             NutBam(
                               textName: 'Đăng nhập',
                               onPressed: () {
