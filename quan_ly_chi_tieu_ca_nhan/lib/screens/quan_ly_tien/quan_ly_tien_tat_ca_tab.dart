@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
@@ -64,10 +65,23 @@ class QuanLyTienTatCaTab extends StatelessWidget {
             child: ListView(
               children: [
                 MuctieuItem(
-                  textName: '01/12/2020 - 31/12/2020',
+                  textName: '01/11/2020 - 31/12/2020',
                   textColor: Colors.blue,
                   barColor: Colors.pink[200],
-                  icon: Icons.add,
+                  icon: FontAwesomeIcons.times,
+                  iconColor: Colors.redAccent,
+                  onItemPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return QuanLyTienChiTietPage();
+                    }));
+                  },
+                ),
+                MuctieuItem(
+                  textName: '01/10/2020 - 01/11/2020',
+                  textColor: Colors.blue,
+                  barColor: Colors.pink[200],
+                  icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
                     Navigator.push(context,
@@ -77,10 +91,10 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                   },
                 ),
                 MuctieuItem(
-                  textName: '01/12/2020 - 31/12/2020',
+                  textName: '01/09/2020 - 01/10/2020',
                   textColor: Colors.blue,
                   barColor: Colors.pink[200],
-                  icon: Icons.add,
+                  icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
                     Navigator.push(context,
@@ -90,10 +104,10 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                   },
                 ),
                 MuctieuItem(
-                  textName: '01/12/2020 - 31/12/2020',
+                  textName: '01/08/2020 - 01/09/2020',
                   textColor: Colors.blue,
                   barColor: Colors.pink[200],
-                  icon: Icons.add,
+                  icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
                     Navigator.push(context,
@@ -103,23 +117,10 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                   },
                 ),
                 MuctieuItem(
-                  textName: '01/12/2020 - 31/12/2020',
+                  textName: '01/07/2020 - 01/08/2020',
                   textColor: Colors.blue,
                   barColor: Colors.pink[200],
-                  icon: Icons.add,
-                  iconColor: Colors.green,
-                  onItemPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return QuanLyTienChiTietPage();
-                    }));
-                  },
-                ),
-                MuctieuItem(
-                  textName: '01/12/2020 - 31/12/2020',
-                  textColor: Colors.blue,
-                  barColor: Colors.pink[200],
-                  icon: Icons.add,
+                  icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
                     Navigator.push(context,

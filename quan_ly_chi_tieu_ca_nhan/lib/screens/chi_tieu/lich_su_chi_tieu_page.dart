@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/outcome_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
@@ -32,20 +34,17 @@ class LichSuChiTieuPage extends StatelessWidget {
                       colorNumber: Colors.red,
                     ),
                     SizedBox(width: 10.0),
-                    GestureDetector(
-                      child: Icon(
-                        Icons.edit,
-                        color: Colors.pinkAccent,
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return ThemChiTieuPage();
-                          }),
-                        );
+                    CircleIconBox(
+                      icon: FontAwesomeIcons.plus,
+                      size: 20.0,
+                      color: Colors.greenAccent,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return ThemChiTieuPage();
+                        }));
                       },
-                    ),
+                    )
                   ],
                 ),
               ),

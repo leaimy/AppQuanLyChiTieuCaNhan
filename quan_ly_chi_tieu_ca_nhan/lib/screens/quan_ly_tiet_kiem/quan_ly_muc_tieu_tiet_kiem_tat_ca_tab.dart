@@ -60,9 +60,9 @@ class QuanLyMucTieuTietKiemTatCaTab extends StatelessWidget {
               MuctieuItem(
                 barColor: Colors.green,
                 textColor: Colors.pink,
-                iconColor: Colors.yellow,
+                iconColor: Colors.redAccent,
                 textName: 'Bỏ heo mua mũ',
-                icon: FontAwesomeIcons.crown,
+                icon: FontAwesomeIcons.times,
                 onItemPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return QuanLyMucTieuTietKiemChiTietPage();

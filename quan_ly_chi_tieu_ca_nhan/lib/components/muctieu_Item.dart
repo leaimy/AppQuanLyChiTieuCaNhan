@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
 
 class MuctieuItem extends StatelessWidget {
   final Color barColor;
@@ -57,22 +58,10 @@ class MuctieuItem extends StatelessWidget {
                 ),
               ),
             ),
-            Material(
-              elevation: 5.0,
-              shape: CircleBorder(),
-              child: Container(
-                height: 40.0,
-                width: 40.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.0),
-                  color: Colors.white,
-                ),
-                child: Icon(
-                  icon,
-                  color: iconColor,
-                  size: 20.0,
-                ),
-              ),
+            CircleIconBox(
+              icon: this.icon,
+              color: this.iconColor,
+              size: 20.0,
             )
           ],
         ),

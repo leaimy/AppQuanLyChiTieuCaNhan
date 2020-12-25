@@ -14,6 +14,7 @@ class ThemKhoanThuPage extends StatelessWidget {
       body: SafeArea(
         child: Container(
           padding: kPaddingMainPage,
+          color: Colors.white,
           child: ListView(
             children: [
               Text(
