@@ -7,23 +7,20 @@ class NutBam extends StatelessWidget {
   NutBam({@required this.textName, @required this.onPressed});
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      onPressed: this.onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          color: Colors.pink[200],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 50.0,
-            vertical: 10.0,
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: Material(
+        elevation: 5.0,
+        color: Colors.pink[200],
+        borderRadius: BorderRadius.circular(30.0),
+        child: MaterialButton(
+          onPressed: this.onPressed,
+          minWidth: 200.0,
+          height: 42.0,
           child: Text(
             textName,
             style: TextStyle(
               fontSize: 18.0,
-              // fontWeight: FontWeight.bold,
               color: Colors.white,
               fontFamily: 'Lobster',
             ),
