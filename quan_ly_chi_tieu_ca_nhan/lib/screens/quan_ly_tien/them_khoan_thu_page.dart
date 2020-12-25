@@ -1,19 +1,23 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemKhoanThuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Thêm nguồn thu'),
+      ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+          padding: kPaddingMainPage,
           child: ListView(
             children: [
               Text(
-                'Nhập số tiền cần quản lý:',
+                'Nhập số tiền:',
                 style: kTitleTextStyle,
               ),
               SizedBox(height: 10.0),
@@ -21,7 +25,7 @@ class ThemKhoanThuPage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number,
                 decoration: kTextFieldDecoration.copyWith(
-                  hintText: 'Nhập số tiền cần quản lý',
+                  hintText: 'Nhập số tiền',
                 ),
               ),
               SizedBox(height: 30.0),
@@ -30,7 +34,7 @@ class ThemKhoanThuPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nhóm thu nhập',
+                      'Chọn nguồn thu:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.0,
@@ -180,86 +184,12 @@ class ThemKhoanThuPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
-              Container(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Ngày bắt đầu:',
-                            textAlign: TextAlign.left,
-                            style: kTitleTextStyle,
-                          ),
-                          DateTimePicker(
-                            textAlign: TextAlign.center,
-                            dateMask: 'dd/MM/yyyy',
-                            type: DateTimePickerType.date,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2100),
-                            initialValue: DateTime.now().toString(),
-                            onChanged: (val) => print(val),
-                            validator: (val) {
-                              print(val);
-                              return null;
-                            },
-                            onSaved: (val) => print(val),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 10.0),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text(
-                            'Ngày kết thúc:',
-                            style: kTitleTextStyle,
-                          ),
-                          DateTimePicker(
-                            textAlign: TextAlign.center,
-                            dateMask: 'dd/MM/yyyy',
-                            type: DateTimePickerType.date,
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(2100),
-                            initialValue: DateTime.now()
-                                .add(Duration(days: 1))
-                                .toString(),
-                            onChanged: (val) => print(val),
-                            validator: (val) {
-                              print(val);
-                              return null;
-                            },
-                            onSaved: (val) => print(val),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
               SizedBox(height: 30.0),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Material(
-                  elevation: 5.0,
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: MaterialButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text(
-                      'Thêm quản lý thu nhập mới',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+              NutBam(
+                textName: 'Thêm',
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               )
             ],
           ),

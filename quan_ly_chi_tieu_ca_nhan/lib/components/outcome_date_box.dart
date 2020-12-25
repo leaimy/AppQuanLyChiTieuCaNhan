@@ -27,7 +27,7 @@ class OutcomeDate extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
-        elevation: 7.0,
+        elevation: 5.0,
         color: this.color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

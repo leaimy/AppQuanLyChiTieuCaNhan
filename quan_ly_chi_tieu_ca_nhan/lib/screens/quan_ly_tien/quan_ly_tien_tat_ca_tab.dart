@@ -4,6 +4,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/quan_ly_tien_chi_tiet_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class QuanLyTienTatCaTab extends StatelessWidget {
@@ -16,12 +17,12 @@ class QuanLyTienTatCaTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Card(
-            elevation: 10.0,
+            elevation: 5.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ThongKeItem(
-                  textName: 'Tổng số tiền đã thu',
+                  textName: 'Tổng số tiền đã quản lý',
                   textNumber: '10.500.000 VND',
                   colorName: Colors.purple[300],
                   colorNumber: Colors.red[700],
@@ -55,10 +56,10 @@ class QuanLyTienTatCaTab extends StatelessWidget {
           ),
           SizedBox(height: 20.0),
           Text(
-            'Danh sách chi tiết các khoản thu:',
+            'Danh sách kế hoạch quản lý tiền:',
             style: kTitleTextStyle,
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 15.0),
           Expanded(
             child: ListView(
               children: [
@@ -132,12 +133,19 @@ class QuanLyTienTatCaTab extends StatelessWidget {
           ),
           SizedBox(height: 10.0),
           NutBam(
-              textName: 'Thêm chi tiêu mới',
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ThemChiTieuPage();
-                }));
-              })
+            textName: 'Tạo kế hoạch quản lý số tiền hiện có',
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => SingleChildScrollView(
+                  child: ThemQuanLyTienPage(),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                ),
+              );
+            },
+          )
         ],
       ),
     );

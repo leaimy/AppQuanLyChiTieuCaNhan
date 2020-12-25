@@ -10,14 +10,17 @@ class QuanLyTienChiTietPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Chi tiết kế hoạch quản lý tiền'),
+      ),
       body: SafeArea(
         child: Container(
           color: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          padding: kPaddingMainPage,
           child: ListView(
             children: [
               Card(
-                elevation: 10.0,
+                elevation: 5.0,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -25,14 +28,17 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ThongKeItem(
-                          textName: 'Tổng số dư hiện tại',
-                          textNumber: '+500.000 VND',
+                          textName: 'Số tiền đang quản lý',
+                          textNumber: '2.500.000 VND',
                           colorName: Colors.purple[300],
                           colorNumber: Colors.red[700],
                         ),
                         SizedBox(width: 10.0),
                         GestureDetector(
-                          child: Icon(Icons.edit),
+                          child: Icon(
+                            Icons.edit,
+                            color: Colors.pinkAccent,
+                          ),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -56,8 +62,8 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ThongKeItem(
-                          textName: 'Tổng thu ban đầu',
-                          textNumber: '+2.500.000',
+                          textName: 'Số dư',
+                          textNumber: '+500.000',
                           colorName: Colors.green,
                           colorNumber: Colors.green,
                         ),
@@ -69,49 +75,30 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 25.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 5.0),
-                child: Text('Chi tiết nguồn thu:', style: kTitleTextStyle),
-              ),
-              SizedBox(height: 10.0),
-              Expanded(
-                child: Column(
-                  children: [
-                    TransactionItem(
-                      barColor: Colors.pinkAccent,
-                      icon: Icons.eco,
-                      iconColor: Colors.purpleAccent,
-                      amount: '+1.500.000',
-                      title: 'Ba mẹ gửi',
-                      textColor: Colors.green,
+                    SizedBox(
+                      width: 350.0,
+                      height: 1.0,
+                      child: const DecoratedBox(
+                        decoration:
+                            const BoxDecoration(color: Color(0xFFE0E0E0)),
+                      ),
                     ),
-                    TransactionItem(
-                      barColor: Colors.greenAccent,
-                      icon: Icons.account_balance_sharp,
-                      iconColor: Colors.lightBlue,
-                      amount: '0',
-                      title: 'Học bổng',
-                      textColor: Colors.green,
-                    ),
-                    TransactionItem(
-                      barColor: Colors.red,
-                      icon: Icons.party_mode,
-                      iconColor: Colors.orange,
-                      amount: '+500.000',
-                      title: 'Công việc',
-                      textColor: Colors.green,
-                    ),
-                    TransactionItem(
-                      barColor: Colors.yellow,
-                      icon: Icons.play_arrow,
-                      iconColor: Colors.orange,
-                      amount: '+500',
-                      title: 'Thu nhập khác',
-                      textColor: Colors.green,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ThongKeItem(
+                          textName: 'Từ ngày',
+                          textNumber: '20/10/2020',
+                          colorName: Colors.blueAccent,
+                          colorNumber: Colors.lightBlueAccent,
+                        ),
+                        ThongKeItem(
+                          textName: 'Đến ngày',
+                          textNumber: '20/11/2020',
+                          colorName: Colors.blueAccent,
+                          colorNumber: Colors.lightBlueAccent,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -119,56 +106,96 @@ class QuanLyTienChiTietPage extends StatelessWidget {
               SizedBox(height: 25.0),
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
-                child: Text('Thống kê khoản chi:', style: kTitleTextStyle),
+                child: Text('Chi tiết các nguồn thu:', style: kTitleTextStyle),
               ),
               SizedBox(height: 10.0),
-              Expanded(
-                child: Column(
-                  children: [
-                    TransactionItem(
-                      barColor: Colors.pinkAccent,
-                      icon: Icons.eco,
-                      iconColor: Colors.purpleAccent,
-                      amount: '-1.300.000',
-                      title: 'Tiền phòng',
-                      textColor: Colors.red,
-                    ),
-                    TransactionItem(
-                      barColor: Colors.greenAccent,
-                      icon: Icons.account_balance_sharp,
-                      iconColor: Colors.lightBlue,
-                      amount: '-500.000',
-                      title: 'Thực phẩm',
-                      textColor: Colors.red,
-                    ),
-                    TransactionItem(
-                      barColor: Colors.red,
-                      icon: Icons.party_mode,
-                      iconColor: Colors.orange,
-                      amount: '-100.000',
-                      title: 'Đồ ăn vặt',
-                      textColor: Colors.red,
-                    ),
-                    TransactionItem(
-                      barColor: Colors.yellow,
-                      icon: Icons.play_arrow,
-                      iconColor: Colors.orange,
-                      amount: '-100.000',
-                      title: 'Chi tiêu khác',
-                      textColor: Colors.red,
-                    ),
-                  ],
-                ),
+              Column(
+                children: [
+                  TransactionItem(
+                    barColor: Colors.pinkAccent,
+                    icon: Icons.eco,
+                    iconColor: Colors.purpleAccent,
+                    amount: '+1.500.000',
+                    title: 'Ba mẹ gửi',
+                    textColor: Colors.green,
+                  ),
+                  TransactionItem(
+                    barColor: Colors.greenAccent,
+                    icon: Icons.account_balance_sharp,
+                    iconColor: Colors.lightBlue,
+                    amount: '0',
+                    title: 'Học bổng',
+                    textColor: Colors.green,
+                  ),
+                  TransactionItem(
+                    barColor: Colors.red,
+                    icon: Icons.party_mode,
+                    iconColor: Colors.orange,
+                    amount: '+500.000',
+                    title: 'Công việc',
+                    textColor: Colors.green,
+                  ),
+                  TransactionItem(
+                    barColor: Colors.yellow,
+                    icon: Icons.play_arrow,
+                    iconColor: Colors.orange,
+                    amount: '+500',
+                    title: 'Thu nhập khác',
+                    textColor: Colors.green,
+                  ),
+                ],
+              ),
+              SizedBox(height: 25.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 5.0),
+                child: Text('Thống kê các khoản chi:', style: kTitleTextStyle),
+              ),
+              SizedBox(height: 10.0),
+              Column(
+                children: [
+                  TransactionItem(
+                    barColor: Colors.pinkAccent,
+                    icon: Icons.eco,
+                    iconColor: Colors.purpleAccent,
+                    amount: '-1.300.000',
+                    title: 'Tiền phòng',
+                    textColor: Colors.red,
+                  ),
+                  TransactionItem(
+                    barColor: Colors.greenAccent,
+                    icon: Icons.account_balance_sharp,
+                    iconColor: Colors.lightBlue,
+                    amount: '-500.000',
+                    title: 'Thực phẩm',
+                    textColor: Colors.red,
+                  ),
+                  TransactionItem(
+                    barColor: Colors.red,
+                    icon: Icons.party_mode,
+                    iconColor: Colors.orange,
+                    amount: '-100.000',
+                    title: 'Đồ ăn vặt',
+                    textColor: Colors.red,
+                  ),
+                  TransactionItem(
+                    barColor: Colors.yellow,
+                    icon: Icons.play_arrow,
+                    iconColor: Colors.orange,
+                    amount: '-100.000',
+                    title: 'Chi tiêu khác',
+                    textColor: Colors.red,
+                  ),
+                ],
               ),
               SizedBox(height: 30.0),
               NutBam(
-                  textName: 'Xem chi tiết các khoản chi',
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return LichSuChiTieuPage();
-                    }));
-                  })
+                textName: 'Xem chi tiết các khoản chi',
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return LichSuChiTieuPage();
+                  }));
+                },
+              )
             ],
           ),
         ),

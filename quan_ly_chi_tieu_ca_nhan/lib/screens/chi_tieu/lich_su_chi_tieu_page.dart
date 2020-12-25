@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/outcome_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class LichSuChiTieuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Lịch sử chi tiêu'),
+      ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(15.0),
+          padding: kPaddingMainPage,
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -115,6 +121,19 @@ class LichSuChiTieuPage extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 10.0, width: double.infinity),
+              Container(
+                width: double.infinity,
+                child: NutBam(
+                  textName: 'Thêm chi tiêu mới',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ThemChiTieuPage();
+                    }));
+                  },
+                ),
+              )
             ],
           ),
         ),
