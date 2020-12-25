@@ -8,11 +8,12 @@ class CardAvatar extends StatelessWidget {
     int rand = Random().nextInt(10);
 
     return Material(
-      elevation: 10.0,
+      elevation: 5.0,
       borderRadius: BorderRadius.circular(20.0),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               width: 70.0,
@@ -29,7 +30,6 @@ class CardAvatar extends StatelessWidget {
               ),
             ),
           ],
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
         ),
       ),
     );
