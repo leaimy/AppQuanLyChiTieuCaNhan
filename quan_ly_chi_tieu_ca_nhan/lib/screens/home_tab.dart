@@ -16,24 +16,24 @@ class HomeTab extends StatelessWidget {
         ),
       ),
       child: Column(children: [
-        Row(
-          children: [
-            Expanded(
-              child: Opacity(
-                opacity: 0.8,
+        Opacity(
+          opacity: 0.7,
+          child: Row(
+            children: [
+              Expanded(
                 child: CardAvatar(),
               ),
-            ),
-            SizedBox(width: 10.0),
-            CircleIconBox(
-              icon: FontAwesomeIcons.signOutAlt,
-              size: 30.0,
-              color: Colors.pinkAccent,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
-          ],
+              SizedBox(width: 10.0),
+              CircleIconBox(
+                icon: FontAwesomeIcons.signOutAlt,
+                size: 30.0,
+                color: Colors.pinkAccent,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )
+            ],
+          ),
         ),
       ]),
     );
