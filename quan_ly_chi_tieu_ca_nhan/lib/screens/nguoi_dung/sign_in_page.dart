@@ -1,18 +1,17 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/welcome_page.dart';
 
 class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.only(
-            // left: 50.0,
-            // right: 50.0,
-            top: 50.0,
-          ),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("images/background.jpg"),
@@ -21,6 +20,7 @@ class SignInPage extends StatelessWidget {
           ),
           child: Column(
             children: [
+              SizedBox(height: 50.0, width: double.infinity),
               Text(
                 'Quản Lý Chi Tiêu',
                 style: TextStyle(
@@ -30,54 +30,45 @@ class SignInPage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
-                height: 30.0,
-                width: double.infinity,
-              ),
+              Expanded(child: Container()),
               Opacity(
                 opacity: 0.8,
                 child: Material(
                   elevation: 10.0,
                   borderRadius: BorderRadius.circular(30.0),
                   child: Container(
-                    height: 450.0,
                     width: 350.0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20.0, right: 20.0, top: 20.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Expanded(
-                                  child: Text(
-                                    'Mời bạn đăng nhập',
-                                    style: TextStyle(
-                                      fontFamily: 'Lobster',
-                                      fontSize: 22.0,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ],
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 30.0,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Mời bạn đăng nhập',
+                          style: TextStyle(
+                            fontFamily: 'Lobster',
+                            fontSize: 22.0,
                           ),
-                          Container(
-                            child: Column(
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: 15.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Tên người dùng:',
+                                  'Email:',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                      fontFamily: 'Lobster'),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    fontFamily: 'Lobster',
+                                  ),
                                 ),
                                 TextField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.emailAddress,
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     icon: Icon(
@@ -90,18 +81,22 @@ class SignInPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
+                              ],
+                            ),
+                            SizedBox(height: 15.0, width: double.infinity),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
                                 Text(
                                   'Mật khẩu:',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                      fontFamily: 'Lobster'),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    fontFamily: 'Lobster',
+                                  ),
                                 ),
                                 TextField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.visiblePassword,
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     icon: Icon(
@@ -114,71 +109,50 @@ class SignInPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 85.0, top: 20.0),
-                                  child: Material(
-                                    elevation: 5.0,
-                                    color: Colors.pink[200],
-                                    borderRadius: BorderRadius.circular(30.0),
-                                    child: MaterialButton(
-                                      onPressed: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return HomePage();
-                                        }));
-                                      },
-                                      minWidth: 150.0,
-                                      height: 42.0,
-                                      child: Text(
-                                        'Đăng nhập',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Lobster',
-                                          fontSize: 17.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 15.0, width: double.infinity),
+                            NutBam(
+                              textName: 'Đăng nhập',
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return WelcomePage();
+                                }));
+                              },
+                            ),
+                            SizedBox(height: 30.0, width: double.infinity),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.facebook,
+                                  color: Colors.blue[600],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 120.0,
-                                    top: 40.0,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        FontAwesomeIcons.facebook,
-                                        color: Colors.blue[600],
-                                      ),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Icon(
-                                        FontAwesomeIcons.google,
-                                        color: Colors.red,
-                                      ),
-                                      SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Icon(
-                                        FontAwesomeIcons.twitter,
-                                        color: Colors.blue[300],
-                                      ),
-                                    ],
-                                  ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.google,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Icon(
+                                  FontAwesomeIcons.twitter,
+                                  color: Colors.blue[300],
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
+              SizedBox(height: 10.0, width: double.infinity),
             ],
           ),
         ),
