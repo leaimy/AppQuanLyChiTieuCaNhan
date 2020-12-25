@@ -18,8 +18,7 @@ class LichSuChiTieuPage extends StatelessWidget {
         child: Container(
           padding: kPaddingMainPage,
           color: Colors.white,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
               Card(
                 elevation: 5.0,
@@ -108,7 +107,8 @@ class LichSuChiTieuPage extends StatelessWidget {
                 child: Text('Chi tiết giao dịch:', style: kTitleTextStyle),
               ),
               SizedBox(height: 10.0),
-              Expanded(
+              Container(
+                height: 350.0,
                 child: ListView(
                   padding: EdgeInsets.only(left: 5.0),
                   children: [
