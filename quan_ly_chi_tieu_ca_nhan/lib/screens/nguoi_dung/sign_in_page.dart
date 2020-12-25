@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/main.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/screens/welcome_page.dart';
 
 class SignInPage extends StatelessWidget {
   @override

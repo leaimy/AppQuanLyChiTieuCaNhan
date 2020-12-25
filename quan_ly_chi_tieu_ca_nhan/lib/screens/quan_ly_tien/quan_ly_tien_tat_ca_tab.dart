@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/quan_ly_tien_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -13,46 +13,43 @@ class QuanLyTienTatCaTab extends StatelessWidget {
     return Container(
       color: Colors.white,
       padding: kPaddingMainPage,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: ListView(
         children: [
-          Card(
-            elevation: 5.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ThongKeItem(
-                  textName: 'Tổng số tiền đã quản lý',
-                  textNumber: '10.500.000 VND',
-                  colorName: Colors.purple[300],
-                  colorNumber: Colors.red[700],
-                ),
-                SizedBox(
-                  width: 350.0,
-                  height: 1.0,
-                  child: const DecoratedBox(
-                    decoration: const BoxDecoration(color: Color(0xFFE0E0E0)),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ThongKeItem(
-                      textName: 'Số dư',
-                      textNumber: '+2.500.000',
-                      colorName: Colors.green,
-                      colorNumber: Colors.green,
-                    ),
-                    ThongKeItem(
-                      textName: 'Tổng chi',
-                      textNumber: '-8.000.000',
-                      colorName: Colors.red,
-                      colorNumber: Colors.red,
-                    ),
-                  ],
-                )
-              ],
-            ),
+          SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RoundedSummaryBox(
+                title: 'Tổng số tiền đã quản lý',
+                money: '10.000.000 ₫',
+                icon: Icons.account_balance_outlined,
+                iconColor: Color(0xFF25555B),
+                iconBgColor: Color(0xFFC4F2FF),
+              ),
+              SizedBox(width: 20.0),
+              RoundedSummaryBox(
+                title: 'Tổng số tiền đã chi tiêu',
+                money: '7.000.000 ₫',
+                icon: Icons.money_off,
+                iconColor: Color(0xFFF2A715),
+                iconBgColor: Color(0xFFFFE6D6),
+              ),
+            ],
+          ),
+          SizedBox(height: 15.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RoundedSummaryBox(
+                title: 'Số lượng kế hoạch đã hoàn thành',
+                money: '4',
+                icon: Icons.done_all,
+                iconColor: Color(0xFFB886A7),
+                iconBgColor: Color(0xFFFFD6F1),
+              ),
+            ],
           ),
           SizedBox(height: 20.0),
           Text(
@@ -60,7 +57,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
             style: kTitleTextStyle,
           ),
           SizedBox(height: 15.0),
-          Expanded(
+          Container(
+            height: 350.0,
             child: ListView(
               children: [
                 MuctieuItem(

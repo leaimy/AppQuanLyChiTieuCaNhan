@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/lich_su_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_khoan_thu_page.dart';
@@ -23,113 +24,96 @@ class QuanLyTienChiTietPage extends StatelessWidget {
             children: [
               Card(
                 elevation: 5.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ThongKeItem(
-                          textName: 'Số tiền đang quản lý',
-                          textNumber: '2.500.000 VND',
-                          colorName: Colors.purple[300],
-                          colorNumber: Colors.red[700],
-                        ),
-                        SizedBox(width: 10.0),
-                        CircleIconBox(
-                          icon: FontAwesomeIcons.plus,
-                          color: Colors.lightGreen,
-                          size: 20.0,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return ThemKhoanThuPage();
-                              }),
-                            );
-                          },
-                        ),
-                      ],
+                    ThongKeItem(
+                      textName: 'Số tiền đang quản lý',
+                      textNumber: '2.500.000 VND',
+                      colorName: Colors.purple[300],
+                      colorNumber: Colors.red[700],
                     ),
-                    SizedBox(
-                      width: 350.0,
-                      height: 1.0,
-                      child: const DecoratedBox(
-                        decoration:
-                            const BoxDecoration(color: Color(0xFFE0E0E0)),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ThongKeItem(
-                          textName: 'Số dư',
-                          textNumber: '+500.000',
-                          colorName: Colors.green,
-                          colorNumber: Colors.green,
-                        ),
-                        ThongKeItem(
-                          textName: 'Tổng chi',
-                          textNumber: '-2.000.000',
-                          colorName: Colors.red,
-                          colorNumber: Colors.red,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 350.0,
-                      height: 1.0,
-                      child: const DecoratedBox(
-                        decoration:
-                            const BoxDecoration(color: Color(0xFFE0E0E0)),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ThongKeItem(
-                          textName: 'Từ ngày',
-                          textNumber: '20/10/2020',
-                          colorName: Colors.blueAccent,
-                          colorNumber: Colors.lightBlueAccent,
-                        ),
-                        ThongKeItem(
-                          textName: 'Đến ngày',
-                          textNumber: '20/11/2020',
-                          colorName: Colors.blueAccent,
-                          colorNumber: Colors.lightBlueAccent,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 350.0,
-                      height: 1.0,
-                      child: const DecoratedBox(
-                        decoration:
-                            const BoxDecoration(color: Color(0xFFE0E0E0)),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ThongKeItem(
-                          textName: 'Hạn mức chi tiêu',
-                          textNumber: '50.000',
-                          colorName: Colors.blueAccent,
-                          colorNumber: Colors.lightBlueAccent,
-                        ),
-                        ThongKeItem(
-                          textName: 'Số ngày vượt',
-                          textNumber: '5',
-                          colorName: Colors.red,
-                          colorNumber: Colors.red,
-                        ),
-                      ],
+                    SizedBox(width: 10.0),
+                    CircleIconBox(
+                      icon: FontAwesomeIcons.plus,
+                      color: Colors.lightGreen,
+                      size: 20.0,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return ThemKhoanThuPage();
+                          }),
+                        );
+                      },
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 25.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RoundedSummaryBox(
+                    title: 'Số dư',
+                    money: '500.000 ₫',
+                    icon: Icons.euro,
+                    iconColor: Colors.green.shade800,
+                    iconBgColor: Colors.green.shade200,
+                  ),
+                  SizedBox(width: 20.0),
+                  RoundedSummaryBox(
+                    title: 'Tổng chi',
+                    money: '2.000.000 ₫',
+                    icon: Icons.money_off,
+                    iconColor: Colors.red.shade800,
+                    iconBgColor: Colors.red.shade200,
+                  ),
+                ],
+              ),
+              SizedBox(height: 15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RoundedSummaryBox(
+                    title: 'Từ ngày',
+                    money: '20/10/2020',
+                    icon: Icons.date_range,
+                    iconColor: Colors.blue.shade800,
+                    iconBgColor: Colors.blue.shade200,
+                  ),
+                  SizedBox(width: 20.0),
+                  RoundedSummaryBox(
+                    title: 'Còn lại',
+                    money: '15 ngày',
+                    icon: Icons.calendar_today,
+                    iconColor: Colors.yellow.shade800,
+                    iconBgColor: Colors.yellow.shade200,
+                  ),
+                ],
+              ),
+              SizedBox(height: 15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RoundedSummaryBox(
+                    title: 'Hạn mức chi tiêu',
+                    money: '50.000 ₫',
+                    icon: Icons.warning,
+                    iconColor: Colors.orange.shade800,
+                    iconBgColor: Colors.orange.shade200,
+                  ),
+                  SizedBox(width: 20.0),
+                  RoundedSummaryBox(
+                    title: 'Số ngày vượt mức',
+                    money: '5',
+                    icon: Icons.warning_sharp,
+                    iconColor: Colors.purple.shade800,
+                    iconBgColor: Colors.purple.shade200,
+                  ),
+                ],
+              ),
+              SizedBox(height: 30.0),
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
                 child: Text('Chi tiết các nguồn thu:', style: kTitleTextStyle),
@@ -171,7 +155,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 25.0),
+              SizedBox(height: 30.0),
               Padding(
                 padding: const EdgeInsets.only(left: 5.0),
                 child: Text('Thống kê các khoản chi:', style: kTitleTextStyle),
