@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/outcome_date_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -20,31 +21,19 @@ class LichSuChiTieuPage extends StatelessWidget {
           color: Colors.white,
           child: ListView(
             children: [
-              Card(
-                elevation: 5.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ThongKeItem(
-                      textName: 'Tổng chi',
-                      textNumber: '410.000',
-                      colorName: Colors.red,
-                      colorNumber: Colors.red,
-                    ),
-                    SizedBox(width: 10.0),
-                    CircleIconBox(
-                      icon: FontAwesomeIcons.plus,
-                      size: 20.0,
-                      color: Colors.greenAccent,
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return ThemChiTieuPage();
-                        }));
-                      },
-                    )
-                  ],
-                ),
+              RoundedSummaryCard(
+                title: 'Tổng tiền chi tiêu ngày\n30/09/2020',
+                money: '410.000 ₫',
+                icon: Icons.money_off,
+                iconColor: Colors.red.shade800,
+                iconBgColor: Colors.red.shade200,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return ThemChiTieuPage();
+                    },
+                  ));
+                },
               ),
               SizedBox(height: 15.0),
               Padding(
@@ -109,6 +98,7 @@ class LichSuChiTieuPage extends StatelessWidget {
               SizedBox(height: 10.0),
               Container(
                 height: 350.0,
+                padding: EdgeInsets.symmetric(vertical: 10.0),
                 child: ListView(
                   padding: EdgeInsets.only(left: 5.0),
                   children: [

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/lich_su_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_khoan_thu_page.dart';
@@ -22,33 +20,20 @@ class QuanLyTienChiTietPage extends StatelessWidget {
           padding: kPaddingMainPage,
           child: ListView(
             children: [
-              Card(
-                elevation: 5.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ThongKeItem(
-                      textName: 'Số tiền đang quản lý',
-                      textNumber: '2.500.000 VND',
-                      colorName: Colors.purple[300],
-                      colorNumber: Colors.red[700],
-                    ),
-                    SizedBox(width: 10.0),
-                    CircleIconBox(
-                      icon: FontAwesomeIcons.plus,
-                      color: Colors.lightGreen,
-                      size: 20.0,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return ThemKhoanThuPage();
-                          }),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+              RoundedSummaryCard(
+                title: 'Số tiền đang quản lý',
+                money: '2.500.000 ₫',
+                icon: Icons.account_balance,
+                iconColor: Colors.green.shade800,
+                iconBgColor: Colors.green.shade200,
+                titleColor: Colors.purpleAccent,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return ThemKhoanThuPage();
+                    },
+                  ));
+                },
               ),
               SizedBox(height: 25.0),
               Row(

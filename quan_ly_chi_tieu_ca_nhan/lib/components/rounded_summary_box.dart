@@ -55,7 +55,12 @@ class RoundedSummaryBox extends StatelessWidget {
             Text(
               this.title,
               textAlign: TextAlign.center,
-              style: TextStyle(color: this.titleColor),
+              style: TextStyle(
+                color: this.titleColor,
+                fontFamily: 'Lobster',
+                letterSpacing: 1.1,
+                fontSize: 13.0,
+              ),
             ),
             SizedBox(height: 7.0),
             Text(

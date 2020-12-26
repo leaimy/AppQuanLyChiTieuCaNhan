@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/quan_ly_tien_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -15,19 +16,29 @@ class QuanLyTienTatCaTab extends StatelessWidget {
       padding: kPaddingMainPage,
       child: ListView(
         children: [
-          SizedBox(height: 10.0),
+          RoundedSummaryCard(
+            title: 'Tổng số tiền đã quản lý',
+            money: '10.000.000 ₫',
+            icon: Icons.account_balance_outlined,
+            iconColor: Color(0xFF25555B),
+            iconBgColor: Color(0xFFC4F2FF),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => SingleChildScrollView(
+                  child: ThemQuanLyTienPage(),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                ),
+              );
+            },
+          ),
+          SizedBox(height: 15.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RoundedSummaryBox(
-                title: 'Tổng số tiền đã quản lý',
-                money: '10.000.000 ₫',
-                icon: Icons.account_balance_outlined,
-                iconColor: Color(0xFF25555B),
-                iconBgColor: Color(0xFFC4F2FF),
-              ),
-              SizedBox(width: 20.0),
               RoundedSummaryBox(
                 title: 'Tổng số tiền đã chi tiêu',
                 money: '7.000.000 ₫',
@@ -35,13 +46,7 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 iconColor: Color(0xFFF2A715),
                 iconBgColor: Color(0xFFFFE6D6),
               ),
-            ],
-          ),
-          SizedBox(height: 15.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+              SizedBox(width: 20.0),
               RoundedSummaryBox(
                 title: 'Số lượng kế hoạch đã hoàn thành',
                 money: '4',
@@ -129,21 +134,6 @@ class QuanLyTienTatCaTab extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 10.0),
-          NutBam(
-            textName: 'Tạo kế hoạch quản lý số tiền hiện có',
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder: (context) => SingleChildScrollView(
-                  child: ThemQuanLyTienPage(),
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                ),
-              );
-            },
-          )
         ],
       ),
     );
