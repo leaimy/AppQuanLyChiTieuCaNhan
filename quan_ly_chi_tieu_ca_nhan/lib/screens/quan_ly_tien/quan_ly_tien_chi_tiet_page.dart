@@ -134,7 +134,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                     barColor: Colors.yellow,
                     icon: Icons.play_arrow,
                     iconColor: Colors.orange,
-                    amount: '+500',
+                    amount: '+500.000',
                     title: 'Thu nhập khác',
                     textColor: Colors.green,
                   ),

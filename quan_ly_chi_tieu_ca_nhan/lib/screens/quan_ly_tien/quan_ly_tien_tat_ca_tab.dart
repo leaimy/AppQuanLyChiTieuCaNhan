@@ -6,6 +6,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/quan_ly_tien_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_quan_ly_tien.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class QuanLyTienTatCaTab extends StatelessWidget {
@@ -56,7 +57,7 @@ class QuanLyTienTatCaTab extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: 30.0),
           Text(
             'Danh sách kế hoạch quản lý tiền:',
             style: kTitleTextStyle,
@@ -68,8 +69,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
               children: [
                 MuctieuItem(
                   textName: '01/11/2020 - 31/12/2020',
-                  textColor: Colors.blue,
-                  barColor: Colors.pink[200],
+                  textColor: ColorPicker.random(),
+                  barColor: ColorPicker.random(),
                   icon: FontAwesomeIcons.times,
                   iconColor: Colors.redAccent,
                   onItemPressed: () {
@@ -81,8 +82,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/10/2020 - 01/11/2020',
-                  textColor: Colors.blue,
-                  barColor: Colors.pink[200],
+                  textColor: ColorPicker.random(),
+                  barColor: ColorPicker.random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
@@ -94,8 +95,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/09/2020 - 01/10/2020',
-                  textColor: Colors.blue,
-                  barColor: Colors.pink[200],
+                  textColor: ColorPicker.random(),
+                  barColor: ColorPicker.random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
@@ -107,8 +108,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/08/2020 - 01/09/2020',
-                  textColor: Colors.blue,
-                  barColor: Colors.pink[200],
+                  textColor: ColorPicker.random(),
+                  barColor: ColorPicker.random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
@@ -120,8 +121,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/07/2020 - 01/08/2020',
-                  textColor: Colors.blue,
-                  barColor: Colors.pink[200],
+                  textColor: ColorPicker.random(),
+                  barColor: ColorPicker.random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {

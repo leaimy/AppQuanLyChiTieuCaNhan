@@ -45,10 +45,13 @@ class TransactionItem extends StatelessWidget {
           SizedBox(width: 10.0),
           Card(
             elevation: 5.0,
-            child: Icon(
-              this.icon,
-              size: 50.0,
-              color: this.iconColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                this.icon,
+                size: 30.0,
+                color: this.iconColor,
+              ),
             ),
           ),
           SizedBox(width: 20.0),
@@ -58,7 +61,7 @@ class TransactionItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${this.amount} VND',
+                  '${this.amount} ₫',
                   style: TextStyle(
                     color: textColor,
                     fontSize: 17.0,
@@ -66,7 +69,15 @@ class TransactionItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5.0),
-                Text(this.title),
+                Text(
+                  this.title,
+                  style: TextStyle(
+                    fontFamily: 'Lobster',
+                    color: Colors.black54,
+                    fontSize: 15.0,
+                    letterSpacing: 1.1,
+                  ),
+                ),
               ],
             ),
           )
