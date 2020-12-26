@@ -16,7 +16,7 @@ class CircleIconBox extends StatelessWidget {
         onPressed();
       },
       child: Card(
-        elevation: 5.0,
+        elevation: 2.5,
         shape: CircleBorder(),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
