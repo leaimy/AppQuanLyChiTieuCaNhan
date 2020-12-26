@@ -44,7 +44,7 @@ class TransactionItem extends StatelessWidget {
           ),
           SizedBox(width: 10.0),
           Card(
-            elevation: 5.0,
+            elevation: 2.5,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
