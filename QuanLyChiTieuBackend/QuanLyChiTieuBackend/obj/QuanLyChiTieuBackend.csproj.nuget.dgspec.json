@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj": {}
+    "C:\\Users\\2nth\\Dev\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj": {}
   },
   "projects": {
-    "D:\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj": {
+    "C:\\Users\\2nth\\Dev\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj",
+        "projectUniqueName": "C:\\Users\\2nth\\Dev\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj",
         "projectName": "QuanLyChiTieuBackend",
-        "projectPath": "D:\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj",
-        "packagesPath": "C:\\Users\\Daisy\\.nuget\\packages\\",
-        "outputPath": "D:\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\obj\\",
+        "projectPath": "C:\\Users\\2nth\\Dev\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend.csproj",
+        "packagesPath": "C:\\Users\\2nth\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\2nth\\Dev\\AppQuanLyChiTieuCaNhan\\QuanLyChiTieuBackend\\QuanLyChiTieuBackend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Daisy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\2nth\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "System.Data.Common": {
               "target": "Package",
@@ -67,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
