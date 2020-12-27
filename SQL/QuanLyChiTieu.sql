@@ -1,7 +1,7 @@
-CREATE DATABASE QuanLyChiTieu
+CREATE DATABASE QuanLyChiTieuTietKiem
 GO 
 
-USE QuanLyChiTieu
+USE QuanLyChiTieuTietKiem
 GO
 
 CREATE TABLE NguoiDung
@@ -56,7 +56,7 @@ CREATE TABLE ChiTietNguonThu
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
     QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(Id),
-    Nhom VARCHAR(100) NOT NULL DEFAULT 'other',
+    Nhom VARCHAR(100) NOT NULL DEFAULT 'khác',
     SoTien DECIMAL NOT NULL,
     CreatedAt DATETIME DEFAULT GETDATE()
 );
@@ -77,7 +77,7 @@ CREATE TABLE ChiTietChiTieu
     Id INT PRIMARY KEY IDENTITY(1,1),
     ChiTieu_Id INT REFERENCES ChiTieu(Id),
     Ten NVARCHAR(200) NOT NULL,
-    Nhom VARCHAR(100) NOT NULL DEFAULT 'other',
+    Nhom VARCHAR(100) NOT NULL DEFAULT 'khác',
     SoTien DECIMAL NOT NULL,
     CreatedAt DATETIME DEFAULT GETDATE()
 );
