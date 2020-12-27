@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using QuanLyChiTieuBackend.DAO;
+using QuanLyChiTieuBackend.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,16 @@ namespace QuanLyChiTieuBackend.Controllers
 				Summary = Summaries[rng.Next(Summaries.Length)]
 			})
 			.ToArray();
+		}
+
+		[HttpPost]
+		public ActionResult<NguoiDungDTO> ThemNguoiDung(NguoiDungDTO nguoiDungMoi)
+		{
+			bool result = NguoiDungDAO.Instance.ThemNguoiDung(nguoiDungMoi);
+
+			if (result)
+				return Ok(nguoiDungMoi);
+			return BadRequest();
 		}
 	}
 }
