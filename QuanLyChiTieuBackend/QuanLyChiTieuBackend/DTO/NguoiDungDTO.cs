@@ -12,6 +12,11 @@ namespace QuanLyChiTieuBackend.DTOs
 		public string Avatar { get; set; }
 		public DateTime CreatedAt { get; set; }
 
+		public NguoiDungDTO()
+		{
+
+		}
+
 		public NguoiDungDTO(int id, string email, string matKhau, string tenHienThi, string avatar, DateTime createdAt)
 		{
 			Id = id;
