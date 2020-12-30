@@ -3,10 +3,10 @@ GO
 
 -- Người dùng
 SET IDENTITY_INSERT NguoiDung ON
-INSERT NguoiDung (Id, Email, MatKhau, TenHienThi, Avatar)
+INSERT NguoiDung (Id, TenDangNhap, MatKhau, TenHienThi, Avatar)
 VALUES 
-    (1, 'hantctk42@gmail.com', 'nth', N'Thị Hà', 'avatar0'),
-    (2, 'hieuntctk42@gmail.com', 'nth', N'Trọng Hiếu', 'avatar1')
+    (1, 'thiha', 'nth', N'Thị Hà', 'avatar0'),
+    (2, 'tronghieu', 'nth', N'Trọng Hiếu', 'avatar1')
 GO
 SET IDENTITY_INSERT NguoiDung OFF
 

@@ -18,34 +18,16 @@ GO
 
 -- EXEC USP_NguoiDung_GetById 1
 
-CREATE PROC USP_NguoiDung_GetByEmail
-@Email VARCHAR(100)
-AS
-BEGIN
-    SELECT * FROM NguoiDung WHERE Email = @Email
-END
-GO
-
--- EXEC USP_NguoiDung_GetByEmail 'hantctk42@gmail.com'
-
-/*
-1),
-    Email VARCHAR(100) NOT NULL UNIQUE,
-    MatKhau VARCHAR(100) NOT NULL,
-    TenHienThi NVARCHAR(100) NOT NULL,
-    Avatar VARCHAR(100) NOT NULL,
-*/
-
 CREATE PROC USP_NguoiDung_Insert
-@Email VARCHAR(100),
+@TenDangNhap VARCHAR(100),
 @MatKhau VARCHAR(100),
 @TenHienThi NVARCHAR(100),
 @Avatar VARCHAR(100)
 AS 
 BEGIN
-    IF (NOT EXISTS (SELECT * FROM NguoiDung WHERE Email = @Email))
-        INSERT NguoiDung(Email, MatKhau, TenHienThi, Avatar)
-        VALUES (@Email, @MatKhau, @TenHienThi, @Avatar)
+    IF (NOT EXISTS (SELECT * FROM NguoiDung WHERE TenDangNhap = @TenDangNhap))
+        INSERT NguoiDung(TenDangNhap, MatKhau, TenHienThi, Avatar)
+        VALUES (@TenDangNhap, @MatKhau, @TenHienThi, @Avatar)
 END
 GO
 
