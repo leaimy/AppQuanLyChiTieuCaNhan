@@ -33,3 +33,14 @@ GO
 
 -- EXEC USP_NguoiDung_Insert 'hieuntctk422@gmail.com', 'nth', N'Trọng Hiếu', 'avatar'
 -- DELETE FROM NguoiDung WHERE email = 'hieuntctk422@gmail.com'
+
+CREATE PROC usp_NguoiDung_Select
+@TenDangNhap VARCHAR(100),
+@MatKhau VARCHAR(100)
+AS
+BEGIN
+    SELECT * FROM NguoiDung
+    WHERE TenDangNhap = @TenDangNhap AND MatKhau = @MatKhau
+END
+GO
+
