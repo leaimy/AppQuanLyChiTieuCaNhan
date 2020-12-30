@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_avatar.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class HomeTab extends StatelessWidget {
+  final NguoiDung nguoiDung;
+  HomeTab({this.nguoiDung});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +25,10 @@ class HomeTab extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: CardAvatar(),
+                child: CardAvatar(
+                  tenHienThi: nguoiDung.tenHienThi,
+                  tenHinh: nguoiDung.avatar,
+                ),
               ),
               SizedBox(width: 10.0),
               CircleIconBox(

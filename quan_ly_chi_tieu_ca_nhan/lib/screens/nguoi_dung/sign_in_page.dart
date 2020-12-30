@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/nguoi_dung_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/home_page.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  _SignInPageState createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  String tenDangNhap;
+  String matKhau;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +87,9 @@ class SignInPage extends StatelessWidget {
                                       fontFamily: 'Lobster',
                                     ),
                                   ),
+                                  onChanged: (value) {
+                                    tenDangNhap = value;
+                                  },
                                 ),
                               ],
                             ),
@@ -105,17 +118,36 @@ class SignInPage extends StatelessWidget {
                                       fontFamily: 'Lobster',
                                     ),
                                   ),
+                                  onChanged: (value) {
+                                    matKhau = value;
+                                  },
                                 ),
                               ],
                             ),
                             SizedBox(height: 20.0, width: double.infinity),
                             NutBam(
                               textName: 'Đăng nhập',
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return HomePage();
-                                }));
+                              onPressed: () async {
+                                NguoiDungApi api = NguoiDungApi();
+                                NguoiDung nguoiDung =
+                                    await api.dangNhap(tenDangNhap, matKhau);
+                                if (nguoiDung == null) {
+                                  print("Đăng nhập thất bại");
+                                } else {
+                                  print(nguoiDung.tenDangNhap);
+                                  print(nguoiDung.avatar);
+                                  print(nguoiDung.matKhau);
+                                  print(nguoiDung.id);
+                                  print(nguoiDung.tenHienThi);
+                                  print(nguoiDung.createdAt);
+
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return HomePage(
+                                      nguoiDung: nguoiDung,
+                                    );
+                                  }));
+                                }
                               },
                             ),
                             SizedBox(height: 30.0, width: double.infinity),
