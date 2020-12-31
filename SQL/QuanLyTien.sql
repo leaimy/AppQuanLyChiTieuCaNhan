@@ -46,7 +46,7 @@ BEGIN
         SUM(SoTienDaSuDung) AS TongSoTienDaChiTieu,
         SUM(CASE WHEN TrangThai = 1 THEN 1 ELSE 0 END) AS TongSoKeHoachQuanLyDaHoanThanh
     FROM QuanLyTienHienCo
-    WHERE NguoiDung_Id = 1
+    WHERE NguoiDung_Id = @IdNguoiDung
 END
 GO
 
