@@ -41,7 +41,7 @@ namespace Server.DAO
       return dsQuanLyTien;
     }
 
-    public QuanLyTienThongKeTongQuanDTO ThongKeTongQuanDTO(int idNguoiDung)
+    public QuanLyTienThongKeTongQuanDTO ThongKeTongQuan(int idNguoiDung)
     {
       string query = "EXEC usp_QuanLyTien_ThongKeTongQuan @IdNguoiDung";
       object[] param = new object[] { idNguoiDung };
@@ -50,6 +50,19 @@ namespace Server.DAO
 
       if (data.Rows.Count > 0)
         thongKe = new QuanLyTienThongKeTongQuanDTO(data.Rows[0]);
+
+      return thongKe;
+    }
+
+    public QuanLyTienThongKeChiTietDTO ThongKeChiTiet(int quanLyTienID)
+    {
+      string query = "EXECUTE dbo.usp_QuanLyTien_ThongKeChiTiet @QuanLyTienID";
+      object[] param = new object[] { quanLyTienID };
+      DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
+      QuanLyTienThongKeChiTietDTO thongKe = new QuanLyTienThongKeChiTietDTO();
+
+      if (data.Rows.Count > 0)
+        thongKe = new QuanLyTienThongKeChiTietDTO(data.Rows[0]);
 
       return thongKe;
     }

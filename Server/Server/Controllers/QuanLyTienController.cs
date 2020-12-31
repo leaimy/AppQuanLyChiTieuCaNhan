@@ -39,7 +39,23 @@ namespace Server.Controllers
 
       int userID = Convert.ToInt32(user_id);
 
-      QuanLyTienThongKeTongQuanDTO thongKe = QuanLyTienDAO.Instance.ThongKeTongQuanDTO(userID);
+      QuanLyTienThongKeTongQuanDTO thongKe = QuanLyTienDAO.Instance.ThongKeTongQuan(userID);
+
+      return Ok(thongKe);
+    }
+
+    [HttpGet("thongkechitiet")]
+    public ActionResult<List<QuanLyTienDTO>> ThongKeChiTiet()
+    {
+      string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
+      if (String.IsNullOrWhiteSpace(quanLyTien_id))
+        return BadRequest();
+
+      //Console.WriteLine(user_id);
+
+      int quanLyTienID = Convert.ToInt32(quanLyTien_id);
+
+      QuanLyTienThongKeChiTietDTO thongKe = QuanLyTienDAO.Instance.ThongKeChiTiet(quanLyTienID);
 
       return Ok(thongKe);
     }
