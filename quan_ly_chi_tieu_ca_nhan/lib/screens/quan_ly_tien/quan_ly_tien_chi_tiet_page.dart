@@ -1,13 +1,45 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tien_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_chi_tiet.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/lich_su_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_khoan_thu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class QuanLyTienChiTietPage extends StatelessWidget {
+class QuanLyTienChiTietPage extends StatefulWidget {
+  final int quanLyTienID;
+
+  QuanLyTienChiTietPage({this.quanLyTienID});
+
+  @override
+  _QuanLyTienChiTietPageState createState() => _QuanLyTienChiTietPageState();
+}
+
+class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
+  final dateFormat = new DateFormat('dd-MM-yyyy');
+  final currencyFormat = new NumberFormat('###,###,###,###');
+  QuanLyTienThongKeChiTiet thongKe = QuanLyTienThongKeChiTiet();
+
+  void getThongKe() async {
+    QuanLyTienApi api = QuanLyTienApi();
+    QuanLyTienThongKeChiTiet data =
+        await api.getQuanLyTienThongKeChiTiet(widget.quanLyTienID);
+
+    setState(() {
+      thongKe = data;
+    });
+  }
+
+  @override
+  void initState() {
+    getThongKe();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +54,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
             children: [
               RoundedSummaryCard(
                 title: 'Số tiền đang quản lý',
-                money: '2.500.000 ₫',
+                money: '${currencyFormat.format(thongKe.soTienHienCo)} ₫',
                 icon: Icons.account_balance,
                 iconColor: Colors.green.shade800,
                 iconBgColor: Colors.green.shade200,
@@ -41,7 +73,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                 children: [
                   RoundedSummaryBox(
                     title: 'Số dư',
-                    money: '500.000 ₫',
+                    money: '${currencyFormat.format(thongKe.soDu)} ₫',
                     icon: Icons.euro,
                     iconColor: Colors.green.shade800,
                     iconBgColor: Colors.green.shade200,
@@ -49,7 +81,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                   SizedBox(width: 20.0),
                   RoundedSummaryBox(
                     title: 'Tổng chi',
-                    money: '2.000.000 ₫',
+                    money: '${currencyFormat.format(thongKe.soTienDaSuDung)} ₫',
                     icon: Icons.money_off,
                     iconColor: Colors.red.shade800,
                     iconBgColor: Colors.red.shade200,
@@ -62,7 +94,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                 children: [
                   RoundedSummaryBox(
                     title: 'Từ ngày',
-                    money: '20/10/2020',
+                    money: '${dateFormat.format(thongKe.ngayBD)}',
                     icon: Icons.date_range,
                     iconColor: Colors.blue.shade800,
                     iconBgColor: Colors.blue.shade200,
@@ -70,7 +102,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                   SizedBox(width: 20.0),
                   RoundedSummaryBox(
                     title: 'Còn lại',
-                    money: '15 ngày',
+                    money: '${thongKe.soNgayConLai} ngày',
                     icon: Icons.calendar_today,
                     iconColor: Colors.yellow.shade800,
                     iconBgColor: Colors.yellow.shade200,
@@ -83,7 +115,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                 children: [
                   RoundedSummaryBox(
                     title: 'Hạn mức chi tiêu',
-                    money: '50.000 ₫',
+                    money: '${currencyFormat.format(thongKe.hanMucChiTieu)} ₫',
                     icon: Icons.warning,
                     iconColor: Colors.orange.shade800,
                     iconBgColor: Colors.orange.shade200,
@@ -91,7 +123,7 @@ class QuanLyTienChiTietPage extends StatelessWidget {
                   SizedBox(width: 20.0),
                   RoundedSummaryBox(
                     title: 'Số ngày vượt mức',
-                    money: '5',
+                    money: '${thongKe.soNgayVuotMuc}',
                     icon: Icons.warning_sharp,
                     iconColor: Colors.purple.shade800,
                     iconBgColor: Colors.purple.shade200,

@@ -128,7 +128,9 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return QuanLyTienChiTietPage();
+                          return QuanLyTienChiTietPage(
+                            quanLyTienID: quanLyTien.id,
+                          );
                         },
                       ),
                     );
