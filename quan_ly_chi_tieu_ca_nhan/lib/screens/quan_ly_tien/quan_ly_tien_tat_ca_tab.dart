@@ -7,6 +7,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/list_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_tong_quan.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/quan_ly_tien_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
@@ -24,6 +25,17 @@ class QuanLyTienTatCaTab extends StatefulWidget {
 class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
   final dateFormat = new DateFormat('dd-MM-yyyy');
   List<ListQuanLyTien> dsQuanLyTien = [];
+  QuanLyTienThongKeTongQuan thongKe = QuanLyTienThongKeTongQuan();
+
+  void getThongKeTongQuan() async {
+    QuanLyTienApi api = QuanLyTienApi();
+    QuanLyTienThongKeTongQuan data =
+        await api.getQuanLyTienThongKeTongQuan(widget.nguoiDung.id);
+
+    setState(() {
+      thongKe = data;
+    });
+  }
 
   void getDanhSachQuanLyTien() async {
     QuanLyTienApi api = QuanLyTienApi();
@@ -36,6 +48,7 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
 
   @override
   void initState() {
+    getThongKeTongQuan();
     getDanhSachQuanLyTien();
     super.initState();
   }
@@ -49,7 +62,7 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
         children: [
           RoundedSummaryCard(
             title: 'Tổng số tiền đã quản lý',
-            money: '10.000.000 ₫',
+            money: '${thongKe.tongSoTienDaQuanLy.toStringAsFixed(0)} ₫',
             icon: Icons.account_balance_outlined,
             iconColor: Color(0xFF25555B),
             iconBgColor: Color(0xFFC4F2FF),
@@ -72,7 +85,7 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
             children: [
               RoundedSummaryBox(
                 title: 'Tổng số tiền đã chi tiêu',
-                money: '7.000.000 ₫',
+                money: '${thongKe.tongSoTienDaChiTieu.toStringAsFixed(0)} ₫',
                 icon: Icons.money_off,
                 iconColor: Color(0xFFF2A715),
                 iconBgColor: Color(0xFFFFE6D6),
@@ -80,7 +93,7 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
               SizedBox(width: 20.0),
               RoundedSummaryBox(
                 title: 'Số lượng kế hoạch đã hoàn thành',
-                money: '4',
+                money: thongKe.tongSoKeHoachQuanLyDaHoanThanh.toString(),
                 icon: Icons.done_all,
                 iconColor: Color(0xFFB886A7),
                 iconBgColor: Color(0xFFFFD6F1),
