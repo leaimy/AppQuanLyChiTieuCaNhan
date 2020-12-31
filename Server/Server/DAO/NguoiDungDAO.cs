@@ -42,23 +42,42 @@ namespace QuanLyChiTieuBackend.DAO
 			return result > 0;
 		}
 
+
 		/// <summary>
 		/// Đăng nhập tài khoản
 		/// </summary>
 		/// <param name="nguoiDung">truyền người dùng cần đăng nhập vào</param>
 		/// <returns>Nếu đăng nhập không thành công thì trả về null còn đăng nhập thành công thì trả về một tài khoản</returns>
-		public TaoTaiKhoanDTO DangNhap(NguoiDungDTO_Create nguoiDung)
+		public TaoTaiKhoanDTO DangNhap(DangNhapDTO nguoiDung)
 		{
 			string query = "EXEC usp_NguoiDung_Select @TenDangNhap , @MatKhau";
 			object[] param = new object[] { nguoiDung.TenDangNhap, nguoiDung.MatKhau };
 			DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
-			if (data.Rows.Count==0)
+			if (data.Rows.Count == 0)
 			{
 				return null;
 			}
 			TaoTaiKhoanDTO nguoidung = new TaoTaiKhoanDTO(data.Rows[0]);
-			return nguoidung; 
-			
+			return nguoidung;
+		}
+
+		/// <summary>
+		/// Lấy 1 người dùng thông qua tên đăng nhập
+		/// </summary>
+		/// <param name="tenDangNhap">Tên đăng nhập</param>
+		/// <returns>Người dùng tương ứng với tên đăng nhập</returns>
+		public TaoTaiKhoanDTO LayNguoiDungBangTenDangNhap(string tenDangNhap)
+		{
+			string query = "EXEC usp_NguoiDung_GetByLoginName @TenDangNhap";
+			object[] param = new object[] { tenDangNhap };
+
+			DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
+			if (data.Rows.Count == 0)
+			{
+				return null;
+			}
+			TaoTaiKhoanDTO nguoidung = new TaoTaiKhoanDTO(data.Rows[0]);
+			return nguoidung;
 		}
 	}
 }

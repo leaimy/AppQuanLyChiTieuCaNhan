@@ -1,9 +1,30 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/nguoi_dung_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/welcome_page.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+  @override
+  _SignUpPageState createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  String tenDangNhap;
+  String tenHienThi;
+  String matKhau;
+  String avatar;
+
+  @override
+  void initState() {
+    int rand = Random().nextInt(10);
+    avatar = 'avatar$rand';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +78,15 @@ class SignUpPage extends StatelessWidget {
                               child: Container(
                                 height: 100.0,
                                 width: 100.0,
+                                padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(50.0),
-                                  color: Colors.grey[200],
                                 ),
-                                child: Icon(
-                                  FontAwesomeIcons.camera,
-                                  color: Colors.pink,
-                                  size: 20.0,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  backgroundImage:
+                                      AssetImage('images/$avatar.png'),
                                 ),
                               ),
                             ),
@@ -78,7 +100,7 @@ class SignUpPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Email:',
+                                  'Tên đăng nhập:',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -86,18 +108,21 @@ class SignUpPage extends StatelessWidget {
                                   ),
                                 ),
                                 TextField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.text,
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     icon: Icon(
                                       FontAwesomeIcons.solidEnvelope,
                                       color: Colors.purple[400],
                                     ),
-                                    hintText: '1812751@dlu.edu.vn',
+                                    hintText: 'thiha',
                                     hintStyle: TextStyle(
                                       fontFamily: 'Lobster',
                                     ),
                                   ),
+                                  onChanged: (value) {
+                                    tenDangNhap = value;
+                                  },
                                 ),
                               ],
                             ),
@@ -106,7 +131,7 @@ class SignUpPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Tên người dùng:',
+                                  'Tên hiển thị:',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -114,7 +139,7 @@ class SignUpPage extends StatelessWidget {
                                   ),
                                 ),
                                 TextField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.text,
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     icon: Icon(
@@ -126,6 +151,9 @@ class SignUpPage extends StatelessWidget {
                                       fontFamily: 'Lobster',
                                     ),
                                   ),
+                                  onChanged: (value) {
+                                    tenHienThi = value;
+                                  },
                                 ),
                               ],
                             ),
@@ -142,7 +170,7 @@ class SignUpPage extends StatelessWidget {
                                   ),
                                 ),
                                 TextField(
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.visiblePassword,
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     icon: Icon(
@@ -154,13 +182,25 @@ class SignUpPage extends StatelessWidget {
                                       fontFamily: 'Lobster',
                                     ),
                                   ),
+                                  onChanged: (value) {
+                                    matKhau = value;
+                                  },
                                 ),
                               ],
                             ),
                             SizedBox(height: 20.0, width: double.infinity),
                             NutBam(
                               textName: 'Tạo tài khoản',
-                              onPressed: () {
+                              onPressed: () async {
+                                NguoiDungApi api = NguoiDungApi();
+                                NguoiDung nguoiDungMoi = await api.taoTaiKhoan(
+                                    tenDangNhap, matKhau, tenHienThi, avatar);
+
+                                if (nguoiDungMoi == null) {
+                                  print('Tạo người dùng mới thất bại');
+                                  return;
+                                }
+
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return WelcomePage();
