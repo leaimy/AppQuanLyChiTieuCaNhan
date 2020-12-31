@@ -24,6 +24,7 @@ class QuanLyTienTatCaTab extends StatefulWidget {
 
 class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
   final dateFormat = new DateFormat('dd-MM-yyyy');
+  final currencyFormat = new NumberFormat('###,###,###,###');
   List<ListQuanLyTien> dsQuanLyTien = [];
   QuanLyTienThongKeTongQuan thongKe = QuanLyTienThongKeTongQuan();
 
@@ -62,7 +63,7 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
         children: [
           RoundedSummaryCard(
             title: 'Tổng số tiền đã quản lý',
-            money: '${thongKe.tongSoTienDaQuanLy.toStringAsFixed(0)} ₫',
+            money: '${currencyFormat.format(thongKe.tongSoTienDaQuanLy)} ₫',
             icon: Icons.account_balance_outlined,
             iconColor: Color(0xFF25555B),
             iconBgColor: Color(0xFFC4F2FF),
@@ -85,7 +86,8 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
             children: [
               RoundedSummaryBox(
                 title: 'Tổng số tiền đã chi tiêu',
-                money: '${thongKe.tongSoTienDaChiTieu.toStringAsFixed(0)} ₫',
+                money:
+                    '${currencyFormat.format(thongKe.tongSoTienDaChiTieu)} ₫',
                 icon: Icons.money_off,
                 iconColor: Color(0xFFF2A715),
                 iconBgColor: Color(0xFFFFE6D6),

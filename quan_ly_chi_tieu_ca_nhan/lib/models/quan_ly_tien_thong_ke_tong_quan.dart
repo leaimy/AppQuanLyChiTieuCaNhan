@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 class QuanLyTienThongKeTongQuan {
-  double tongSoTienDaQuanLy;
-  double tongSoTienDaChiTieu;
+  int tongSoTienDaQuanLy;
+  int tongSoTienDaChiTieu;
   int tongSoKeHoachQuanLyDaHoanThanh;
 
   QuanLyTienThongKeTongQuan({
@@ -14,8 +12,8 @@ class QuanLyTienThongKeTongQuan {
   factory QuanLyTienThongKeTongQuan.fromJson(Map<String, dynamic> json) {
     print(json);
     return QuanLyTienThongKeTongQuan(
-      tongSoTienDaQuanLy: double.parse(json['tongSoTienDaQuanLy'].toString()),
-      tongSoTienDaChiTieu: double.parse(json['tongSoTienDaChiTieu'].toString()),
+      tongSoTienDaQuanLy: int.parse(json['tongSoTienDaQuanLy'].toString()),
+      tongSoTienDaChiTieu: int.parse(json['tongSoTienDaChiTieu'].toString()),
       tongSoKeHoachQuanLyDaHoanThanh:
           int.parse(json['tongSoKeHoachQuanLyDaHoanThanh'].toString()),
     );
