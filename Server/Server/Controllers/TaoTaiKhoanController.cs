@@ -13,7 +13,7 @@ namespace Server.Controllers
   public class TaoTaiKhoanController : ControllerBase
   {
     [HttpPost]
-    public ActionResult<NguoiDungDTO> SignIn(NguoiDungDTO nguoiDungMoi)
+    public ActionResult<TaoTaiKhoanDTO> SignIn(TaoTaiKhoanDTO nguoiDungMoi)
     {
       bool success = NguoiDungDAO.Instance.ThemNguoiDung(nguoiDungMoi);
 

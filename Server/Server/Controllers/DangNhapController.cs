@@ -13,7 +13,7 @@ namespace Server.Controllers
 	public class DangNhapController : ControllerBase
 	{
 		[HttpPost]
-		public ActionResult<TaoTaiKhoanDTO> SignIn(NguoiDungDTO_Create nguoiDungDN)
+		public ActionResult<TaoTaiKhoanDTO> SignIn(DangNhapDTO nguoiDungDN)
 		{
 			TaoTaiKhoanDTO nguoidung = NguoiDungDAO.Instance.DangNhap(nguoiDungDN);
 			if (nguoidung == null)

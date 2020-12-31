@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.DTO
 {
-	public class NguoiDungDTO
+	public class TaoTaiKhoanDTO
 	{
 		public int Id { get; set; }
 		public string TenDangNhap { get; set; }
@@ -15,12 +15,12 @@ namespace Server.DTO
 		public string Avatar { get; set; }
 		public DateTime CreatedAt { get; set; }
 
-		public NguoiDungDTO()
+		public TaoTaiKhoanDTO()
 		{
 
 		}
 
-		public NguoiDungDTO(int id, string tenDangNhap, string matKhau, string tenHienThi, string avatar, DateTime createdAt)
+		public TaoTaiKhoanDTO(int id, string tenDangNhap, string matKhau, string tenHienThi, string avatar, DateTime createdAt)
 		{
 			Id = id;
 			TenDangNhap = tenDangNhap;
@@ -30,7 +30,7 @@ namespace Server.DTO
 			CreatedAt = createdAt;
 		}
 
-		public NguoiDungDTO(DataRow row)
+		public TaoTaiKhoanDTO(DataRow row)
 		{
 			Id = Convert.ToInt32(row["Id"]);
 			TenDangNhap = row["TenDangNhap"].ToString();
