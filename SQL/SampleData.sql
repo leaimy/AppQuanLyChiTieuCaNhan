@@ -55,3 +55,18 @@ SET SoTienDaTietKiemDuoc = 390000 WHERE Id = 1
 UPDATE ChiTietTietKiem
 SET TrangThai = 1 WHERE Id = 1 OR Id = 2 OR Id = 4
 
+-- Quản lý số tiền hiện có
+SET IDENTITY_INSERT QuanLyTienHienCo ON
+
+INSERT INTO QuanLyTienHienCo(Id, NguoiDung_Id, SoTienHienCo, SoTienDaSuDung, NgayBD, NgayKT, TrangThai)
+    VALUES 
+        (1, 1, 1000000, 1000000, '20201001', '20201031', 1),
+        (2, 1, 1500000, 1500000, '20201101', '20201130', 1),
+        (3, 1, 2000000, 0, '20201201', '20201231', 0),
+        (4, 2, 1000000, 1000000, '20201001', '20201031', 1),
+        (5, 2, 1000000, 1000000, '20201101', '20201130', 1),
+        (6, 2, 1000000, 0, '20201201', '20201231', 0)
+
+SET IDENTITY_INSERT QuanLyTienHienCo OFF
+
+SELECT * FROM QuanLyTienHienCo

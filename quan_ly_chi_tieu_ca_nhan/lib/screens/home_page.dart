@@ -26,7 +26,9 @@ class _HomePageState extends State<HomePage> {
       QuanLyMucTieuTietKiemTatCaTab(
         nguoiDung: widget.nguoiDung,
       ),
-      QuanLyTienTatCaTab(),
+      QuanLyTienTatCaTab(
+        nguoiDung: widget.nguoiDung,
+      ),
     ];
 
     super.initState();

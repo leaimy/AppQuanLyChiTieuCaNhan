@@ -1,15 +1,71 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tien_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/list_quan_ly_tien.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/quan_ly_tien_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class QuanLyTienTatCaTab extends StatelessWidget {
+class QuanLyTienTatCaTab extends StatefulWidget {
+  final NguoiDung nguoiDung;
+
+  QuanLyTienTatCaTab({this.nguoiDung});
+
+  @override
+  _QuanLyTienTatCaTabState createState() => _QuanLyTienTatCaTabState();
+}
+
+class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
+  final dateFormat = new DateFormat('dd-MM-yyyy');
+  List<ListQuanLyTien> dsQuanLyTien = [];
+
+  void getDanhSachQuanLyTien() async {
+    QuanLyTienApi api = QuanLyTienApi();
+    List<ListQuanLyTien> list = await api.getAllQuanLyTien(widget.nguoiDung.id);
+
+    setState(() {
+      dsQuanLyTien = list;
+    });
+  }
+
+  List<Widget> renderDanhSachQuanLyTien() {
+    List<Widget> list = [];
+
+    for (ListQuanLyTien quanLyTien in dsQuanLyTien) {
+      MuctieuItem item = MuctieuItem(
+        textName:
+            '${dateFormat.format(quanLyTien.ngayBD)} - ${dateFormat.format(quanLyTien.ngayKT)}',
+        textColor: ColorPicker().random(),
+        barColor: ColorPicker().random(),
+        icon: quanLyTien.trangThai == true
+            ? FontAwesomeIcons.check
+            : FontAwesomeIcons.times,
+        iconColor: quanLyTien.trangThai == true ? Colors.green : Colors.red,
+        onItemPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return QuanLyTienChiTietPage();
+          }));
+        },
+      );
+
+      list.add(item);
+    }
+
+    return list;
+  }
+
+  @override
+  void initState() {
+    getDanhSachQuanLyTien();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,73 +122,7 @@ class QuanLyTienTatCaTab extends StatelessWidget {
           Container(
             height: 350.0,
             child: ListView(
-              children: [
-                MuctieuItem(
-                  textName: '01/11/2020 - 31/12/2020',
-                  textColor: ColorPicker().random(),
-                  barColor: ColorPicker().random(),
-                  icon: FontAwesomeIcons.times,
-                  iconColor: Colors.redAccent,
-                  onItemPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return QuanLyTienChiTietPage();
-                    }));
-                  },
-                ),
-                MuctieuItem(
-                  textName: '01/10/2020 - 01/11/2020',
-                  textColor: ColorPicker().random(),
-                  barColor: ColorPicker().random(),
-                  icon: FontAwesomeIcons.check,
-                  iconColor: Colors.green,
-                  onItemPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return QuanLyTienChiTietPage();
-                    }));
-                  },
-                ),
-                MuctieuItem(
-                  textName: '01/09/2020 - 01/10/2020',
-                  textColor: ColorPicker().random(),
-                  barColor: ColorPicker().random(),
-                  icon: FontAwesomeIcons.check,
-                  iconColor: Colors.green,
-                  onItemPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return QuanLyTienChiTietPage();
-                    }));
-                  },
-                ),
-                MuctieuItem(
-                  textName: '01/08/2020 - 01/09/2020',
-                  textColor: ColorPicker().random(),
-                  barColor: ColorPicker().random(),
-                  icon: FontAwesomeIcons.check,
-                  iconColor: Colors.green,
-                  onItemPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return QuanLyTienChiTietPage();
-                    }));
-                  },
-                ),
-                MuctieuItem(
-                  textName: '01/07/2020 - 01/08/2020',
-                  textColor: ColorPicker().random(),
-                  barColor: ColorPicker().random(),
-                  icon: FontAwesomeIcons.check,
-                  iconColor: Colors.green,
-                  onItemPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return QuanLyTienChiTietPage();
-                    }));
-                  },
-                ),
-              ],
+              children: renderDanhSachQuanLyTien(),
             ),
           ),
         ],
