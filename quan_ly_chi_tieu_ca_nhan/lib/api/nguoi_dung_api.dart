@@ -2,10 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class NguoiDungApi {
-  final String _urlDangNhap = "http://10.0.2.2:5000/api/dangnhap";
-  final String _urlTaoTaiKhoan = 'http://10.0.2.2:5000/api/taotaikhoan';
+  final String _urlDangNhap = "$kURL/api/dangnhap";
+  final String _urlTaoTaiKhoan = '$kURL/api/taotaikhoan';
 
   Future<NguoiDung> dangNhap(String tenDangNhap, String matKhau) async {
     var body = {"TenDangNhap": tenDangNhap, "MatKhau": matKhau};

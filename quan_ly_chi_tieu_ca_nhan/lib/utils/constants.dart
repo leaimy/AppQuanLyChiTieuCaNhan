@@ -35,3 +35,6 @@ const kPaddingMainPage = EdgeInsets.symmetric(
   vertical: 20.0,
   horizontal: 10.0,
 );
+
+// const kURL = 'http://10.0.2.2:5000';
+const kURL = 'http://10.0.3.2:5000';
