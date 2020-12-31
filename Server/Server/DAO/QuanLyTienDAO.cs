@@ -40,5 +40,18 @@ namespace Server.DAO
 
       return dsQuanLyTien;
     }
+
+    public QuanLyTienThongKeTongQuanDTO ThongKeTongQuanDTO(int idNguoiDung)
+    {
+      string query = "EXEC usp_QuanLyTien_ThongKeTongQuan @IdNguoiDung";
+      object[] param = new object[] { idNguoiDung };
+      DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
+      QuanLyTienThongKeTongQuanDTO thongKe = new QuanLyTienThongKeTongQuanDTO(0, 0, 0);
+
+      if (data.Rows.Count > 0)
+        thongKe = new QuanLyTienThongKeTongQuanDTO(data.Rows[0]);
+
+      return thongKe;
+    }
   }
 }

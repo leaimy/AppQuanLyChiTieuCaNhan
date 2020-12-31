@@ -34,32 +34,6 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
     });
   }
 
-  List<Widget> renderDanhSachQuanLyTien() {
-    List<Widget> list = [];
-
-    for (ListQuanLyTien quanLyTien in dsQuanLyTien) {
-      MuctieuItem item = MuctieuItem(
-        textName:
-            '${dateFormat.format(quanLyTien.ngayBD)} - ${dateFormat.format(quanLyTien.ngayKT)}',
-        textColor: ColorPicker().random(),
-        barColor: ColorPicker().random(),
-        icon: quanLyTien.trangThai == true
-            ? FontAwesomeIcons.check
-            : FontAwesomeIcons.times,
-        iconColor: quanLyTien.trangThai == true ? Colors.green : Colors.red,
-        onItemPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return QuanLyTienChiTietPage();
-          }));
-        },
-      );
-
-      list.add(item);
-    }
-
-    return list;
-  }
-
   @override
   void initState() {
     getDanhSachQuanLyTien();
@@ -121,8 +95,32 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
           SizedBox(height: 15.0),
           Container(
             height: 350.0,
-            child: ListView(
-              children: renderDanhSachQuanLyTien(),
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                ListQuanLyTien quanLyTien = dsQuanLyTien[index];
+                return MuctieuItem(
+                  textName:
+                      '${dateFormat.format(quanLyTien.ngayBD)} - ${dateFormat.format(quanLyTien.ngayKT)}',
+                  textColor: ColorPicker().random(),
+                  barColor: ColorPicker().random(),
+                  icon: quanLyTien.trangThai == true
+                      ? FontAwesomeIcons.check
+                      : FontAwesomeIcons.times,
+                  iconColor:
+                      quanLyTien.trangThai == true ? Colors.green : Colors.red,
+                  onItemPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return QuanLyTienChiTietPage();
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
+              itemCount: dsQuanLyTien.length,
             ),
           ),
         ],
