@@ -44,3 +44,12 @@ BEGIN
 END
 GO
 
+CREATE PROC usp_NguoiDung_GetByLoginName
+@TenDangNhap VARCHAR(100)
+AS
+BEGIN
+    SELECT *
+    FROM NguoiDung
+    WHERE TenDangNhap = @TenDangNhap
+END
+GO
