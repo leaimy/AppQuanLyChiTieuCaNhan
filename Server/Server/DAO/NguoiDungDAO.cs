@@ -27,7 +27,7 @@ namespace QuanLyChiTieuBackend.DAO
 		/// </summary>
 		/// <param name="nguoiDungMoi">truyền người dùng cần tạo vào</param>
 		/// <returns>Thêm thành công trả về true còn không thành công trả về false</returns>
-		public bool ThemNguoiDung(NguoiDungDTO nguoiDungMoi)
+		public bool ThemNguoiDung(TaoTaiKhoanDTO nguoiDungMoi)
 		{
 			string query = "EXEC USP_NguoiDung_Insert @TenDangNhap , @MatKhau , @TenHienThi , @Avatar";
 			object[] param = new object[]
@@ -47,7 +47,7 @@ namespace QuanLyChiTieuBackend.DAO
 		/// </summary>
 		/// <param name="nguoiDung">truyền người dùng cần đăng nhập vào</param>
 		/// <returns>Nếu đăng nhập không thành công thì trả về null còn đăng nhập thành công thì trả về một tài khoản</returns>
-		public NguoiDungDTO DangNhap(NguoiDungDTO_Create nguoiDung)
+		public TaoTaiKhoanDTO DangNhap(NguoiDungDTO_Create nguoiDung)
 		{
 			string query = "EXEC usp_NguoiDung_Select @TenDangNhap , @MatKhau";
 			object[] param = new object[] { nguoiDung.TenDangNhap, nguoiDung.MatKhau };
@@ -56,7 +56,7 @@ namespace QuanLyChiTieuBackend.DAO
 			{
 				return null;
 			}
-			NguoiDungDTO nguoidung = new NguoiDungDTO(data.Rows[0]);
+			TaoTaiKhoanDTO nguoidung = new TaoTaiKhoanDTO(data.Rows[0]);
 			return nguoidung; 
 			
 		}

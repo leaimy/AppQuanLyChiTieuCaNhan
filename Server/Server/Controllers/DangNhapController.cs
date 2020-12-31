@@ -13,9 +13,9 @@ namespace Server.Controllers
 	public class DangNhapController : ControllerBase
 	{
 		[HttpPost]
-		public ActionResult<NguoiDungDTO> SignIn(NguoiDungDTO_Create nguoiDungDN)
+		public ActionResult<TaoTaiKhoanDTO> SignIn(NguoiDungDTO_Create nguoiDungDN)
 		{
-			NguoiDungDTO nguoidung = NguoiDungDAO.Instance.DangNhap(nguoiDungDN);
+			TaoTaiKhoanDTO nguoidung = NguoiDungDAO.Instance.DangNhap(nguoiDungDN);
 			if (nguoidung == null)
 			{
 				return BadRequest("Đăng nhập không thành công");
