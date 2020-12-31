@@ -15,9 +15,13 @@ SELECT * FROM NguoiDung
 -- Mục tiêu tiết kiệm và chi tiết mục tiêu tiết kiệm
 SET IDENTITY_INSERT MucTieuTietKiem ON
 INSERT MucTieuTietKiem (Id, NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, SoTienDaTietKiemDuoc, NgayBD, NgayKT, LoaiTietKiem)
-VALUES (
+VALUES 
+(
     1, 1, N'Tiết kiệm mua máy ảnh', N'Mua 1 chiếc máy ảnh thật đẹp để chụp hình cho mọi người',
     4000000, 0, '20201220', '20210120', 'ngày'
+),
+(
+    2, 1, N'Tiet'
 )
 
 DECLARE @begin_date DATETIME = '20201220'

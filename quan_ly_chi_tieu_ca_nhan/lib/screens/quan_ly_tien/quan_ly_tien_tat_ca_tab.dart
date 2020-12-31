@@ -69,8 +69,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
               children: [
                 MuctieuItem(
                   textName: '01/11/2020 - 31/12/2020',
-                  textColor: ColorPicker.random(),
-                  barColor: ColorPicker.random(),
+                  textColor: ColorPicker().random(),
+                  barColor: ColorPicker().random(),
                   icon: FontAwesomeIcons.times,
                   iconColor: Colors.redAccent,
                   onItemPressed: () {
@@ -82,8 +82,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/10/2020 - 01/11/2020',
-                  textColor: ColorPicker.random(),
-                  barColor: ColorPicker.random(),
+                  textColor: ColorPicker().random(),
+                  barColor: ColorPicker().random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
@@ -95,8 +95,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/09/2020 - 01/10/2020',
-                  textColor: ColorPicker.random(),
-                  barColor: ColorPicker.random(),
+                  textColor: ColorPicker().random(),
+                  barColor: ColorPicker().random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
@@ -108,8 +108,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/08/2020 - 01/09/2020',
-                  textColor: ColorPicker.random(),
-                  barColor: ColorPicker.random(),
+                  textColor: ColorPicker().random(),
+                  barColor: ColorPicker().random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {
@@ -121,8 +121,8 @@ class QuanLyTienTatCaTab extends StatelessWidget {
                 ),
                 MuctieuItem(
                   textName: '01/07/2020 - 01/08/2020',
-                  textColor: ColorPicker.random(),
-                  barColor: ColorPicker.random(),
+                  textColor: ColorPicker().random(),
+                  barColor: ColorPicker().random(),
                   icon: FontAwesomeIcons.check,
                   iconColor: Colors.green,
                   onItemPressed: () {

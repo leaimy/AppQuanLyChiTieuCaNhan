@@ -67,7 +67,7 @@ class _SignInPageState extends State<SignInPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Email:',
+                                  'Tên đăng nhập:',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
@@ -82,7 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                                       FontAwesomeIcons.solidUser,
                                       color: Colors.blue[400],
                                     ),
-                                    hintText: 'Heo con',
+                                    hintText: 'Heocon',
                                     hintStyle: TextStyle(
                                       fontFamily: 'Lobster',
                                     ),
