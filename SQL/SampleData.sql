@@ -124,3 +124,36 @@ INSERT INTO ChiTietNguonThu(QuanLyTienHienCo_Id, Nhom, SoTien)
         (5, N'ba mẹ', 100000),
         (6, N'ba mẹ', 100000);
 GO
+
+-- Chèn dữ liệu mẫu bảng chi tiêu và chi tiết chi tiêu
+SET IDENTITY_INSERT ChiTieu ON
+
+INSERT INTO ChiTieu(Id, QuanLyTienHienCo_Id, Ngay, TongChi)
+    VALUES 
+        (1, 1, '20201002', 500000),
+        (2, 1, '20201005', 500000),
+        (3, 2, '20201102', 1500000),
+        (4, 4, '20201001', 500000),
+        (5, 4, '20201010', 300000),
+        (6, 4, '20201015', 200000),
+        (7, 5, '20201120', 1000000)
+
+SET IDENTITY_INSERT ChiTieu OFF
+GO
+
+INSERT INTO ChiTietChiTieu(ChiTieu_Id, Ten, Nhom, SoTien)
+VALUES 
+    (1, N'Ăn đám cưới bạn', N'bạn bè', 300000),
+    (1, N'Mua thực phẩm', N'đi chợ', 50000),
+    (1, N'Mua áo', N'áo quần', 150000),
+    (2, N'Ăn ngoài quán với bạn bè', N'ăn uống', 500000),
+    (3, N'Mua áo', N'áo quần', 1300000),
+    (3, N'Mua đồ ăn hằng ngày', N'đi chợ', 200000),
+    (4, N'Mua áo', N'áo quần', 200000),
+    (4, N'Ăn ngoài quán', N'ăn uống', 200000),
+    (4, N'Bạn ở xa lên thăm', N'bạn bè', 100000),
+    (5, N'Mua đồ', N'áo quần', 300000),
+    (6, N'Mua đồ', N'áo quần', 100000),
+    (6, N'Mua đồ ăn hằng ngày', N'đi chợ', 100000),
+    (7, N'Mua đồ sang nhà thầy 20/11', N'xã hội', 100000)
+

@@ -158,6 +158,36 @@ AS
     WHERE QuanLyTienHienCo.Id = @QuanLyTienID
     GROUP BY QuanLyTienHienCo.Id, Nhom
 GO
--- example to execute the stored procedure we just created
+
 EXECUTE dbo.usp_ThongKeNguonThuTongQuan 1
+GO
+
+-- Create a new stored procedure called 'usp_ThongKeCacKhoanChiTongQuan' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_ThongKeCacKhoanChiTongQuan'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_ThongKeCacKhoanChiTongQuan
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.usp_ThongKeCacKhoanChiTongQuan
+    @QuanLyTienID INT
+AS
+    SELECT 
+        @QuanLyTienID AS [Id], 
+        ChiTietChiTieu.Nhom AS [Nhom], 
+        SUM(ChiTietChiTieu.SoTien) AS [SoTien]
+    FROM ChiTieu
+    JOIN QuanLyTienHienCo ON QuanLyTienHienCo.Id = ChiTieu.QuanLyTienHienCo_Id
+    JOIN ChiTietChiTieu ON ChiTieu.Id = ChiTietChiTieu.ChiTieu_Id
+    WHERE QuanLyTienHienCo.Id = @QuanLyTienID
+    GROUP BY ChiTietChiTieu.Nhom
+    ORDER BY [SoTien] DESC
+GO
+
+EXECUTE dbo.usp_ThongKeCacKhoanChiTongQuan 4
 GO
