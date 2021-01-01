@@ -8,9 +8,15 @@ namespace Server.DTO
 {
   public class QuanLyTienThongKeNguonThuDTO
   {
+    private string nhom;
+
     public int QuanLyTienID { get; set; }
-    public string Nhom { get; set; }
     public decimal SoTien { get; set; }
+    public string Nhom
+    {
+      get { return nhom.First().ToString().ToUpper() + nhom.Substring(1); }
+      set { nhom = value.ToLower(); }
+    }
 
     public QuanLyTienThongKeNguonThuDTO()
     {
