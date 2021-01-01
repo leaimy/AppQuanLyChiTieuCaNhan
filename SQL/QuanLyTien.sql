@@ -136,3 +136,28 @@ GO
 
 EXECUTE dbo.usp_QuanLyTien_ThongKeChiTiet 1
 GO
+
+-- Create a new stored procedure called 'usp_ThongKeNguonThuTongQuan' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_ThongKeNguonThuTongQuan'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_ThongKeNguonThuTongQuan
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.usp_ThongKeNguonThuTongQuan
+    @QuanLyTienID INT
+AS    
+    SELECT QuanLyTienHienCo.Id AS [Id], Nhom, SUM(SoTien) AS [SoTien]
+    FROM QuanLyTienHienCo
+    JOIN ChiTietNguonThu ON QuanLyTienHienCo.Id = ChiTietNguonThu.QuanLyTienHienCo_Id
+    WHERE QuanLyTienHienCo.Id = @QuanLyTienID
+    GROUP BY QuanLyTienHienCo.Id, Nhom
+GO
+-- example to execute the stored procedure we just created
+EXECUTE dbo.usp_ThongKeNguonThuTongQuan 1
+GO
