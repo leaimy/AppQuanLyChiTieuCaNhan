@@ -66,5 +66,21 @@ namespace Server.DAO
 
       return thongKe;
     }
+
+    public List<QuanLyTienThongKeNguonThuDTO> ThongKeNguonThuTongQuan(int quanLyTienID)
+    {
+      string query = "EXECUTE dbo.usp_ThongKeNguonThuTongQuan @QuanLyTienID";
+      object[] param = new object[] { quanLyTienID };
+
+      List<QuanLyTienThongKeNguonThuDTO> dsNguonThu = new List<QuanLyTienThongKeNguonThuDTO>();
+
+      DataTable table = DataProvider.Instance.ExecuteQuery(query, param);
+      foreach (DataRow row in table.Rows)
+      {
+        dsNguonThu.Add(new QuanLyTienThongKeNguonThuDTO(row));
+      }
+
+      return dsNguonThu;
+    }
   }
 }
