@@ -6,6 +6,74 @@
 
 - Nguyễn Trọng Hiếu
 
+## Bảng phân công
+
+### 1. Nguyễn Thị Hà
+
+1. Thiết kế giao diện
+   
+   - [x] Trang chào mừng
+   
+   - [x] Trang tạo tài khoản
+   
+   - [x] Trang đăng nhập
+   
+   - [x] Trang chủ
+   
+   - [x] Trang kế hoạch tiết kiệm
+   
+   - [x] Trang chi tiết kế hoạch tiết kiệm
+   
+   - [x] Trang thêm kế hoạch tiết kiệm
+
+2. Server
+   
+   - [x] API lấy danh sách kế hoạch tiết kiệm
+
+3. Chức năng trên giao diện
+   
+   - [x] Hiển thị danh sách kế hoạch tiết kiệm
+
+### 2. Nguyễn Trọng Hiếu
+
+1. Thiết kế giao diện
+   
+   - [x] Trang tổng hợp kế hoạch quản lý tiền hiện có
+   
+   - [x] Trang chi tiết kế hoạch quản lý tiền hiện có
+   
+   - [x] Trang lịch sử chi tiêu
+   
+   - [x] Trang thêm kế hoạch quản lý tiền hiện có
+   
+   - [x] Trang thêm nguồn thu
+   
+   - [x] Trang thêm chi tiêu
+
+2. Server
+   
+   - [x] API lấy danh sách kế hoạch quản lý tiền hiện có
+   
+   - [x] API thống kê tổng quan tổng tiền đã quản lý và tổng tiền đã chi tiêu của người dùng
+   
+   - [x] API lấy chi tiết 1 kế hoạch quản lý tiền
+   
+   - [x] API thống kê nguồn thu của 1 kế hoạch quản lý tiền
+   
+   - [x] API thống kê các khoản chi của 1 kế hoạch quản lý tiền
+
+3. Chức năng trên giao diện
+   
+   - [x] Hiển thị danh sách kế hoạch quản lý tiền hiện có
+   
+   - [x] Hiển thị thống kê tổng quan tổng tiền đã quản lý và tổng tiền đã chi tiêu của người dùng
+   
+   - [x] Hiển thị thông tin chi tiết 1 kế hoạch quản lý tiền
+   
+   - [x] Hiển thị thống kê danh sách nguồn thu
+   
+   - [x] Hiển thị thống kê danh sách các khoản chi
+
 ## Mô tả Cơ sở dữ liệu
 
 ### 1. Quản lý người dùng
