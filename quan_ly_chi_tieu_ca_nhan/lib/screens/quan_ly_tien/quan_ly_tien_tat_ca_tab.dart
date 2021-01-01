@@ -33,9 +33,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
     QuanLyTienThongKeTongQuan data =
         await api.getQuanLyTienThongKeTongQuan(widget.nguoiDung.id);
 
-    setState(() {
-      thongKe = data;
-    });
+    if (data != null)
+      setState(() {
+        thongKe = data;
+      });
   }
 
   void getDanhSachQuanLyTien() async {
