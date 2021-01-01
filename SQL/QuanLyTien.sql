@@ -53,6 +53,7 @@ CREATE PROC usp_QuanLyTien_ThongKeTongQuan
 AS
 BEGIN
     SELECT 
+        @IdNguoiDung AS [NguoiDung_Id],
         SUM(SoTienHienCo) AS TongSoTienDaQuanLy,
         SUM(SoTienDaSuDung) AS TongSoTienDaChiTieu,
         SUM(CASE WHEN TrangThai = 1 THEN 1 ELSE 0 END) AS TongSoKeHoachQuanLyDaHoanThanh
@@ -109,6 +110,9 @@ AS
     DECLARE @soDu DECIMAL;
     SET @soDu = @soTienHienCo - @soTienDaSuDung;
 
+    SELECT @soNgayVuotMuc = COUNT(*) FROM ChiTieu
+    WHERE QuanLyTienHienCo_Id = @QuanLyTienID AND TongChi > @hanMucChiTieu
+
     IF (@soTienHienCo IS NULL) SET @soTienHienCo = 0
     IF (@soTienDaSuDung IS NULL) SET @soTienDaSuDung = 0
     IF (@soDu IS NULL) SET @soDu = 0
@@ -119,6 +123,7 @@ AS
     IF (@soNgayVuotMuc IS NULL) SET @soNgayVuotMuc = 0
 
     SELECT 
+        @QuanLyTienID AS [Id],
         @soTienHienCo AS [SoTienHienCo],
         @soTienDaSuDung AS [SoTienDaSuDung],
         @soDu AS [SoDu],
