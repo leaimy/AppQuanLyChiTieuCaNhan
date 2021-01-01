@@ -6,8 +6,10 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_chi_tiet.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_nguon_thu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/lich_su_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tien/them_khoan_thu_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class QuanLyTienChiTietPage extends StatefulWidget {
@@ -22,21 +24,55 @@ class QuanLyTienChiTietPage extends StatefulWidget {
 class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
   final dateFormat = new DateFormat('dd-MM-yyyy');
   final currencyFormat = new NumberFormat('###,###,###,###');
+  ColorPicker colorPicker = ColorPicker();
+  QuanLyTienApi _quanLyTienApi = QuanLyTienApi();
+
   QuanLyTienThongKeChiTiet thongKe = QuanLyTienThongKeChiTiet();
+  List<QuanLyTienThongKeNguonThu> dsNguonThu = [];
 
   void getThongKe() async {
-    QuanLyTienApi api = QuanLyTienApi();
     QuanLyTienThongKeChiTiet data =
-        await api.getQuanLyTienThongKeChiTiet(widget.quanLyTienID);
+        await _quanLyTienApi.getQuanLyTienThongKeChiTiet(widget.quanLyTienID);
 
-    setState(() {
-      thongKe = data;
-    });
+    if (data != null)
+      setState(() {
+        thongKe = data;
+      });
+  }
+
+  void getDanhSachNguonThu() async {
+    List<QuanLyTienThongKeNguonThu> data = await _quanLyTienApi
+        .getQuanLyTienThongKeNguonThuTongQuan(widget.quanLyTienID);
+
+    if (data != null)
+      setState(() {
+        dsNguonThu = data;
+      });
+  }
+
+  List<TransactionItem> renderDanhSachNguonThu() {
+    List<TransactionItem> widgets = [];
+
+    for (var nguonThu in dsNguonThu) {
+      TransactionItem item = TransactionItem(
+        barColor: colorPicker.random(),
+        icon: nguonThu.icon,
+        iconColor: colorPicker.random(),
+        amount: '+ ${nguonThu.soTien}',
+        title: '${nguonThu.nhom}',
+        textColor: Colors.green,
+      );
+
+      widgets.add(item);
+    }
+
+    return widgets;
   }
 
   @override
   void initState() {
     getThongKe();
+    getDanhSachNguonThu();
     super.initState();
   }
 
@@ -137,40 +173,7 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
               ),
               SizedBox(height: 10.0),
               Column(
-                children: [
-                  TransactionItem(
-                    barColor: Colors.pinkAccent,
-                    icon: Icons.eco,
-                    iconColor: Colors.purpleAccent,
-                    amount: '+1.500.000',
-                    title: 'Ba mẹ gửi',
-                    textColor: Colors.green,
-                  ),
-                  TransactionItem(
-                    barColor: Colors.greenAccent,
-                    icon: Icons.account_balance_sharp,
-                    iconColor: Colors.lightBlue,
-                    amount: '0',
-                    title: 'Học bổng',
-                    textColor: Colors.green,
-                  ),
-                  TransactionItem(
-                    barColor: Colors.red,
-                    icon: Icons.party_mode,
-                    iconColor: Colors.orange,
-                    amount: '+500.000',
-                    title: 'Công việc',
-                    textColor: Colors.green,
-                  ),
-                  TransactionItem(
-                    barColor: Colors.yellow,
-                    icon: Icons.play_arrow,
-                    iconColor: Colors.orange,
-                    amount: '+500.000',
-                    title: 'Thu nhập khác',
-                    textColor: Colors.green,
-                  ),
-                ],
+                children: renderDanhSachNguonThu(),
               ),
               SizedBox(height: 30.0),
               Padding(
