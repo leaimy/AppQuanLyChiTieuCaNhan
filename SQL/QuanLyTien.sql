@@ -157,6 +157,7 @@ AS
     JOIN ChiTietNguonThu ON QuanLyTienHienCo.Id = ChiTietNguonThu.QuanLyTienHienCo_Id
     WHERE QuanLyTienHienCo.Id = @QuanLyTienID
     GROUP BY QuanLyTienHienCo.Id, Nhom
+    ORDER BY [SoTien] DESC
 GO
 
 EXECUTE dbo.usp_ThongKeNguonThuTongQuan 1
