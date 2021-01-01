@@ -67,5 +67,19 @@ namespace Server.Controllers
 
       return Ok(dsNguonThu);
     }
+
+    [HttpGet("thongkekhoanchi")]
+    public ActionResult<List<QuanLyTienThongKeKhoanChiDTO>> ThongKeKhoanChiTongQuan()
+    {
+      string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
+      if (String.IsNullOrWhiteSpace(quanLyTien_id))
+        return BadRequest();
+
+      int quanLyTienID = Convert.ToInt32(quanLyTien_id);
+
+      List<QuanLyTienThongKeKhoanChiDTO> dsKhoanChi = QuanLyTienDAO.Instance.ThongKeCacKhoanChiTongQuan(quanLyTienID);
+
+      return Ok(dsKhoanChi);
+    }
   }
 }
