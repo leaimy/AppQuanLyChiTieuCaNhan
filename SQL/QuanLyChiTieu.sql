@@ -18,7 +18,7 @@ GO
 CREATE TABLE MucTieuTietKiem
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    NguoiDung_Id INT REFERENCES NguoiDung(Id),
+    NguoiDung_Id INT REFERENCES NguoiDung(Id) ON DELETE CASCADE,
     TenMucTieu NVARCHAR(200) NOT NULL,
     MoTa NVARCHAR(200),
     SoTienCanTietKiem DECIMAL NOT NULL,
@@ -34,7 +34,7 @@ GO
 CREATE TABLE ChiTietTietKiem
 (
      Id INT PRIMARY KEY IDENTITY(1,1),
-     MucTieuTietKiem_Id INT REFERENCES MucTieuTietKiem(Id),
+     MucTieuTietKiem_Id INT REFERENCES MucTieuTietKiem(Id) ON DELETE CASCADE,
      TrangThai BIT DEFAULT 0,
      SoTien DECIMAL,
      Ngay DATETIME
@@ -43,7 +43,7 @@ CREATE TABLE ChiTietTietKiem
 CREATE TABLE QuanLyTienHienCo 
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    NguoiDung_Id INT REFERENCES NguoiDung,
+    NguoiDung_Id INT REFERENCES NguoiDung(Id) ON DELETE CASCADE,
     SoTienHienCo DECIMAL NOT NULL DEFAULT 0,
     SoTienDaSuDung DECIMAL NOT NULL DEFAULT 0,
     NgayBD DATETIME NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE QuanLyTienHienCo
 CREATE TABLE ChiTietNguonThu
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(Id),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(Id) ON DELETE CASCADE,
     Nhom VARCHAR(100) NOT NULL DEFAULT 'khác',
     SoTien DECIMAL NOT NULL,
     CreatedAt DATETIME DEFAULT GETDATE()
@@ -65,7 +65,7 @@ GO
 CREATE TABLE ChiTieu
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(id),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(id) ON DELETE CASCADE,
     TongChi DECIMAL NOT NULL,
     Ngay DATETIME NOT NULL DEFAULT GETDATE()
 );
@@ -74,7 +74,7 @@ GO
 CREATE TABLE ChiTietChiTieu 
 (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    ChiTieu_Id INT REFERENCES ChiTieu(Id),
+    ChiTieu_Id INT REFERENCES ChiTieu(Id) ON DELETE CASCADE,
     Ten NVARCHAR(200) NOT NULL,
     Nhom VARCHAR(100) NOT NULL DEFAULT 'khác',
     SoTien DECIMAL NOT NULL,
