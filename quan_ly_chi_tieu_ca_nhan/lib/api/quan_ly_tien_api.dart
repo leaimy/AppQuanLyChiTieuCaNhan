@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:quan_ly_chi_tieu_ca_nhan/models/list_quan_ly_tien.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_chi_tiet.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_khoan_chi.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_nguon_thu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/quan_ly_tien_thong_ke_tong_quan.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -13,6 +14,8 @@ class QuanLyTienApi {
   final String _urlThongKeChiTiet = '$kURL/api/quanlytien/thongkechitiet';
   final String _urlThongKeNguonThuTongQuan =
       '$kURL/api/quanlytien/thongkenguonthu';
+  final String _urlThongKeKhoanchiTongQuan =
+      '$kURL/api/quanlytien/thongkekhoanchi';
 
   Future<List<ListQuanLyTien>> getAllQuanLyTien(int userID) async {
     http.Response response = await http.get(
@@ -84,5 +87,28 @@ class QuanLyTienApi {
     }
 
     return dsNguonThu;
+  }
+
+  Future<List<QuanLyTienThongKeKhoanChi>> getQuanLyTienThongKeKhoanChiTongQuan(
+      int quanLyTienID) async {
+    http.Response response = await http.get(
+      '$_urlThongKeKhoanchiTongQuan?quanlytien_id=$quanLyTienID',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode != 200) return null;
+
+    List<dynamic> list = jsonDecode(response.body);
+
+    List<QuanLyTienThongKeKhoanChi> dsKhoanChi = [];
+    for (var json in list) {
+      QuanLyTienThongKeKhoanChi khoanChi =
+          QuanLyTienThongKeKhoanChi.fromJson(json);
+      dsKhoanChi.add(khoanChi);
+    }
+
+    return dsKhoanChi;
   }
 }
