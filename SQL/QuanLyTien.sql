@@ -18,8 +18,19 @@ CREATE PROC usp_QuanLyTien_GetAllQuanLyTien
 @IdNguoiDung INT
 AS
 BEGIN
+    DECLARE @QuanLytienChuaHoanThanhID INT
+    SELECT @QuanLytienChuaHoanThanhID = Id FROM QuanLyTienHienCo
+    WHERE NguoiDung_Id = @IdNguoiDung AND TrangThai = 0 AND NgayKT < GETDATE()
+
+    IF (@QuanLytienChuaHoanThanhID IS NOT NULL)
+        UPDATE QuanLyTienHienCo
+        SET 
+            TrangThai = 1
+        WHERE Id = @QuanLytienChuaHoanThanhID
+
     SELECT Id, NgayBD, NgayKT, TrangThai FROM QuanLyTienHienCo
     WHERE NguoiDung_Id = @IdNguoiDung
+    ORDER BY NgayBD DESC
 END
 GO
 EXECUTE dbo.usp_QuanLyTien_GetAllQuanLyTien 1
@@ -53,7 +64,7 @@ GO
 EXEC usp_QuanLyTien_ThongKeTongQuan 1
 GO
 
-select * from QuanLyTienHienCo
+-- select * from QuanLyTienHienCo
 
 IF EXISTS (
 SELECT *
