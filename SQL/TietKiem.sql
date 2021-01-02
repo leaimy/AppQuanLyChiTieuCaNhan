@@ -15,7 +15,7 @@ BEGIN
     SELECT @soNgay = COUNT(*)
     FROM MucTieuTietKiem
     JOIN ChiTietTietKiem ON MucTieuTietKiem.Id = ChiTietTietKiem.MucTieuTietKiem_Id
-    WHERE ChiTietTietKiem.TrangThai = 1
+    WHERE ChiTietTietKiem.TrangThai = 1 AND MucTieuTietKiem_Id = @tietKiemID
 
     IF (@soNgay IS NULL)   
         SET @soNgay = 0;  
@@ -36,12 +36,24 @@ BEGIN
     SELECT @soNgay = COUNT(*)
     FROM MucTieuTietKiem
     JOIN ChiTietTietKiem ON MucTieuTietKiem.Id = ChiTietTietKiem.MucTieuTietKiem_Id
-    WHERE ChiTietTietKiem.TrangThai = 0
+    WHERE ChiTietTietKiem.TrangThai = 0 AND MucTieuTietKiem_Id = @tietKiemID
 
     IF (@soNgay IS NULL)   
         SET @soNgay = 0;  
     RETURN @soNgay;  
 END; 
+GO
+
+-- Create a new stored procedure called 'usp_TietKiem_GetAllMucTieu' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_GetAllMucTieu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_GetAllMucTieu
 GO
 
 -- Hiển thị tất cả mục tiêu
@@ -57,7 +69,17 @@ GO
 EXEC usp_TietKiem_GetAllMucTieu 1
 GO
 
--- Hiển thị chi tiết mục tiêu
+-- Create a new stored procedure called 'usp_TietKiem_GetChiTietMucTieu' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_GetChiTietMucTieu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_GetChiTietMucTieu
+GO
 CREATE PROC usp_TietKiem_GetChiTietMucTieu
 @Id INT
 AS
@@ -74,15 +96,44 @@ BEGIN
     TrangThai,
     LoaiTietKiem,
     CreatedAt,
-    dbo.ufnDemSoNgayTietKiemDaHoanThanh(@Id) AS SoNgayDaTietKiem,
-    dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@Id) AS SoNgayTietKiemChuaHoanThanh
+    dbo.ufnDemSoNgayTietKiemDaHoanThanh(@Id) AS SoNgayHoanThanh,
+    dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@Id) AS SoNgayChuaHoanThanh
     FROM MucTieuTietKiem
     WHERE Id = @Id
 END
 GO
-
-EXEC usp_TietKiem_GetChiTietMucTieu 1
+-- example to execute the stored procedure we just created
+EXECUTE dbo.usp_TietKiem_GetChiTietMucTieu 1 
 GO
 
--- Thống kê số liệu tiết kiệm
+-- Create a new stored procedure called 'usp_TietKiem_ThongKeTietKiem' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_ThongKeTietKiem'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_ThongKeTietKiem
+GO
+
+CREATE PROC usp_TietKiem_ThongKeTietKiem
+@IdNguoiDung INT
+AS
+BEGIN
+    SELECT
+    @IdNguoiDung AS Id,
+    SUM(SoTienCanTietKiem)AS SoTienCanTietKiem, 
+    SUM(SoTienDaTietKiemDuoc)AS SoTienDaTietKiemDuoc, 
+    SUM(CASE WHEN TrangThai = 1 THEN 1 ELSE 0 END) AS SoMucTieuHoanThanh,
+    SUM(CASE WHEN TrangThai = 0 THEN 1 ELSE 0 END) AS SoMucTieuChuaHoanThanh
+     FROM MucTieuTietKiem
+    WHERE NguoiDung_Id = @IdNguoiDung
+END
+GO
+
+EXEC usp_TietKiem_ThongKeTietKiem 1
+GO
+
 
