@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_chi_tiet_tiet_kiem.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/components/card_muc_tieu_item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
 
 var ngayBD = new DateTime(2020, 10, 20);
@@ -31,6 +30,7 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Container(
+          color: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           child: ListView(
             children: [
@@ -71,36 +71,37 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Material(
-                          elevation: 5.0,
-                          color: Colors.lightBlueAccent,
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: Container(
-                            width: 100.0,
-                            height: 42.0,
-                            child: MaterialButton(
-                              onPressed: () {},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.baseline,
-                                children: [
-                                  Text(
-                                    'Check',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(width: 10.0),
-                                  Icon(
-                                    FontAwesomeIcons.check,
-                                    color: Colors.lightGreen,
-                                    size: 16.0,
-                                  )
-                                ],
+                      SizedBox(height: 10.0),
+                      Material(
+                        elevation: 3.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          width: 250.0,
+                          child: CheckboxListTile(
+                            title: Text(
+                              '20-10-2020',
+                              style: TextStyle(
+                                fontFamily: 'Lobster',
+                                letterSpacing: 1.1,
+                                fontSize: 15.0,
+                                color: Colors.pinkAccent,
                               ),
                             ),
+                            secondary: Icon(
+                              Icons.date_range,
+                              color: Colors.pink.shade300,
+                            ),
+                            controlAffinity: ListTileControlAffinity.leading,
+                            checkColor: Colors.pink,
+                            activeColor: Colors.white,
+                            value: true,
+                            onChanged: (value) {},
                           ),
                         ),
                       ),
