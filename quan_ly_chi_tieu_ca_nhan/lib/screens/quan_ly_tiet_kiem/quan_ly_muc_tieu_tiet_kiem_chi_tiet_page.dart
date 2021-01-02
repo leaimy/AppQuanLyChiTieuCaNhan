@@ -22,7 +22,7 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
           )
         ],
         title: Text(
-          'Bỏ heo mua sách',
+          'Chi tiết mục tiêu tiết kiệm',
           style: TextStyle(
             fontFamily: 'Lobster',
           ),

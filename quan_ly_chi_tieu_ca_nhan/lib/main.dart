@@ -9,6 +9,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.light().copyWith(
+        appBarTheme: AppBarTheme.of(context).copyWith(
+          color: Colors.pink[200],
+          centerTitle: true,
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       home: WelcomePage(),
     );
