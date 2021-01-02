@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/card_chi_tiet_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_muc_tieu_item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
 
@@ -33,65 +34,37 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           child: ListView(
             children: [
-              Card(
-                elevation: 10.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Container(
+                height: 230,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
                   children: [
-                    CardMucTieuItem(
-                      nameLable: 'Tên mục tiêu:',
-                      nameText: 'Bỏ heo mua sách',
-                      colorLable: Colors.pink[300],
-                      colorText: Colors.blue,
+                    CardChiTietTietKiem(
+                      title: 'Tên mục tiêu',
+                      money: 'Tiết kiệm mua máy ảnh',
+                      icon: Icons.ac_unit,
                     ),
-                    CardMucTieuItem(
-                      nameLable: 'Loại tiết kiệm:',
-                      nameText: 'Ngày',
-                      colorLable: Colors.grey[600],
-                      colorText: Colors.yellow[600],
+                    CardChiTietTietKiem(
+                      title: 'Tên mục tiêu',
+                      money:
+                          'Mua 1 chiếc máy ảnh thật đẹp để chụp hình cho mọi người 😘😘😘',
+                      icon: Icons.ac_unit,
                     ),
-                    CardMucTieuItem(
-                      nameLable: 'Ngày bắt đầu:',
-                      nameText: '20/10/2020',
-                      colorLable: Colors.green[400],
-                      colorText: Colors.red,
+                    CardChiTietTietKiem(
+                      title: 'Ngày bắt đầu',
+                      money: '20-10-2020',
+                      icon: Icons.ac_unit,
                     ),
-                    CardMucTieuItem(
-                      nameLable: 'Ngày kết thúc:',
-                      nameText: '20/12/2020',
-                      colorLable: Colors.purple[300],
-                      colorText: Colors.red[300],
-                    ),
-                    CardMucTieuItem(
-                      nameLable: 'Số tiền cần tiết kiệm:',
-                      nameText: '500.000 VND',
-                      colorLable: Colors.orange[500],
-                      colorText: Colors.blue[800],
-                    ),
-                    CardMucTieuItem(
-                      nameLable: 'Mô tả:',
-                      nameText: 'Cố lên!!',
-                      colorLable: Colors.pinkAccent[400],
-                      colorText: Colors.purpleAccent,
-                    ),
-                    CardMucTieuItem(
-                      nameLable: 'Số ngày đã hoàn thành:',
-                      nameText: '60',
-                      colorLable: Colors.greenAccent,
-                      colorText: Colors.red[400],
-                    ),
-                    CardMucTieuItem(
-                      nameLable: 'Số ngày chưa hoàn thành:',
-                      nameText: '30',
-                      colorLable: Colors.blueGrey,
-                      colorText: Colors.pink[200],
+                    CardChiTietTietKiem(
+                      title: 'Ngày kết thúc',
+                      money: '20-12-2020',
+                      icon: Icons.ac_unit,
                     ),
                   ],
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 20.0,
               ),
               Card(
                 child: Padding(
