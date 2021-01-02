@@ -53,5 +53,17 @@ namespace Server.DAO
 			return dsMucTieu;
 		}
 
+		public ChiTietMucTieuDTO GetChiTietMucTieu(int idMucTieu)
+		{
+			string query = "EXECUTE dbo.usp_TietKiem_GetChiTietMucTieu @Id";
+			object[] param = new object[] { idMucTieu };
+			DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
+			if (data.Rows.Count>0)
+			{
+				return new ChiTietMucTieuDTO(data.Rows[0]);
+			}
+			return new ChiTietMucTieuDTO();
+		}
+
 	}
 }

@@ -27,6 +27,7 @@ namespace Server.Controllers
 
 			return Ok(dsTietKiem);
 		}
+
 		[HttpGet("thongketietkiem")]
 		public ActionResult<ThongKeTietKiemDTO> ThongKeTongQuan()
 		{
@@ -40,5 +41,21 @@ namespace Server.Controllers
 
 			return Ok(thongKe);
 		}
+
+
+		[HttpGet("chitiettietkiem")]
+		public ActionResult<ChiTietMucTieuDTO> ChiTietMucTieu()
+		{
+			string user_id = HttpContext.Request.Query["user_id"].ToString();
+			if (String.IsNullOrWhiteSpace(user_id))
+				return BadRequest();
+
+			int userID = Convert.ToInt32(user_id);
+
+			ChiTietMucTieuDTO chiTietMucTieu = TietKiemDAO.Instance.GetChiTietMucTieu(userID);
+
+			return Ok(chiTietMucTieu);
+		}
+
 	}
 }
