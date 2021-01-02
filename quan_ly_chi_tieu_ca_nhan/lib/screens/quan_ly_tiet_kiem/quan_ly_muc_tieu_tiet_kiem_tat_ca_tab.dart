@@ -1,11 +1,13 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/list_muc_tieu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/thong_ke_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tiet_kiem/quan_ly_muc_tieu_tiet_kiem_chi_tiet_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tiet_kiem/them_muc_tieu_tiet_kiem_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
@@ -23,7 +25,14 @@ class QuanLyMucTieuTietKiemTatCaTab extends StatefulWidget {
 
 class _QuanLyMucTieuTietKiemTatCaTabState
     extends State<QuanLyMucTieuTietKiemTatCaTab> {
+  final currencyFormat = NumberFormat('###,###,###,###');
   List<MucTieuTietKiem> dsMucTieu = [];
+  ThongKeTietKiem thongKeTietKiem = ThongKeTietKiem(
+    tongTienDaTietKiem: 0,
+    tongTienTietKiem: 0,
+    soMTChuaHoanThanh: 0,
+    soMTHoanThanh: 0,
+  );
 
   void getAllMucTieu() async {
     MucTieuApi mucTieuApi = MucTieuApi();
@@ -32,6 +41,16 @@ class _QuanLyMucTieuTietKiemTatCaTabState
 
     setState(() {
       dsMucTieu = list;
+    });
+  }
+
+  void getAllThongKeTietKiem() async {
+    MucTieuApi mucTieuApi = MucTieuApi();
+    ThongKeTietKiem thongKe =
+        await mucTieuApi.thongKeTietKiem(widget.nguoiDung.id);
+
+    setState(() {
+      thongKeTietKiem = thongKe;
     });
   }
 
@@ -62,6 +81,7 @@ class _QuanLyMucTieuTietKiemTatCaTabState
   @override
   void initState() {
     getAllMucTieu();
+    getAllThongKeTietKiem();
     super.initState();
   }
 
@@ -83,13 +103,15 @@ class _QuanLyMucTieuTietKiemTatCaTabState
                   children: [
                     ThongKeItem(
                       textName: 'Tổng tiền tiết kiệm',
-                      textNumber: '500.000 VND',
+                      textNumber:
+                          '${currencyFormat.format(thongKeTietKiem.tongTienTietKiem)} ₫',
                       colorName: Colors.purple[300],
                       colorNumber: Colors.red[700],
                     ),
                     ThongKeItem(
                       textName: 'Tổng tiền đã tiết kiệm',
-                      textNumber: '100.000 VND',
+                      textNumber:
+                          '${currencyFormat.format(thongKeTietKiem.tongTienDaTietKiem)} ₫',
                       colorName: Colors.blueGrey[300],
                       colorNumber: Colors.green[700],
                     ),
@@ -107,13 +129,13 @@ class _QuanLyMucTieuTietKiemTatCaTabState
                   children: [
                     ThongKeItem(
                       textName: 'Số mục tiêu\nhoàn thành',
-                      textNumber: '3',
+                      textNumber: thongKeTietKiem.soMTHoanThanh.toString(),
                       colorName: Colors.blue[400],
                       colorNumber: Colors.pink[300],
                     ),
                     ThongKeItem(
                       textName: 'Số mục tiêu\nchưa hoàn thành',
-                      textNumber: '2',
+                      textNumber: thongKeTietKiem.soMTChuaHoanThanh.toString(),
                       colorName: Colors.orange[400],
                       colorNumber: Colors.blue[700],
                     ),
