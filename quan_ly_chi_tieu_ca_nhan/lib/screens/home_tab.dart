@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_avatar.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/quick_action_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -47,43 +48,24 @@ class HomeTab extends StatelessWidget {
           Expanded(child: Container()),
           Opacity(
             opacity: 0.7,
-            child: Material(
-              elevation: 5.0,
-              borderRadius: BorderRadius.circular(20.0),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 20.0,
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 35.0,
-                      height: 35.0,
-                      child: CircleAvatar(
-                        child: Icon(
-                          Icons.store_mall_directory,
-                          color: Colors.pink[800],
-                        ),
-                        backgroundColor: Colors.pink[100],
-                      ),
-                    ),
-                    SizedBox(width: 15.0),
-                    Text(
-                      'Thêm chi tiêu hôm nay',
-                      style: TextStyle(
-                        fontSize: 17.0,
-                        fontFamily: 'Lobster',
-                      ),
-                    ),
-                    Expanded(child: Container()),
-                    CircleIconBox(
-                      icon: Icons.add,
-                      color: Colors.green,
-                      onPressed: () {},
-                    )
-                  ],
-                ),
+            child: QuickActionBox(
+              icon: Icon(
+                Icons.shopping_bag,
+                color: Colors.pink[800],
+              ),
+              title: Text(
+                'Thêm chi tiêu hôm nay',
+                style: TextStyle(fontFamily: 'Lobster'),
+              ),
+              iconBackGroundColor: Colors.pink[100],
+              actionIcon: CircleIconBox(
+                icon: Icons.add,
+                color: Colors.green,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ThemChiTieuPage();
+                  }));
+                },
               ),
             ),
           ),
