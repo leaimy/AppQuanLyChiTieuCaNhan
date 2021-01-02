@@ -26,6 +26,18 @@ namespace Server.DAO
 
 		private TietKiemDAO() { }
 
+		public ThongKeTietKiemDTO ThongKeTietKiem(int idNguoiDung)
+		{
+			string query = "EXEC usp_TietKiem_ThongKeTietKiem @IdNguoiDung";
+			object[] param = new object[] { idNguoiDung };
+			DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
+			if (data.Rows.Count>0)
+			{
+				return new ThongKeTietKiemDTO(data.Rows[0]);
+			}
+			return new ThongKeTietKiemDTO();
+		}
+
 		public List<MucTieuTietKiemDTO> GetAllMucTieu(int idNguoiDung)
 		{
 			string query = "EXEC usp_TietKiem_GetAllMucTieu @IdNguoiDung";
@@ -40,5 +52,6 @@ namespace Server.DAO
 
 			return dsMucTieu;
 		}
+
 	}
 }

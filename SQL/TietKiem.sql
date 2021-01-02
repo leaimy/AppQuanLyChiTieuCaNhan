@@ -44,6 +44,7 @@ BEGIN
 END; 
 GO
 
+-- Hiển thị tất cả mục tiêu
 CREATE PROC usp_TietKiem_GetAllMucTieu
 @IdNguoiDung INT
 AS
@@ -56,6 +57,7 @@ GO
 EXEC usp_TietKiem_GetAllMucTieu 1
 GO
 
+-- Hiển thị chi tiết mục tiêu
 CREATE PROC usp_TietKiem_GetChiTietMucTieu
 @Id INT
 AS
@@ -81,3 +83,6 @@ GO
 
 EXEC usp_TietKiem_GetChiTietMucTieu 1
 GO
+
+-- Thống kê số liệu tiết kiệm
+

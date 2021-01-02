@@ -1,194 +1,83 @@
+CREATE DATABASE QuanLyChiTieuTietKiem
+GO 
+
 USE QuanLyChiTieuTietKiem
 GO
 
--- SELECT *
--- FROM QuanLyTienHienCo
--- GO
-
-IF EXISTS (
-SELECT *
-    FROM INFORMATION_SCHEMA.ROUTINES
-WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'usp_QuanLyTien_GetAllQuanLyTien'
-    AND ROUTINE_TYPE = N'PROCEDURE'
-)
-DROP PROCEDURE dbo.usp_QuanLyTien_GetAllQuanLyTien
-GO
-CREATE PROC usp_QuanLyTien_GetAllQuanLyTien
-@IdNguoiDung INT
-AS
-BEGIN
-    DECLARE @QuanLytienChuaHoanThanhID INT
-    SELECT @QuanLytienChuaHoanThanhID = Id FROM QuanLyTienHienCo
-    WHERE NguoiDung_Id = @IdNguoiDung AND TrangThai = 0 AND NgayKT < GETDATE()
-
-    IF (@QuanLytienChuaHoanThanhID IS NOT NULL)
-        UPDATE QuanLyTienHienCo
-        SET 
-            TrangThai = 1
-        WHERE Id = @QuanLytienChuaHoanThanhID
-
-    SELECT Id, NgayBD, NgayKT, TrangThai FROM QuanLyTienHienCo
-    WHERE NguoiDung_Id = @IdNguoiDung
-    ORDER BY NgayBD DESC
-END
-GO
-EXECUTE dbo.usp_QuanLyTien_GetAllQuanLyTien 1
+CREATE TABLE NguoiDung
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    TenDangNhap VARCHAR(100) NOT NULL UNIQUE,
+    MatKhau VARCHAR(100) NOT NULL,
+    TenHienThi NVARCHAR(100) NOT NULL,
+    Avatar VARCHAR(100) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO
 
--- select * from QuanLyTienHienCo
--- GO
-
-IF EXISTS (
-SELECT *
-    FROM INFORMATION_SCHEMA.ROUTINES
-WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'usp_QuanLyTien_ThongKeTongQuan'
-    AND ROUTINE_TYPE = N'PROCEDURE'
-)
-DROP PROCEDURE dbo.usp_QuanLyTien_ThongKeTongQuan
-GO
-CREATE PROC usp_QuanLyTien_ThongKeTongQuan
-@IdNguoiDung INT
-AS
-BEGIN
-    SELECT 
-        @IdNguoiDung AS [NguoiDung_Id],
-        SUM(SoTienHienCo) AS TongSoTienDaQuanLy,
-        SUM(SoTienDaSuDung) AS TongSoTienDaChiTieu,
-        SUM(CASE WHEN TrangThai = 1 THEN 1 ELSE 0 END) AS TongSoKeHoachQuanLyDaHoanThanh
-    FROM QuanLyTienHienCo
-    WHERE NguoiDung_Id = @IdNguoiDung
-END
+CREATE TABLE MucTieuTietKiem
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    NguoiDung_Id INT REFERENCES NguoiDung(Id) ON DELETE CASCADE,
+    TenMucTieu NVARCHAR(200) NOT NULL,
+    MoTa NVARCHAR(200),
+    SoTienCanTietKiem DECIMAL NOT NULL,
+    SoTienDaTietKiemDuoc DECIMAL NOT NULL,
+    NgayBD DATETIME NOT NULL,
+    NgayKT DATETIME NOT NULL,
+    TrangThai BIT DEFAULT 0,
+    LoaiTietKiem NVARCHAR(50) NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO
 
-EXEC usp_QuanLyTien_ThongKeTongQuan 1
+CREATE TABLE ChiTietTietKiem
+(
+     Id INT PRIMARY KEY IDENTITY(1,1),
+     MucTieuTietKiem_Id INT REFERENCES MucTieuTietKiem(Id) ON DELETE CASCADE,
+     TrangThai BIT DEFAULT 0,
+     SoTien DECIMAL,
+     Ngay DATETIME
+);
+
+CREATE TABLE QuanLyTienHienCo 
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    NguoiDung_Id INT REFERENCES NguoiDung(Id) ON DELETE CASCADE,
+    SoTienHienCo DECIMAL NOT NULL DEFAULT 0,
+    SoTienDaSuDung DECIMAL NOT NULL DEFAULT 0,
+    NgayBD DATETIME NOT NULL,
+    NgayKT DATETIME NOT NULL,
+    TrangThai BIT DEFAULT 0,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE ChiTietNguonThu
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(Id) ON DELETE CASCADE,
+    Nhom NVARCHAR(100) NOT NULL DEFAULT 'khác',
+    SoTien DECIMAL NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO
 
--- select * from QuanLyTienHienCo
-
-IF EXISTS (
-SELECT *
-    FROM INFORMATION_SCHEMA.ROUTINES
-WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'usp_QuanLyTien_ThongKeChiTiet'
-    AND ROUTINE_TYPE = N'PROCEDURE'
-)
-DROP PROCEDURE dbo.usp_QuanLyTien_ThongKeChiTiet
-GO
-CREATE PROCEDURE dbo.usp_QuanLyTien_ThongKeChiTiet
-@QuanLyTienID INT    
-AS
-    DECLARE @soTienHienCo DECIMAL;
-    DECLARE @soTienDaSuDung DECIMAL;
-    DECLARE @ngayBD DATETIME;
-    DECLARE @ngayKT DATETIME;
-    DECLARE @soNgayVuotMuc INT = 0;
-
-    SELECT 
-        @soTienHienCo = SoTienHienCo,
-        @soTienDaSuDung = SoTienDaSuDung,
-        @ngayBD = NgayBD,
-        @ngayKT = NgayKT
-    FROM QuanLyTienHienCo
-    WHERE QuanLyTienHienCo.Id = @QuanLyTienID;
-
-    DECLARE @tongSoNgay INT;
-    SET @tongSoNgay = DATEDIFF(DAY, @ngayBD, @ngayKT);
-
-    DECLARE @soNgayConLai INT;
-    SET @soNgayConLai = DATEDIFF(DAY, GETDATE(), @ngayKT);
-
-    IF (@soNgayConLai < 0)   
-        SET @soNgayConLai = 0; 
-    
-    DECLARE @hanMucChiTieu INT;
-    SET @hanMucChiTieu = @soTienHienCo / @tongSoNgay / 1000;
-    SET @hanMucChiTieu = FLOOR(@hanMucChiTieu)
-    SET @hanMucChiTieu = @hanMucChiTieu * 1000
-
-    DECLARE @soDu DECIMAL;
-    SET @soDu = @soTienHienCo - @soTienDaSuDung;
-
-    SELECT @soNgayVuotMuc = COUNT(*) FROM ChiTieu
-    WHERE QuanLyTienHienCo_Id = @QuanLyTienID AND TongChi > @hanMucChiTieu
-
-    IF (@soTienHienCo IS NULL) SET @soTienHienCo = 0
-    IF (@soTienDaSuDung IS NULL) SET @soTienDaSuDung = 0
-    IF (@soDu IS NULL) SET @soDu = 0
-    IF (@ngayBD IS NULL) SET @ngayBD = GETDATE()
-    IF (@ngayKT IS NULL) SET @ngayKT = GETDATE()
-    IF (@soNgayConLai IS NULL) SET @soNgayConLai = 0
-    IF (@hanMucChiTieu IS NULL) SET @hanMucChiTieu = 0
-    IF (@soNgayVuotMuc IS NULL) SET @soNgayVuotMuc = 0
-
-    SELECT 
-        @QuanLyTienID AS [Id],
-        @soTienHienCo AS [SoTienHienCo],
-        @soTienDaSuDung AS [SoTienDaSuDung],
-        @soDu AS [SoDu],
-        @ngayBD AS [NgayBD],
-        @ngayKT AS [NgayKT],
-        @soNgayConLai AS [SoNgayConLai],
-        @hanMucChiTieu AS [HanMucChiTieu],
-        @soNgayVuotMuc AS [SoNgayVuotMuc]
+CREATE TABLE ChiTieu
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    QuanLyTienHienCo_Id INT REFERENCES QuanLyTienHienCo(id) ON DELETE CASCADE,
+    TongChi DECIMAL NOT NULL,
+    Ngay DATETIME NOT NULL DEFAULT GETDATE()
+);
 GO
 
-EXECUTE dbo.usp_QuanLyTien_ThongKeChiTiet 1
-GO
-
--- Create a new stored procedure called 'usp_ThongKeNguonThuTongQuan' in schema 'dbo'
--- Drop the stored procedure if it already exists
-IF EXISTS (
-SELECT *
-    FROM INFORMATION_SCHEMA.ROUTINES
-WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'usp_ThongKeNguonThuTongQuan'
-    AND ROUTINE_TYPE = N'PROCEDURE'
-)
-DROP PROCEDURE dbo.usp_ThongKeNguonThuTongQuan
-GO
--- Create the stored procedure in the specified schema
-CREATE PROCEDURE dbo.usp_ThongKeNguonThuTongQuan
-    @QuanLyTienID INT
-AS    
-    SELECT QuanLyTienHienCo.Id AS [Id], Nhom, SUM(SoTien) AS [SoTien]
-    FROM QuanLyTienHienCo
-    JOIN ChiTietNguonThu ON QuanLyTienHienCo.Id = ChiTietNguonThu.QuanLyTienHienCo_Id
-    WHERE QuanLyTienHienCo.Id = @QuanLyTienID
-    GROUP BY QuanLyTienHienCo.Id, Nhom
-    ORDER BY [SoTien] DESC
-GO
-
-EXECUTE dbo.usp_ThongKeNguonThuTongQuan 1
-GO
-
--- Create a new stored procedure called 'usp_ThongKeCacKhoanChiTongQuan' in schema 'dbo'
--- Drop the stored procedure if it already exists
-IF EXISTS (
-SELECT *
-    FROM INFORMATION_SCHEMA.ROUTINES
-WHERE SPECIFIC_SCHEMA = N'dbo'
-    AND SPECIFIC_NAME = N'usp_ThongKeCacKhoanChiTongQuan'
-    AND ROUTINE_TYPE = N'PROCEDURE'
-)
-DROP PROCEDURE dbo.usp_ThongKeCacKhoanChiTongQuan
-GO
--- Create the stored procedure in the specified schema
-CREATE PROCEDURE dbo.usp_ThongKeCacKhoanChiTongQuan
-    @QuanLyTienID INT
-AS
-    SELECT 
-        @QuanLyTienID AS [Id], 
-        ChiTietChiTieu.Nhom AS [Nhom], 
-        SUM(ChiTietChiTieu.SoTien) AS [SoTien]
-    FROM ChiTieu
-    JOIN QuanLyTienHienCo ON QuanLyTienHienCo.Id = ChiTieu.QuanLyTienHienCo_Id
-    JOIN ChiTietChiTieu ON ChiTieu.Id = ChiTietChiTieu.ChiTieu_Id
-    WHERE QuanLyTienHienCo.Id = @QuanLyTienID
-    GROUP BY ChiTietChiTieu.Nhom
-    ORDER BY [SoTien] DESC
-GO
-
-EXECUTE dbo.usp_ThongKeCacKhoanChiTongQuan 4
+CREATE TABLE ChiTietChiTieu 
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    ChiTieu_Id INT REFERENCES ChiTieu(Id) ON DELETE CASCADE,
+    Ten NVARCHAR(200) NOT NULL,
+    Nhom NVARCHAR(100) NOT NULL DEFAULT 'khác',
+    SoTien DECIMAL NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
 GO

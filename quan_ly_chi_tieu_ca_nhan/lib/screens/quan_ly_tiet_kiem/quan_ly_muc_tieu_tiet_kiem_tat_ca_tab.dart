@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/api/list_muc_tieu.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_ThongKeItem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
@@ -38,6 +38,7 @@ class _QuanLyMucTieuTietKiemTatCaTabState
   List<Widget> renderAllMucTieu() {
     List<Widget> listWidget = [];
     for (var muctieu in dsMucTieu) {
+      print(muctieu.trangThai);
       MuctieuItem item = MuctieuItem(
         barColor: ColorPicker().random(),
         textColor: ColorPicker().random(),
@@ -77,11 +78,22 @@ class _QuanLyMucTieuTietKiemTatCaTabState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ThongKeItem(
-                  textName: 'Tổng tiền tiết kiệm',
-                  textNumber: '500.000 VND',
-                  colorName: Colors.purple[300],
-                  colorNumber: Colors.red[700],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ThongKeItem(
+                      textName: 'Tổng tiền tiết kiệm',
+                      textNumber: '500.000 VND',
+                      colorName: Colors.purple[300],
+                      colorNumber: Colors.red[700],
+                    ),
+                    ThongKeItem(
+                      textName: 'Tổng tiền đã tiết kiệm',
+                      textNumber: '100.000 VND',
+                      colorName: Colors.blueGrey[300],
+                      colorNumber: Colors.green[700],
+                    ),
+                  ],
                 ),
                 SizedBox(
                   width: 350.0,
@@ -103,7 +115,7 @@ class _QuanLyMucTieuTietKiemTatCaTabState
                       textName: 'Số mục tiêu\nchưa hoàn thành',
                       textNumber: '2',
                       colorName: Colors.orange[400],
-                      colorNumber: Colors.green[600],
+                      colorNumber: Colors.blue[700],
                     ),
                   ],
                 )

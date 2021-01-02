@@ -27,5 +27,18 @@ namespace Server.Controllers
 
 			return Ok(dsTietKiem);
 		}
+		[HttpGet("thongketietkiem")]
+		public ActionResult<ThongKeTietKiemDTO> ThongKeTongQuan()
+		{
+			string user_id = HttpContext.Request.Query["user_id"].ToString();
+			if (String.IsNullOrWhiteSpace(user_id))
+				return BadRequest();
+
+			int userID = Convert.ToInt32(user_id);
+
+			ThongKeTietKiemDTO thongKe = TietKiemDAO.Instance.ThongKeTietKiem(userID);
+
+			return Ok(thongKe);
+		}
 	}
 }

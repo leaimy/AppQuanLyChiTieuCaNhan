@@ -70,12 +70,29 @@ GO
 
 -- Chèn dữ liệu vào bảng tiết kiệm và chi tiết mục tiêu tiết kiệm
 SET IDENTITY_INSERT MucTieuTietKiem ON
-INSERT MucTieuTietKiem (Id, NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, SoTienDaTietKiemDuoc, NgayBD, NgayKT, LoaiTietKiem)
+INSERT MucTieuTietKiem (Id, NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, SoTienDaTietKiemDuoc, NgayBD, NgayKT, LoaiTietKiem, TrangThai)
 VALUES 
 (
     1, 1, N'Tiết kiệm mua máy ảnh', N'Mua 1 chiếc máy ảnh thật đẹp để chụp hình cho mọi người',
-    4000000, 0, '20201220', '20210120', 'ngày'
+    4000000, 0, '20201220', '20210120', 'ngày', 0
+),
+(
+     2, 1, N'Tiết kiệm mua sách', N'Cố lên!!! Mỗi quyển sách là một người bạn',
+    500000, 500000, '20201020', '20201220', 'ngày', 1
+),
+(
+     3, 1, N'Tiết kiệm mua quần áo', N'Cố lên!!! Cố lên!!! Sắp có quần áo mới để mặc rồi',
+    1000000, 1000000, '20200820', '20210120', 'tuần', 1
+),
+(
+     4, 2, N'Tiết kiệm mua gas', N'Cố lên!!! Sắp có gas sài rồi',
+    400000, 400000 , '20201020', '20210101', 'tuần', 1
+),
+(
+     5, 2, N'Tiết kiệm mua đồ trang điểm', N'Cố lên!!! Sắp có đồ để trang điểm cho mình rồi hihi',
+    2000000, 200000, '20201120', '20210320', 'ngày', 0
 )
+
 
 PRINT(N'Chèn xong dữ liệu mẫu bảng mục tiêu tiết kiệm');
 
@@ -83,12 +100,6 @@ EXECUTE dbo.usp_TaoDanhSachChiTietMucTieuTietKiem 1
 GO
 
 SET IDENTITY_INSERT MucTieuTietKiem OFF
-
-UPDATE MucTieuTietKiem
-SET SoTienDaTietKiemDuoc = 390000 WHERE Id = 1
-
-UPDATE ChiTietTietKiem
-SET TrangThai = 1 WHERE Id = 1 OR Id = 2 OR Id = 4
 
 
 
