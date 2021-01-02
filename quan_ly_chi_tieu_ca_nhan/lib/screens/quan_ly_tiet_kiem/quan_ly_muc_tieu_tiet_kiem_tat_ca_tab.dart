@@ -46,7 +46,11 @@ class _QuanLyMucTieuTietKiemTatCaTabState
             ? FontAwesomeIcons.gem
             : FontAwesomeIcons.fan,
         iconColor: muctieu.trangThai == true ? Colors.blue : Colors.red,
-        onItemPressed: () {},
+        onItemPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return QuanLyMucTieuTietKiemChiTietPage();
+          }));
+        },
       );
 
       listWidget.add(item);
