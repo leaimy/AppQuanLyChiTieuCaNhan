@@ -5,6 +5,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_icon_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/quick_action_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tiet_kiem/them_muc_tieu_tiet_kiem_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class HomeTab extends StatelessWidget {
@@ -50,11 +51,35 @@ class HomeTab extends StatelessWidget {
             opacity: 0.7,
             child: QuickActionBox(
               icon: Icon(
+                Icons.card_travel,
+                color: Colors.pink[800],
+              ),
+              title: Text(
+                'Thêm mục tiêu tiết kiệm ngay 😆',
+                style: TextStyle(fontFamily: 'Lobster'),
+              ),
+              iconBackGroundColor: Colors.pink[100],
+              actionIcon: CircleIconBox(
+                icon: Icons.add,
+                color: Colors.green,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ThemMucTieuTietKiemPage();
+                  }));
+                },
+              ),
+            ),
+          ),
+          SizedBox(height: 15.0),
+          Opacity(
+            opacity: 0.7,
+            child: QuickActionBox(
+              icon: Icon(
                 Icons.shopping_bag,
                 color: Colors.pink[800],
               ),
               title: Text(
-                'Thêm chi tiêu hôm nay',
+                'Thêm chi tiêu hôm nay 😙',
                 style: TextStyle(fontFamily: 'Lobster'),
               ),
               iconBackGroundColor: Colors.pink[100],
