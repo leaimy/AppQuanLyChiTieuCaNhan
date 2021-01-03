@@ -144,6 +144,36 @@ class LocalNotifyManager {
       payload: payload,
     );
   }
+
+  Future<void> showDailyAtTimeNotification({
+    @required String title,
+    @required String body,
+    @required String payload,
+  }) async {
+    var time = Time(21, 54, 0);
+    var androidChannel = AndroidNotificationDetails(
+      'CHANNEL_ID',
+      'CHANNEL_NAME',
+      'CHANNEL_DESCRIPTION',
+      importance: Importance.Max,
+      priority: Priority.High,
+      playSound: true,
+      // sound: RawResourceAndroidNotificationSound('notification_sound'),
+      // timeoutAfter: 5000,
+      enableLights: true,
+      enableVibration: true,
+    );
+    var iosChannel = IOSNotificationDetails();
+    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+      0,
+      title,
+      body,
+      time,
+      platformChannel,
+      payload: payload,
+    );
+  }
 }
 
 class ReceiveNotification {
