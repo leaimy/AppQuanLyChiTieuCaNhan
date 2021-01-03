@@ -93,9 +93,9 @@ class LocalNotifyManager {
   }) async {
     var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
     var androidChannel = AndroidNotificationDetails(
-      'CHANNEL_ID',
-      'CHANNEL_NAME',
-      'CHANNEL_DESCRIPTION',
+      'CHANNEL_ID 1',
+      'CHANNEL_NAME 1',
+      'CHANNEL_DESCRIPTION 1',
       importance: Importance.Max,
       priority: Priority.High,
       playSound: true,
@@ -111,6 +111,35 @@ class LocalNotifyManager {
       title,
       body,
       scheduleNotificationDateTime,
+      platformChannel,
+      payload: payload,
+    );
+  }
+
+  Future<void> repeatNotification({
+    @required String title,
+    @required String body,
+    @required String payload,
+  }) async {
+    var androidChannel = AndroidNotificationDetails(
+      'CHANNEL_ID 2',
+      'CHANNEL_NAME 2',
+      'CHANNEL_DESCRIPTION 2',
+      importance: Importance.Max,
+      priority: Priority.High,
+      playSound: true,
+      // sound: RawResourceAndroidNotificationSound('notification_sound'),
+      // timeoutAfter: 5000,
+      enableLights: true,
+      enableVibration: true,
+    );
+    var iosChannel = IOSNotificationDetails();
+    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    await flutterLocalNotificationsPlugin.periodicallyShow(
+      0,
+      title,
+      body,
+      RepeatInterval.EveryMinute,
       platformChannel,
       payload: payload,
     );
