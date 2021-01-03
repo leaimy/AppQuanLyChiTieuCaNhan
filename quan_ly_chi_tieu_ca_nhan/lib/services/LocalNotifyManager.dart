@@ -70,6 +70,10 @@ class LocalNotifyManager {
       importance: Importance.Max,
       priority: Priority.High,
       playSound: true,
+      // sound: RawResourceAndroidNotificationSound('notification_sound'),
+      // timeoutAfter: 5000,
+      enableLights: true,
+      enableVibration: true,
     );
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);
