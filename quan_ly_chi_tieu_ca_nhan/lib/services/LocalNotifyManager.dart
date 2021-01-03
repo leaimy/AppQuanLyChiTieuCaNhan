@@ -85,6 +85,36 @@ class LocalNotifyManager {
       payload: payload,
     );
   }
+
+  Future<void> scheduleNotification({
+    @required String title,
+    @required String body,
+    @required String payload,
+  }) async {
+    var scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
+    var androidChannel = AndroidNotificationDetails(
+      'CHANNEL_ID',
+      'CHANNEL_NAME',
+      'CHANNEL_DESCRIPTION',
+      importance: Importance.Max,
+      priority: Priority.High,
+      playSound: true,
+      // sound: RawResourceAndroidNotificationSound('notification_sound'),
+      // timeoutAfter: 5000,
+      enableLights: true,
+      enableVibration: true,
+    );
+    var iosChannel = IOSNotificationDetails();
+    var platformChannel = NotificationDetails(androidChannel, iosChannel);
+    await flutterLocalNotificationsPlugin.schedule(
+      0,
+      title,
+      body,
+      scheduleNotificationDateTime,
+      platformChannel,
+      payload: payload,
+    );
+  }
 }
 
 class ReceiveNotification {
