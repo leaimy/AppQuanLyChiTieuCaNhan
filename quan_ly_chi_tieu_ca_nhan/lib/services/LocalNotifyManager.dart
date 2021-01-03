@@ -107,7 +107,7 @@ class LocalNotifyManager {
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);
     await flutterLocalNotificationsPlugin.schedule(
-      0,
+      1,
       title,
       body,
       scheduleNotificationDateTime,
@@ -136,7 +136,7 @@ class LocalNotifyManager {
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);
     await flutterLocalNotificationsPlugin.periodicallyShow(
-      0,
+      2,
       title,
       body,
       RepeatInterval.EveryMinute,
@@ -166,13 +166,21 @@ class LocalNotifyManager {
     var iosChannel = IOSNotificationDetails();
     var platformChannel = NotificationDetails(androidChannel, iosChannel);
     await flutterLocalNotificationsPlugin.showDailyAtTime(
-      0,
+      3,
       title,
       body,
       time,
       platformChannel,
       payload: payload,
     );
+  }
+
+  Future<void> cancelNotification(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+  }
+
+  Future<void> cancelAllNotification() async {
+    await flutterLocalNotificationsPlugin.cancelAll();
   }
 }
 
