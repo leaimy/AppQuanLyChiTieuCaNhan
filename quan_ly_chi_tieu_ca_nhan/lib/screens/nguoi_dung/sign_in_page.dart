@@ -108,6 +108,9 @@ class _SignInPageState extends State<SignInPage> {
                                 TextField(
                                   keyboardType: TextInputType.visiblePassword,
                                   textAlign: TextAlign.center,
+                                  enableSuggestions: false,
+                                  autocorrect: false,
+                                  obscureText: true,
                                   decoration: InputDecoration(
                                     icon: Icon(
                                       FontAwesomeIcons.key,
