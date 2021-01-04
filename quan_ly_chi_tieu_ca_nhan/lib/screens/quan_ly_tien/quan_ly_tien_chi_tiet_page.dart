@@ -221,7 +221,9 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                 textName: 'Xem lịch sử chi tiêu',
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return LichSuChiTieuPage();
+                    return LichSuChiTieuPage(
+                      quanLyTienID: widget.quanLyTienID,
+                    );
                   }));
                 },
               )

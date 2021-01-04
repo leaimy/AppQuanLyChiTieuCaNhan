@@ -1,11 +1,90 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/chi_tieu_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/outcome_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/rounded_summary_card.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/transaction_iten.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_chi_tieu.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tieu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class LichSuChiTieuPage extends StatelessWidget {
+class LichSuChiTieuPage extends StatefulWidget {
+  final int quanLyTienID;
+
+  LichSuChiTieuPage({@required this.quanLyTienID});
+
+  @override
+  _LichSuChiTieuPageState createState() => _LichSuChiTieuPageState();
+}
+
+class _LichSuChiTieuPageState extends State<LichSuChiTieuPage> {
+  final dateFormat = new DateFormat('dd-MM-yyyy');
+  final currencyFormat = new NumberFormat('###,###,###,###');
+  ChiTieuAPI chiTieuAPI = ChiTieuAPI();
+
+  List<ChiTieu> dsChiTieu = [];
+  List<ChiTietChiTieu> dsChiTietChiTieu = [];
+  DateTime ngayChiTieu = DateTime.now();
+  int tongTienChiTieu = 0;
+  int currentSelectedIndex = 0;
+
+  Future<void> getDanhSachChiTieu() async {
+    var data = await chiTieuAPI.layDanhSachChiTieu(widget.quanLyTienID);
+
+    if (data != null) {
+      List<ChiTietChiTieu> raw = [];
+      if (data.length > 0) {
+        raw = await chiTieuAPI.layDanhSachChiTietChiTieu(data[0].id);
+      }
+
+      setState(() {
+        dsChiTieu = data;
+        if (data.length > 0) {
+          dsChiTieu[0].isSelected = true;
+          ngayChiTieu = dsChiTieu[0].ngay;
+          tongTienChiTieu = dsChiTieu[0].tongChi;
+        }
+        if (raw != null) dsChiTietChiTieu = raw;
+      });
+    }
+  }
+
+  Future<void> getDanhSachChiTietChiTieu(int chiTieuId) async {
+    var data = await chiTieuAPI.layDanhSachChiTietChiTieu(chiTieuId);
+
+    if (data != null)
+      setState(() {
+        dsChiTietChiTieu = data;
+      });
+  }
+
+  void handleOnDateBoxPressed(int selectedIndex) {
+    if (currentSelectedIndex == selectedIndex) return;
+
+    currentSelectedIndex = selectedIndex;
+
+    for (var chiTieu in dsChiTieu) {
+      chiTieu.isSelected = false;
+    }
+
+    setState(() {
+      ngayChiTieu = dsChiTieu[selectedIndex].ngay;
+      tongTienChiTieu = dsChiTieu[selectedIndex].tongChi;
+      dsChiTieu[selectedIndex].isSelected = true;
+    });
+
+    int chiTieuId = dsChiTieu[selectedIndex].id;
+
+    getDanhSachChiTietChiTieu(chiTieuId);
+  }
+
+  @override
+  void initState() {
+    getDanhSachChiTieu();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +98,9 @@ class LichSuChiTieuPage extends StatelessWidget {
           child: ListView(
             children: [
               RoundedSummaryCard(
-                title: 'Tổng tiền chi tiêu ngày\n30/09/2020',
-                money: '410.000 ₫',
+                title:
+                    'Tổng tiền chi tiêu ngày\n ${dateFormat.format(ngayChiTieu)}',
+                money: '${currencyFormat.format(tongTienChiTieu)} ₫',
                 icon: Icons.money_off,
                 iconColor: Colors.red.shade800,
                 iconBgColor: Colors.red.shade200,
@@ -40,51 +120,19 @@ class LichSuChiTieuPage extends StatelessWidget {
               SizedBox(height: 10.0),
               Container(
                 height: 110.0,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    OutcomeDate(
-                      date: '29',
-                      month: 'Tháng 09',
-                      color: Colors.white,
-                      textColor: Colors.grey.shade600,
-                    ),
-                    OutcomeDate(
-                      date: '30',
-                      month: 'Tháng 09',
-                      textColor: Colors.white,
-                    ),
-                    OutcomeDate(
-                      date: '01',
-                      month: 'Tháng 10',
-                      color: Colors.white,
-                      textColor: Colors.grey.shade600,
-                    ),
-                    OutcomeDate(
-                      date: '02',
-                      month: 'Tháng 10',
-                      color: Colors.white,
-                      textColor: Colors.grey.shade600,
-                    ),
-                    OutcomeDate(
-                      date: '03',
-                      month: 'Tháng 10',
-                      color: Colors.white,
-                      textColor: Colors.grey.shade600,
-                    ),
-                    OutcomeDate(
-                      date: '04',
-                      month: 'Tháng 10',
-                      color: Colors.white,
-                      textColor: Colors.grey.shade600,
-                    ),
-                    OutcomeDate(
-                      date: '05',
-                      month: 'Tháng 10',
-                      color: Colors.white,
-                      textColor: Colors.grey.shade600,
-                    ),
-                  ],
+                  itemCount: dsChiTieu.length,
+                  itemBuilder: (context, index) {
+                    return OutcomeDate(
+                      date: '${dsChiTieu[index].ngay.day}',
+                      month: 'Tháng ${dsChiTieu[index].ngay.month}',
+                      isSelected: dsChiTieu[index].isSelected,
+                      onPressed: () {
+                        handleOnDateBoxPressed(index);
+                      },
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 25.0),
@@ -96,45 +144,19 @@ class LichSuChiTieuPage extends StatelessWidget {
               Container(
                 height: 350.0,
                 padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: ListView(
+                child: ListView.builder(
                   padding: EdgeInsets.only(left: 5.0),
-                  children: [
-                    TransactionItem(
+                  itemCount: dsChiTietChiTieu.length,
+                  itemBuilder: (context, index) {
+                    return TransactionItem(
                       barColor: Colors.pinkAccent,
                       icon: Icons.eco,
                       iconColor: Colors.purpleAccent,
-                      amount: '50.000',
-                      title: 'Đi chợ mua đồ ăn',
-                    ),
-                    TransactionItem(
-                      barColor: Colors.greenAccent,
-                      icon: Icons.account_balance_sharp,
-                      iconColor: Colors.lightBlue,
-                      amount: '10.000',
-                      title: 'Mua nước uống',
-                    ),
-                    TransactionItem(
-                      barColor: Colors.red,
-                      icon: Icons.party_mode,
-                      iconColor: Colors.orange,
-                      amount: '100.000',
-                      title: 'Dự tiệc sinh nhật bạn 🎂🎂🎂',
-                    ),
-                    TransactionItem(
-                      barColor: Colors.yellow,
-                      icon: Icons.play_arrow,
-                      iconColor: Colors.orange,
-                      amount: '200.000',
-                      title: 'Dự tiệc đám cưới bạn 😂😂😂',
-                    ),
-                    TransactionItem(
-                      barColor: Colors.lightBlue,
-                      icon: Icons.access_time,
-                      iconColor: Colors.pink,
-                      amount: '50.000',
-                      title: 'Tiền lung tung',
-                    ),
-                  ],
+                      amount:
+                          '${currencyFormat.format(dsChiTietChiTieu[index].soTien)}',
+                      title: '${dsChiTietChiTieu[index].ten}',
+                    );
+                  },
                 ),
               ),
             ],
