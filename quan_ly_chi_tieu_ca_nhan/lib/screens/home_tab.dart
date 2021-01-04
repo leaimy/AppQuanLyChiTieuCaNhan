@@ -87,11 +87,11 @@ class _HomeTabState extends State<HomeTab> {
                 icon: Icons.add,
                 color: Colors.green,
                 onPressed: () async {
-                  // await localNotifyManager.showNotification(
-                  //   title: 'Thông báo',
-                  //   body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
-                  //   payload: 'New Payload',
-                  // );
+                  await localNotifyManager.showNotification(
+                    title: 'Thông báo',
+                    body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
+                    payload: 'New Payload',
+                  );
 
                   // await localNotifyManager.scheduleNotification(
                   //   title: 'Thông báo',
@@ -105,7 +105,7 @@ class _HomeTabState extends State<HomeTab> {
                   //   payload: 'New Payload',
                   // );
 
-                  await localNotifyManager.cancelAllNotification();
+                  // await localNotifyManager.cancelAllNotification();
                 },
               ),
             ),

@@ -192,3 +192,53 @@ GO
 
 EXECUTE dbo.usp_ThongKeCacKhoanChiTongQuan 4
 GO
+
+-- Create a new stored procedure called 'usp_QuanLyTien_LayTatCaChiTieu' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_QuanLyTien_LayTatCaChiTieu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_QuanLyTien_LayTatCaChiTieu
+GO
+
+CREATE PROCEDURE dbo.usp_QuanLyTien_LayTatCaChiTieu
+    @QuanLyTienID INT
+AS
+    SELECT * 
+    FROM ChiTieu
+    WHERE QuanLyTienHienCo_Id = @QuanLyTienID
+    ORDER BY Ngay ASC
+GO
+
+EXECUTE dbo.usp_QuanLyTien_LayTatCaChiTieu 1 
+GO
+
+-- Create a new stored procedure called 'usp_ChiTieu_LayTatCaChiTietChiTieu' in schema 'dbo'
+-- Drop the stored procedure if it already exists
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_ChiTieu_LayTatCaChiTietChiTieu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu
+    @ChiTieuID INT
+AS
+    SELECT *
+    FROM ChiTietChiTieu
+    WHERE ChiTieu_Id = @ChiTieuID
+    ORDER BY CreatedAt ASC
+GO
+
+EXECUTE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu 1 
+GO
+
+
