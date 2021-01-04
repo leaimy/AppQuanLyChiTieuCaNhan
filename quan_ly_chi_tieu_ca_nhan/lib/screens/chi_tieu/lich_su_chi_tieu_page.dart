@@ -8,6 +8,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_chi_tieu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tieu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 
 class LichSuChiTieuPage extends StatefulWidget {
   final int quanLyTienID;
@@ -21,6 +22,7 @@ class LichSuChiTieuPage extends StatefulWidget {
 class _LichSuChiTieuPageState extends State<LichSuChiTieuPage> {
   final dateFormat = new DateFormat('dd-MM-yyyy');
   final currencyFormat = new NumberFormat('###,###,###,###');
+  final colorPicker = ColorPicker();
   ChiTieuAPI chiTieuAPI = ChiTieuAPI();
 
   List<ChiTieu> dsChiTieu = [];
@@ -149,11 +151,11 @@ class _LichSuChiTieuPageState extends State<LichSuChiTieuPage> {
                   itemCount: dsChiTietChiTieu.length,
                   itemBuilder: (context, index) {
                     return TransactionItem(
-                      barColor: Colors.pinkAccent,
-                      icon: Icons.eco,
-                      iconColor: Colors.purpleAccent,
+                      barColor: colorPicker.random(),
+                      icon: dsChiTietChiTieu[index].icon,
+                      iconColor: colorPicker.random(),
                       amount:
-                          '${currencyFormat.format(dsChiTietChiTieu[index].soTien)}',
+                          '- ${currencyFormat.format(dsChiTietChiTieu[index].soTien)}',
                       title: '${dsChiTietChiTieu[index].ten}',
                     );
                   },

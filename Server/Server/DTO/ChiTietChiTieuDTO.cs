@@ -8,12 +8,18 @@ namespace Server.DTO
 {
   public class ChiTietChiTieuDTO
   {
+    private string nhom;
+
     public int Id { get; set; }
     public int ChiTieuId { get; set; }
     public string Ten { get; set; }
-    public string Nhom { get; set; }
     public decimal SoTien { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string Nhom
+    {
+      get { return nhom.First().ToString().ToUpper() + nhom.Substring(1); }
+      set { nhom = value.ToLower(); }
+    }
 
     public ChiTietChiTieuDTO()
     {
