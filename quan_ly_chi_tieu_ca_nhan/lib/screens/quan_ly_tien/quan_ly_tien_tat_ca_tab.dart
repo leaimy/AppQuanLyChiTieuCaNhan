@@ -120,10 +120,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                   textColor: ColorPicker().random(),
                   barColor: ColorPicker().random(),
                   icon: quanLyTien.trangThai == true
-                      ? FontAwesomeIcons.check
-                      : FontAwesomeIcons.times,
+                      ? FontAwesomeIcons.award
+                      : FontAwesomeIcons.clipboardCheck,
                   iconColor:
-                      quanLyTien.trangThai == true ? Colors.green : Colors.red,
+                      quanLyTien.trangThai == true ? Colors.red : Colors.green,
                   onItemPressed: () {
                     Navigator.push(
                       context,
