@@ -148,8 +148,8 @@ SET IDENTITY_INSERT MucTieuTietKiem OFF
 UPDATE ChiTietTietKiem SET TrangThai = 1 WHERE MucTieuTietKiem_Id = 2 OR MucTieuTietKiem_Id = 3 OR MucTieuTietKiem_Id = 4
 
 
-select *
-from ChiTietTietKiem WHERE MucTieuTietKiem_Id = 2
+-- select *
+-- from ChiTietTietKiem WHERE MucTieuTietKiem_Id = 2
 
 
 

@@ -47,6 +47,10 @@ class _HomePageState extends State<HomePage> {
         child: _children[_currentIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.pink[200],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.blueGrey[700],
+        elevation: 5.0,
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[

@@ -53,7 +53,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
           )
         ],
         title: Text(
-          'Bỏ heo mua sách',
+          'Chi tiết mục tiêu tiết kiệm',
           style: TextStyle(
             fontFamily: 'Lobster',
           ),
