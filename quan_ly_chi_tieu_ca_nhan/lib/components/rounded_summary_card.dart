@@ -35,6 +35,7 @@ class RoundedSummaryCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
       child: Material(
         elevation: 5.0,
+        shadowColor: Colors.pink,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),

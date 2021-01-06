@@ -6,7 +6,6 @@ import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_chi_tiet_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_muc_tieu.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 
 var ngayBD = new DateTime(2020, 10, 20);
 var ngayKT = new DateTime(2020, 12, 25);

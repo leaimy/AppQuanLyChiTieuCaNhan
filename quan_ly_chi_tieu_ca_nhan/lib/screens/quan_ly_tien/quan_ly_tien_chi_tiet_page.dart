@@ -124,8 +124,8 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                 title: 'Số tiền đang quản lý',
                 money: '${currencyFormat.format(thongKe.soTienHienCo)} ₫',
                 icon: Icons.account_balance,
-                iconColor: Colors.green.shade800,
-                iconBgColor: Colors.green.shade200,
+                iconBgColor: Colors.blue[200],
+                iconColor: Colors.orange,
                 titleColor: Colors.purpleAccent,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
