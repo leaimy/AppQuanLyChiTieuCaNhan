@@ -35,11 +35,7 @@ class ThemKhoanThuPage extends StatelessWidget {
                   children: [
                     Text(
                       'Chọn nguồn thu:',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        letterSpacing: 1.3,
-                      ),
+                      style: kTitleTextStyle,
                     ),
                     SizedBox(height: 15.0),
                     Container(
@@ -74,7 +70,10 @@ class ThemKhoanThuPage extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Ba mẹ'),
+                                    Text(
+                                      'Gia đình',
+                                      style: kNguonThuItemStyle,
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -105,7 +104,10 @@ class ThemKhoanThuPage extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Học bổng'),
+                                    Text(
+                                      'Học bổng',
+                                      style: kNguonThuItemStyle,
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -136,7 +138,10 @@ class ThemKhoanThuPage extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Công việc'),
+                                    Text(
+                                      'Công việc',
+                                      style: kNguonThuItemStyle,
+                                    ),
                                   ],
                                 ),
                                 Radio(
@@ -167,7 +172,10 @@ class ThemKhoanThuPage extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(width: 10.0),
-                                    Text('Khác'),
+                                    Text(
+                                      'Khác',
+                                      style: kNguonThuItemStyle,
+                                    ),
                                   ],
                                 ),
                                 Radio(
