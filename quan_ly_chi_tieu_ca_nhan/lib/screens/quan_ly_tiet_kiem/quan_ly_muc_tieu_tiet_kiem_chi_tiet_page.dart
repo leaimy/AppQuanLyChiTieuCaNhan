@@ -1,13 +1,44 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_chi_tiet_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_muc_tieu.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 
 var ngayBD = new DateTime(2020, 10, 20);
 var ngayKT = new DateTime(2020, 12, 25);
 
-class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
+class QuanLyMucTieuTietKiemChiTietPage extends StatefulWidget {
+  final int idMucTieu;
+  QuanLyMucTieuTietKiemChiTietPage({this.idMucTieu});
+  @override
+  _QuanLyMucTieuTietKiemChiTietPageState createState() =>
+      _QuanLyMucTieuTietKiemChiTietPageState();
+}
+
+class _QuanLyMucTieuTietKiemChiTietPageState
+    extends State<QuanLyMucTieuTietKiemChiTietPage> {
+  final dateFormat = new DateFormat('dd-MM-yyyy');
+  final currencyFormat = NumberFormat('###,###,###,###');
+  ChiTietMucTieu chiTietMucTieu = ChiTietMucTieu();
+  void getChiTietMucTieu() async {
+    MucTieuApi mucTieuApi = MucTieuApi();
+    ChiTietMucTieu data = await mucTieuApi.chiTietMucTieu(widget.idMucTieu);
+    if (data != null)
+      setState(() {
+        chiTietMucTieu = data;
+      });
+  }
+
+  @override
+  void initState() {
+    getChiTietMucTieu();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,25 +71,78 @@ class QuanLyMucTieuTietKiemChiTietPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     CardChiTietTietKiem(
-                      title: 'Tên mục tiêu',
-                      money: 'Tiết kiệm mua máy ảnh',
-                      icon: Icons.ac_unit,
+                      tieuDe: 'Tên mục tiêu',
+                      giaTri: chiTietMucTieu.tenMucTieu,
+                      giaTriColor: Colors.red,
+                      icon: FontAwesomeIcons.bullhorn,
+                      iconBgColor: Colors.blue[200],
+                      iconColor: Colors.orange,
                     ),
                     CardChiTietTietKiem(
-                      title: 'Tên mục tiêu',
-                      money:
-                          'Mua 1 chiếc máy ảnh thật đẹp để chụp hình cho mọi người 😘😘😘',
-                      icon: Icons.ac_unit,
+                      tieuDe: 'Mô tả',
+                      giaTri: chiTietMucTieu.moTa,
+                      giaTriColor: Colors.blue,
+                      icon: FontAwesomeIcons.heartbeat,
+                      iconBgColor: Colors.green[200],
+                      iconColor: Colors.red,
                     ),
                     CardChiTietTietKiem(
-                      title: 'Ngày bắt đầu',
-                      money: '20-10-2020',
-                      icon: Icons.ac_unit,
+                      tieuDe: 'Số tiền tiết kiệm',
+                      giaTri:
+                          '${currencyFormat.format(chiTietMucTieu.soTienTietKiem)}',
+                      giaTriColor: Colors.orange,
+                      icon: FontAwesomeIcons.moneyBill,
+                      iconBgColor: Colors.red[100],
+                      iconColor: Colors.green,
                     ),
                     CardChiTietTietKiem(
-                      title: 'Ngày kết thúc',
-                      money: '20-12-2020',
-                      icon: Icons.ac_unit,
+                      tieuDe: 'Số tiền đã tiết kiệm',
+                      giaTri:
+                          '${currencyFormat.format(chiTietMucTieu.soTienDaTietKiem)}',
+                      giaTriColor: Colors.green,
+                      icon: FontAwesomeIcons.handHoldingUsd,
+                      iconBgColor: Colors.orange[200],
+                      iconColor: Colors.blue,
+                    ),
+                    CardChiTietTietKiem(
+                      tieuDe: 'Ngày bắt đầu',
+                      giaTri: '${dateFormat.format(chiTietMucTieu.ngayBD)}',
+                      giaTriColor: Colors.pink,
+                      icon: FontAwesomeIcons.hourglassStart,
+                      iconBgColor: Colors.purple[200],
+                      iconColor: Colors.yellow,
+                    ),
+                    CardChiTietTietKiem(
+                      tieuDe: 'Ngày kết thúc',
+                      giaTri: '${dateFormat.format(chiTietMucTieu.ngayKT)}',
+                      giaTriColor: Colors.teal,
+                      icon: FontAwesomeIcons.hourglassEnd,
+                      iconBgColor: Colors.yellow[200],
+                      iconColor: Colors.purple,
+                    ),
+                    CardChiTietTietKiem(
+                      tieuDe: 'Loại tiết kiệm',
+                      giaTri: chiTietMucTieu.loaiTietKiem,
+                      giaTriColor: Colors.yellow,
+                      icon: FontAwesomeIcons.cannabis,
+                      iconBgColor: Colors.teal[200],
+                      iconColor: Colors.orange[900],
+                    ),
+                    CardChiTietTietKiem(
+                      tieuDe: 'Số ngày hoàn thành',
+                      giaTri: '${chiTietMucTieu.soNgayHoanThanh}',
+                      giaTriColor: Colors.purple,
+                      icon: FontAwesomeIcons.cloudSun,
+                      iconBgColor: Colors.pink[200],
+                      iconColor: Colors.yellow[600],
+                    ),
+                    CardChiTietTietKiem(
+                      tieuDe: 'Số ngày chưa hoàn thành',
+                      giaTri: '${chiTietMucTieu.soNgayChuaHoanThanh}',
+                      giaTriColor: Colors.red[900],
+                      icon: FontAwesomeIcons.cloudSunRain,
+                      iconBgColor: Colors.pink[200],
+                      iconColor: Colors.blueGrey,
                     ),
                   ],
                 ),
