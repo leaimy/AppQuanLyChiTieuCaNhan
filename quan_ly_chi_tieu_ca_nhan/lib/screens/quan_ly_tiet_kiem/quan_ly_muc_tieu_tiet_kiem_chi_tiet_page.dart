@@ -53,9 +53,6 @@ class _QuanLyMucTieuTietKiemChiTietPageState
         ],
         title: Text(
           'Chi tiết mục tiêu tiết kiệm',
-          style: TextStyle(
-            fontFamily: 'Lobster',
-          ),
         ),
       ),
       body: SafeArea(
