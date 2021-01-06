@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChiTietChiTieu {
   int id;
@@ -9,12 +10,12 @@ class ChiTietChiTieu {
   DateTime createdAt;
 
   IconData get icon {
-    if (nhom == 'Áo quần') return Icons.ad_units;
-    if (nhom == 'Bạn bè') return Icons.network_cell;
-    if (nhom == 'Ăn uống') return Icons.food_bank;
-    if (nhom == 'Đi chợ') return Icons.store;
+    if (nhom == 'Thức ăn') return FontAwesomeIcons.utensils;
+    if (nhom == 'Bạn bè') return FontAwesomeIcons.userFriends;
+    if (nhom == 'Quần áo') return FontAwesomeIcons.tshirt;
+    if (nhom == 'Di chuyển') return FontAwesomeIcons.busAlt;
 
-    return Icons.ac_unit;
+    return FontAwesomeIcons.chartPie;
   }
 
   ChiTietChiTieu({

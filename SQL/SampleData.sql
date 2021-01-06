@@ -165,7 +165,9 @@ VALUES
     (3, 1, 2000000, 0, '20201201', '20201231', 0),
     (4, 2, 1000000, 1000000, '20201001', '20201031', 1),
     (5, 2, 1000000, 1000000, '20201101', '20201130', 1),
-    (6, 2, 1000000, 0, '20201201', '20201231', 0)
+    (6, 2, 1000000, 0, '20201201', '20201231', 0),
+    (7, 1, 10000000, 0, '20210101', '20210131', 0),
+    (8, 2, 1000000, 0, '20210101', '20210131', 0)
 
 SET IDENTITY_INSERT QuanLyTienHienCo OFF
 PRINT(N'Chèn xong dữ liệu mẫu bảng chi tiết mục tiêu tiết kiệm');
@@ -174,15 +176,15 @@ PRINT(N'Chèn xong dữ liệu mẫu bảng chi tiết mục tiêu tiết kiệm
 INSERT INTO ChiTietNguonThu
     (QuanLyTienHienCo_Id, Nhom, SoTien)
 VALUES
-    (1, N'ba mẹ', 800000),
+    (1, N'gia đình', 800000),
     (1, N'khác', 200000),
-    (2, N'ba mẹ', 1000000),
+    (2, N'gia đình', 1000000),
     (2, N'bạn bè', 400000),
     (2, N'khác', 100000),
-    (3, N'ba mẹ', 200000),
-    (4, N'ba mẹ', 1000000),
-    (5, N'ba mẹ', 100000),
-    (6, N'ba mẹ', 100000);
+    (3, N'gia đình', 200000),
+    (4, N'gia đình', 1000000),
+    (5, N'gia đình', 100000),
+    (6, N'gia đình', 100000);
 GO
 
 -- Chèn dữ liệu mẫu bảng chi tiêu và chi tiết chi tiêu
@@ -206,16 +208,15 @@ INSERT INTO ChiTietChiTieu
     (ChiTieu_Id, Ten, Nhom, SoTien)
 VALUES
     (1, N'Ăn đám cưới bạn', N'bạn bè', 300000),
-    (1, N'Mua thực phẩm', N'đi chợ', 50000),
-    (1, N'Mua áo', N'áo quần', 150000),
-    (2, N'Ăn ngoài quán với bạn bè', N'ăn uống', 500000),
-    (3, N'Mua áo', N'áo quần', 1300000),
-    (3, N'Mua đồ ăn hằng ngày', N'đi chợ', 200000),
-    (4, N'Mua áo', N'áo quần', 200000),
-    (4, N'Ăn ngoài quán', N'ăn uống', 200000),
+    (1, N'Mua thực phẩm', N'thức ăn', 50000),
+    (1, N'Mua áo', N'quần áo', 150000),
+    (2, N'Ăn ngoài quán với bạn bè', N'thức ăn', 500000),
+    (3, N'Mua áo', N'quần áo', 1300000),
+    (3, N'Mua đồ ăn hằng ngày', N'thức ăn', 200000),
+    (4, N'Mua áo', N'quần áo', 200000),
+    (4, N'Ăn ngoài quán', N'thức ăn', 200000),
     (4, N'Bạn ở xa lên thăm', N'bạn bè', 100000),
-    (5, N'Mua đồ', N'áo quần', 300000),
-    (6, N'Mua đồ', N'áo quần', 100000),
-    (6, N'Mua đồ ăn hằng ngày', N'đi chợ', 100000),
-    (7, N'Mua đồ sang nhà thầy 20/11', N'xã hội', 100000)
-
+    (5, N'Mua đồ', N'quần áo', 300000),
+    (6, N'Mua đồ', N'quần áo', 100000),
+    (6, N'Mua đồ ăn hằng ngày', N'thức ăn', 100000),
+    (7, N'Mua đồ sang nhà thầy 20/11', N'khác', 100000)

@@ -78,10 +78,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     SizedBox(width: 10.0),
                                     Text(
                                       'Thức ăn',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -115,10 +112,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     SizedBox(width: 10.0),
                                     Text(
                                       'Bạn bè',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -152,10 +146,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     SizedBox(width: 10.0),
                                     Text(
                                       'Quần áo',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -189,10 +180,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     SizedBox(width: 10.0),
                                     Text(
                                       'Di chuyển',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -218,7 +206,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                       height: 30.0,
                                       width: 7.0,
                                       decoration: BoxDecoration(
-                                        color: Colors.greenAccent,
+                                        color: Colors.yellow,
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
@@ -226,10 +214,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     SizedBox(width: 10.0),
                                     Text(
                                       'Khác',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
