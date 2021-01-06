@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 
 class CardChiTietTietKiem extends StatelessWidget {
-  final String title;
-  final String money;
+  final String tieuDe;
+  final String giaTri;
   final IconData icon;
-  final Color titleColor;
-  final Color moneyColor;
+  final Color tieuDeColor;
+  final Color giaTriColor;
   final Color iconColor;
   final Color iconBgColor;
   final Color cardColor;
 
   CardChiTietTietKiem({
-    @required this.title,
-    @required this.money,
+    @required this.tieuDe,
+    @required this.giaTri,
     @required this.icon,
-    this.titleColor = Colors.grey,
-    this.moneyColor = Colors.black,
-    this.iconColor = Colors.brown,
-    this.iconBgColor = Colors.pinkAccent,
+    this.tieuDeColor = Colors.grey,
+    this.giaTriColor = Colors.black,
+    this.iconColor = Colors.black,
+    this.iconBgColor = Colors.pink,
     this.cardColor = Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
-    bool isTooLong = money.length > 100;
+    bool isTooLong = giaTri.length > 100;
 
     double screenWidth = MediaQuery.of(context).size.width;
     double cardWidth = screenWidth * 0.5;
@@ -34,6 +35,7 @@ class CardChiTietTietKiem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Material(
         elevation: 5.0,
+        shadowColor: Colors.pink,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -57,22 +59,23 @@ class CardChiTietTietKiem extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               Text(
-                this.title,
+                this.tieuDe,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: this.titleColor,
+                  color: this.tieuDeColor,
                   fontFamily: 'Lobster',
                   letterSpacing: 1.1,
-                  fontSize: 13.0,
+                  fontSize: 15.0,
                 ),
               ),
               SizedBox(height: 7.0),
               Text(
-                this.money,
+                this.giaTri,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontWeight: isTooLong ? FontWeight.normal : FontWeight.bold,
-                  color: this.moneyColor,
-                  fontSize: isTooLong ? 10.0 : 15.0,
+                  fontFamily: 'Lobster',
+                  color: this.giaTriColor,
+                  fontSize: isTooLong ? 10.0 : 18.0,
                 ),
               ),
             ],

@@ -43,16 +43,16 @@ namespace Server.Controllers
 		}
 
 
-		[HttpGet("chitiettietkiem")]
+		[HttpGet("chitietmuctieu")]
 		public ActionResult<ChiTietMucTieuDTO> ChiTietMucTieu()
 		{
-			string user_id = HttpContext.Request.Query["user_id"].ToString();
-			if (String.IsNullOrWhiteSpace(user_id))
+			string id_muctieu = HttpContext.Request.Query["id_muctieu"].ToString();
+			if (String.IsNullOrWhiteSpace(id_muctieu))
 				return BadRequest();
 
-			int userID = Convert.ToInt32(user_id);
+			int idMucTieu = Convert.ToInt32(id_muctieu);
 
-			ChiTietMucTieuDTO chiTietMucTieu = TietKiemDAO.Instance.GetChiTietMucTieu(userID);
+			ChiTietMucTieuDTO chiTietMucTieu = TietKiemDAO.Instance.GetChiTietMucTieu(idMucTieu);
 
 			return Ok(chiTietMucTieu);
 		}

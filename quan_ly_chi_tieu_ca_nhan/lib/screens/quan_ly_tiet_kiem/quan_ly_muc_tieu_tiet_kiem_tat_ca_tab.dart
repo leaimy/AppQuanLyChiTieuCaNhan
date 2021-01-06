@@ -63,12 +63,14 @@ class _QuanLyMucTieuTietKiemTatCaTabState
         textColor: ColorPicker().random(),
         textName: muctieu.tenMucTieu,
         icon: muctieu.trangThai == true
-            ? FontAwesomeIcons.gem
-            : FontAwesomeIcons.fan,
-        iconColor: muctieu.trangThai == true ? Colors.blue : Colors.red,
+            ? FontAwesomeIcons.award
+            : FontAwesomeIcons.clipboardCheck,
+        iconColor: muctieu.trangThai == true ? Colors.red : Colors.green,
         onItemPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return QuanLyMucTieuTietKiemChiTietPage();
+            return QuanLyMucTieuTietKiemChiTietPage(
+              idMucTieu: muctieu.id,
+            );
           }));
         },
       );
