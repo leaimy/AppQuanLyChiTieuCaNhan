@@ -77,7 +77,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Học tập',
+                                      'Thức ăn',
                                       style: TextStyle(
                                         fontFamily: 'Lobster',
                                         fontSize: 18.0,
@@ -114,7 +114,7 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Xã hội',
+                                      'Bạn bè',
                                       style: TextStyle(
                                         fontFamily: 'Lobster',
                                         fontSize: 18.0,
@@ -151,7 +151,44 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Thực phẩm',
+                                      'Quần áo',
+                                      style: TextStyle(
+                                        fontFamily: 'Lobster',
+                                        fontSize: 18.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Radio(
+                                  value: false,
+                                  groupValue: null,
+                                  onChanged: (value) {},
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 1.0,
+                              width: double.infinity,
+                              child: Container(color: Colors.grey.shade200),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 30.0,
+                                      width: 7.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.greenAccent,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10.0),
+                                    Text(
+                                      'Di chuyển',
                                       style: TextStyle(
                                         fontFamily: 'Lobster',
                                         fontSize: 18.0,
