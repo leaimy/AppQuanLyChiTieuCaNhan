@@ -78,7 +78,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
   void handleCircleDatePressed(DateTime pressedDate, bool status) {
     setState(() {
       selectedDate = pressedDate;
-      isCheck = status;
+      isCheck = status != null ? status : false;
     });
   }
 
@@ -237,15 +237,12 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                             value: isCheck,
                             onChanged: (value) async {
                               if (value == true) {
-                                if (selectedDate
-                                        .difference(DateTime.now())
-                                        .inDays >
-                                    0) return;
                                 setTrangThaiByDate(selectedDate);
                                 await mucTieuApi.capNhatTrangThaiMucTieu(
                                   idMucTieu: widget.idMucTieu,
                                   date: selectedDate,
                                 );
+                                getChiTietMucTieu();
                                 if (widget.onChanged != null)
                                   widget.onChanged();
                               }
@@ -278,6 +275,13 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                         ) {
                           // print(now);
                           if (isToday == true) {
+                            if (getTrangThaiByDate(now) == null)
+                              return CircleDateBox(
+                                text: now.day.toString(),
+                                color: Colors.green,
+                                onPressed: () {},
+                              );
+
                             return CircleDateBox(
                               text: now.day.toString(),
                               color: Colors.green,
@@ -288,10 +292,15 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                             );
                           }
 
-                          if (chiTietMucTieu.ngayBD.difference(now).inDays <=
-                                  0 &&
-                              chiTietMucTieu.ngayKT.difference(now).inDays >=
-                                  0) {
+                          if (chiTietMucTieu.ngayBD.compareTo(now) <= 0 &&
+                              chiTietMucTieu.ngayKT.compareTo(now) >= 0) {
+                            if (now.compareTo(DateTime.now()) > 0)
+                              return CircleDateBox(
+                                text: now.day.toString(),
+                                color: Colors.pink[200],
+                                onPressed: () {},
+                              );
+
                             bool trangThai = getTrangThaiByDate(now);
                             if (trangThai == true) {
                               return CircleDateBox(

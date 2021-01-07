@@ -93,11 +93,7 @@ BEGIN
     DECLARE @SoNgayChuaTietKiem INT 
 
     SET @SoNgayDaTietKiem = dbo.ufnDemSoNgayTietKiemDaHoanThanh(@Id)
-    SET @SoNgayChuaTietKiem = dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@Id)
-
-    DECLARE @TrangThai BIT = 0
-    IF (@SoNgayChuaTietKiem = 0)
-        SET @TrangThai = 1
+    SET @SoNgayChuaTietKiem = dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@Id)   
 
     SELECT 
     Id,
@@ -108,7 +104,7 @@ BEGIN
     SoTienDaTietKiemDuoc,
     NgayBD,
     NgayKT,
-    @TrangThai AS TrangThai,
+    TrangThai,
     LoaiTietKiem,
     CreatedAt,
     @SoNgayDaTietKiem AS SoNgayHoanThanh,
@@ -261,7 +257,7 @@ BEGIN
     WHERE MucTieuTietKiem_Id = @idMucTieu AND DATEDIFF(DAY, Ngay, @Date) = 0
 
     DECLARE @SoTien DECIMAL = 0
-    SELECT @SoTien = @SoTien FROM ChiTietTietKiem
+    SELECT @SoTien = SoTien FROM ChiTietTietKiem
     WHERE MucTieuTietKiem_Id = @idMucTieu AND DATEDIFF(DAY, Ngay, @Date) = 0
 
     DECLARE @SoTienTietKiemHienTai DECIMAL
@@ -274,7 +270,16 @@ BEGIN
     UPDATE MucTieuTietKiem
     SET SoTienDaTietKiemDuoc = @SoTienDaTietKiemMoi
     WHERE Id = @idMucTieu
+
+    DECLARE @SoNgayDaTietKiem INT 
+    DECLARE @SoNgayChuaTietKiem INT 
+
+    SET @SoNgayDaTietKiem = dbo.ufnDemSoNgayTietKiemDaHoanThanh(@idMucTieu)
+    SET @SoNgayChuaTietKiem = dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@idMucTieu)   
+
+    IF (@SoNgayChuaTietKiem = 0)
+        UPDATE MucTieuTietKiem
+        SET TrangThai = 1
+        WHERE Id = @idMucTieu
 END
 GO
-
-
