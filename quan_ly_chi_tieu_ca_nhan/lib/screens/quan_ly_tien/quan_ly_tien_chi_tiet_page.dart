@@ -69,7 +69,7 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
       TransactionItem item = TransactionItem(
         barColor: colorPicker.random(),
         icon: nguonThu.icon,
-        iconColor: colorPicker.random(),
+        iconColor: nguonThu.iconColor,
         amount: '+ ${currencyFormat.format(nguonThu.soTien)}',
         title: '${nguonThu.nhom}',
         textColor: Colors.green,
@@ -88,7 +88,7 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
       TransactionItem item = TransactionItem(
         barColor: colorPicker.random(),
         icon: khoanChi.icon,
-        iconColor: colorPicker.random(),
+        iconColor: khoanChi.iconColor,
         amount: '- ${currencyFormat.format(khoanChi.soTien)}',
         title: '${khoanChi.nhom}',
         textColor: Colors.red,
@@ -124,8 +124,8 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                 title: 'Số tiền đang quản lý',
                 money: '${currencyFormat.format(thongKe.soTienHienCo)} ₫',
                 icon: Icons.account_balance,
-                iconColor: Colors.green.shade800,
-                iconBgColor: Colors.green.shade200,
+                iconBgColor: Colors.blue[200],
+                iconColor: Colors.orange,
                 titleColor: Colors.purpleAccent,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
@@ -221,7 +221,9 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                 textName: 'Xem lịch sử chi tiêu',
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return LichSuChiTieuPage();
+                    return LichSuChiTieuPage(
+                      quanLyTienID: widget.quanLyTienID,
+                    );
                   }));
                 },
               )

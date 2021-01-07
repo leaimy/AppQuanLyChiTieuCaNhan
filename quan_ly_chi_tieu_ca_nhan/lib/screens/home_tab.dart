@@ -6,11 +6,35 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/quick_action_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/nguoi_dung.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/chi_tieu/them_chi_tieu_page.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/screens/quan_ly_tiet_kiem/them_muc_tieu_tiet_kiem_page.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/services/LocalNotifyManager.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   final NguoiDung nguoiDung;
   HomeTab({this.nguoiDung});
+
+  @override
+  _HomeTabState createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  LocalNotifyManager localNotifyManager;
+
+  @override
+  void initState() {
+    super.initState();
+    localNotifyManager = LocalNotifyManager.init();
+    localNotifyManager.setOnNotificationReceive(onNotificationReceive);
+    localNotifyManager.setOnNotificationClick(onNotificationClick);
+  }
+
+  onNotificationReceive(ReceiveNotification notification) {
+    print('Notication Received: ${notification.id}');
+  }
+
+  onNotificationClick(String payload) {
+    print('Payload $payload');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +54,8 @@ class HomeTab extends StatelessWidget {
               children: [
                 Expanded(
                   child: CardAvatar(
-                    tenHienThi: nguoiDung.tenHienThi,
-                    tenHinh: nguoiDung.avatar,
+                    tenHienThi: widget.nguoiDung.tenHienThi,
+                    tenHinh: widget.nguoiDung.avatar,
                   ),
                 ),
                 SizedBox(width: 10.0),
@@ -47,6 +71,46 @@ class HomeTab extends StatelessWidget {
             ),
           ),
           Expanded(child: Container()),
+          Opacity(
+            opacity: 0.7,
+            child: QuickActionBox(
+              icon: Icon(
+                Icons.alarm,
+                color: Colors.pink[800],
+              ),
+              title: Text(
+                'Bật thông báo 😘',
+                style: TextStyle(fontFamily: 'Lobster'),
+              ),
+              iconBackGroundColor: Colors.pink[100],
+              actionIcon: CircleIconBox(
+                icon: Icons.add,
+                color: Colors.green,
+                onPressed: () async {
+                  await localNotifyManager.showNotification(
+                    title: 'Thông báo',
+                    body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
+                    payload: 'New Payload',
+                  );
+
+                  // await localNotifyManager.scheduleNotification(
+                  //   title: 'Thông báo',
+                  //   body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
+                  //   payload: 'New Payload',
+                  // );
+
+                  // await localNotifyManager.showDailyAtTimeNotification(
+                  //   title: 'Thông báo',
+                  //   body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
+                  //   payload: 'New Payload',
+                  // );
+
+                  // await localNotifyManager.cancelAllNotification();
+                },
+              ),
+            ),
+          ),
+          SizedBox(height: 15.0),
           Opacity(
             opacity: 0.7,
             child: QuickActionBox(

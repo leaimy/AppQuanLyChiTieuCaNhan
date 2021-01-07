@@ -13,6 +13,13 @@ class App extends StatelessWidget {
         appBarTheme: AppBarTheme.of(context).copyWith(
           color: Colors.pink[200],
           centerTitle: true,
+          shadowColor: Colors.pink,
+          textTheme: TextTheme(
+            headline6: TextStyle(
+              fontFamily: 'Lobster',
+              fontSize: 17.0,
+            ),
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,

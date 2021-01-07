@@ -38,3 +38,9 @@ const kPaddingMainPage = EdgeInsets.symmetric(
 
 const kURL = 'http://10.0.2.2:5000';
 // const kURL = 'http://10.0.3.2:5000';
+
+const kNguonThuItemStyle = TextStyle(
+  fontFamily: 'Lobster',
+  fontSize: 16.0,
+  color: Colors.black54,
+);

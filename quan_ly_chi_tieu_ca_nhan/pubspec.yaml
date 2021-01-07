@@ -17,6 +17,8 @@ dependencies:
   date_time_picker: ^1.1.0
   flutter_calendar_carousel: ^1.5.2
   http: ^0.12.2
+  flutter_local_notifications: ^1.4.4+4
+  rxdart: ^0.24.1
 
 dev_dependencies:
   flutter_test:

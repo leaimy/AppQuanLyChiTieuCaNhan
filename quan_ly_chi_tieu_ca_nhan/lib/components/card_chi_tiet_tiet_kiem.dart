@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 
 class CardChiTietTietKiem extends StatelessWidget {
   final String tieuDe;

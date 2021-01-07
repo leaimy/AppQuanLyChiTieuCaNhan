@@ -6,8 +6,11 @@ import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_chi_tiet_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_muc_tieu.dart';
+<<<<<<< HEAD
 import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_ngay_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
+=======
+>>>>>>> 373b5fdbbe813ce511eac8a2a7f76ae1f3ee0f00
 
 class QuanLyMucTieuTietKiemChiTietPage extends StatefulWidget {
   final int idMucTieu;
@@ -77,9 +80,6 @@ class _QuanLyMucTieuTietKiemChiTietPageState
         ],
         title: Text(
           'Chi tiết mục tiêu tiết kiệm',
-          style: TextStyle(
-            fontFamily: 'Lobster',
-          ),
         ),
       ),
       body: SafeArea(

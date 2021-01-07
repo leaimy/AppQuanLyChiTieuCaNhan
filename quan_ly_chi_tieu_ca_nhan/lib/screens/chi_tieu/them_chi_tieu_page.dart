@@ -77,11 +77,8 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Học tập',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      'Thức ăn',
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -114,11 +111,8 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Xã hội',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      'Bạn bè',
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -151,11 +145,8 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Thực phẩm',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
-                                      ),
+                                      'Quần áo',
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),
@@ -188,11 +179,42 @@ class ThemChiTieuPage extends StatelessWidget {
                                     ),
                                     SizedBox(width: 10.0),
                                     Text(
-                                      'Khác',
-                                      style: TextStyle(
-                                        fontFamily: 'Lobster',
-                                        fontSize: 18.0,
+                                      'Di chuyển',
+                                      style: kNguonThuItemStyle,
+                                    ),
+                                  ],
+                                ),
+                                Radio(
+                                  value: false,
+                                  groupValue: null,
+                                  onChanged: (value) {},
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 1.0,
+                              width: double.infinity,
+                              child: Container(color: Colors.grey.shade200),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 30.0,
+                                      width: 7.0,
+                                      decoration: BoxDecoration(
+                                        color: Colors.yellow,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
                                       ),
+                                    ),
+                                    SizedBox(width: 10.0),
+                                    Text(
+                                      'Khác',
+                                      style: kNguonThuItemStyle,
                                     ),
                                   ],
                                 ),

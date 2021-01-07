@@ -66,8 +66,8 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
             title: 'Tổng số tiền đã quản lý',
             money: '${currencyFormat.format(thongKe.tongSoTienDaQuanLy)} ₫',
             icon: Icons.account_balance_outlined,
-            iconColor: Color(0xFF25555B),
-            iconBgColor: Color(0xFFC4F2FF),
+            iconBgColor: Colors.blue[200],
+            iconColor: Colors.orange,
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -90,16 +90,16 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                 money:
                     '${currencyFormat.format(thongKe.tongSoTienDaChiTieu)} ₫',
                 icon: Icons.money_off,
-                iconColor: Color(0xFFF2A715),
-                iconBgColor: Color(0xFFFFE6D6),
+                iconBgColor: Colors.purple[200],
+                iconColor: Colors.yellow,
               ),
               SizedBox(width: 20.0),
               RoundedSummaryBox(
                 title: 'Số lượng kế hoạch đã hoàn thành',
                 money: thongKe.tongSoKeHoachQuanLyDaHoanThanh.toString(),
                 icon: Icons.done_all,
-                iconColor: Color(0xFFB886A7),
-                iconBgColor: Color(0xFFFFD6F1),
+                iconBgColor: Colors.yellow[200],
+                iconColor: Colors.purple,
               ),
             ],
           ),
@@ -120,10 +120,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                   textColor: ColorPicker().random(),
                   barColor: ColorPicker().random(),
                   icon: quanLyTien.trangThai == true
-                      ? FontAwesomeIcons.check
-                      : FontAwesomeIcons.times,
+                      ? FontAwesomeIcons.award
+                      : FontAwesomeIcons.clipboardCheck,
                   iconColor:
-                      quanLyTien.trangThai == true ? Colors.green : Colors.red,
+                      quanLyTien.trangThai == true ? Colors.red : Colors.green,
                   onItemPressed: () {
                     Navigator.push(
                       context,

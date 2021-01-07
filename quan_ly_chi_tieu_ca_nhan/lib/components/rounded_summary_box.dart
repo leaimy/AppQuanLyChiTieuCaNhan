@@ -30,6 +30,7 @@ class RoundedSummaryBox extends StatelessWidget {
 
     return Material(
       elevation: 5.0,
+      shadowColor: Colors.pink,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
