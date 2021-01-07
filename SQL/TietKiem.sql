@@ -66,6 +66,7 @@ AS
 BEGIN
     SELECT Id, TenMucTieu, TrangThai FROM MucTieuTietKiem
     WHERE NguoiDung_Id = @IdNguoiDung
+    ORDER BY NgayBD DESC
 END
 GO
 

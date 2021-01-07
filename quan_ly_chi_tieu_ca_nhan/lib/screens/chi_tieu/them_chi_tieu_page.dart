@@ -292,18 +292,20 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
               ),
               SizedBox(height: 30.0),
               NutBam(
-                  textName: 'Thêm chi tiêu',
-                  onPressed: () async {
-                    bool ketQua = await chiTieuAPI.themChiTieu(
-                      tenChiTieu: tenChiTieu,
-                      nhom: nhom,
-                      soTien: soTien,
-                    );
-                    if (ketQua == true)
-                      Navigator.pop(context);
-                    else
-                      print("lỗi");
-                  }),
+                textName: 'Thêm chi tiêu',
+                onPressed: () async {
+                  bool ketQua = await chiTieuAPI.themChiTieu(
+                    tenChiTieu: tenChiTieu,
+                    nhom: nhom,
+                    soTien: soTien,
+                    ngayChiTieu: DateTime.now(),
+                  );
+                  if (ketQua == true)
+                    Navigator.pop(context);
+                  else
+                    print("lỗi");
+                },
+              ),
             ],
           ),
         ),

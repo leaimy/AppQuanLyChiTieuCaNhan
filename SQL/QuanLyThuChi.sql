@@ -399,3 +399,6 @@ BEGIN
     WHERE Id = @IdQuanLyTien
 END
 GO
+
+SELECT * FROM QuanLyTienHienCo
+SELECT * FROM ChiTieu WHERE QuanLyTienHienCo_Id = 8

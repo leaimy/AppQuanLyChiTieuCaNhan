@@ -6,32 +6,24 @@ using System.Threading.Tasks;
 
 namespace Server.DTO
 {
-	public class ThemChiTieuDTO
-	{
-        private string nhom;
+  public class ThemChiTieuDTO
+  {
+    public string TenChiTieu { get; set; }
+    public decimal SoTien { get; set; }
+    public DateTime NgayChiTieu { get; set; }
+    public string Nhom { get; set; }
 
-		public string TenChiTieu { get; set; }         
-		public decimal SoTien { get; set; }
-		public DateTime NgayChiTieu { get; set; }
-		public string Nhom
-        {
-            get { return nhom.First().ToString().ToUpper() + nhom.Substring(1); }
-            set { nhom = value.ToLower(); }
-        }
+    public ThemChiTieuDTO()
+    {
 
-        public ThemChiTieuDTO()
-        {
+    }
 
-        }
-
-		public ThemChiTieuDTO(string tenChiTieu, decimal soTien, DateTime ngayChiTieu, string nhom)
-		{
-			TenChiTieu = tenChiTieu;
-			SoTien = soTien;
-			NgayChiTieu = ngayChiTieu;
-			Nhom = nhom;
-		}
-
-		
-	}
+    public ThemChiTieuDTO(string tenChiTieu, decimal soTien, DateTime ngayChiTieu, string nhom)
+    {
+      TenChiTieu = tenChiTieu;
+      SoTien = soTien;
+      NgayChiTieu = ngayChiTieu;
+      Nhom = nhom;
+    }
+  }
 }
