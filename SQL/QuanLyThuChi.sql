@@ -258,7 +258,6 @@ WHERE SPECIFIC_SCHEMA = N'dbo'
 )
 DROP PROCEDURE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu
 GO
--- Create the stored procedure in the specified schema
 CREATE PROCEDURE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu
     @ChiTieuID INT
 AS

@@ -146,6 +146,18 @@ GO
 EXEC usp_TietKiem_ThongKeTietKiem 1
 GO
 
+/*
+    LẤY DANH SÁCH TẤT CẢ CÁC THEO DÕI CHI TIẾT TIẾT KIỆM THUỘC VỀ 1 MỤC TIÊU TIẾT KIỆM
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_GetTime'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_GetTime
+GO
 
 CREATE PROC usp_TietKiem_GetTime
 @IdMucTieu INT
@@ -160,9 +172,25 @@ GO
 EXEC usp_TietKiem_GetTime 2
 GO
 
---Them muc tieu tiet kiem
+/*
+    THÊM 1 MỤC TIÊU TIẾT KIỆM MỚI
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_ThemMucTieuTietKiem'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_ThemMucTieuTietKiem
+GO
 CREATE PROC usp_TietKiem_ThemMucTieuTietKiem
-@TenMucTieu NVARCHAR(200), @MoTa NVARCHAR(200), @SoTienTietKiem DECIMAL, @NgayBD DATETIME, @NgayKT DATETIME, @LoaiTietKiem NVARCHAR(50),@idNguoiDung INT
+    @TenMucTieu NVARCHAR(200), 
+    @MoTa NVARCHAR(200), 
+    @SoTienTietKiem DECIMAL, 
+    @NgayBD DATETIME, 
+    @NgayKT DATETIME, @LoaiTietKiem NVARCHAR(50),
+    @idNguoiDung INT
 AS 
 BEGIN  
     INSERT INTO MucTieuTietKiem (NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, NgayBD, NgayKT, LoaiTietKiem)
