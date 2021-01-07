@@ -20,13 +20,16 @@ class _QuanLyMucTieuTietKiemChiTietPageState
     extends State<QuanLyMucTieuTietKiemChiTietPage> {
   final dateFormat = new DateFormat('dd-MM-yyyy');
   final currencyFormat = NumberFormat('###,###,###,###');
+  final mucTieuApi = MucTieuApi();
   ChiTietMucTieu chiTietMucTieu = ChiTietMucTieu();
   List<ChiTietNgayTietKiem> dsNgay = [];
   DateTime ngayBD = DateTime.now();
   DateTime ngayKT = DateTime.now();
 
+  bool isCheck = false;
+  DateTime selectedDate = DateTime.now();
+
   void getChiTietMucTieu() async {
-    MucTieuApi mucTieuApi = MucTieuApi();
     ChiTietMucTieu data = await mucTieuApi.chiTietMucTieu(widget.idMucTieu);
     if (data != null)
       setState(() {
@@ -35,7 +38,6 @@ class _QuanLyMucTieuTietKiemChiTietPageState
   }
 
   void getChiTietNgay() async {
-    MucTieuApi mucTieuApi = MucTieuApi();
     List<ChiTietNgayTietKiem> data =
         await mucTieuApi.getNgayTietKiem(widget.idMucTieu);
 
@@ -44,7 +46,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
     });
   }
 
-  bool timKiemTrangThai(DateTime date) {
+  bool getTrangThaiByDate(DateTime date) {
     for (var item in dsNgay) {
       if (item.ngayTietKiem.difference(date).inDays == 0) {
         return item.trangThai;
@@ -52,6 +54,29 @@ class _QuanLyMucTieuTietKiemChiTietPageState
     }
 
     return false;
+  }
+
+  void setTrangThaiByDate(DateTime date) {
+    DateTime now = DateTime.now();
+    if (date.difference(now.add(Duration(days: 1))).inDays == 0) return;
+    if (date.difference(now).inDays <= 0) {
+      setState(() {
+        isCheck = true;
+        for (var item in dsNgay) {
+          if (item.ngayTietKiem.difference(date).inDays == 0) {
+            item.trangThai = true;
+            break;
+          }
+        }
+      });
+    }
+  }
+
+  void handleCircleDatePressed(DateTime pressedDate, bool status) {
+    setState(() {
+      selectedDate = pressedDate;
+      isCheck = status;
+    });
   }
 
   @override
@@ -191,7 +216,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                           width: 250.0,
                           child: CheckboxListTile(
                             title: Text(
-                              '20-10-2020',
+                              '${dateFormat.format(selectedDate)}',
                               style: TextStyle(
                                 fontFamily: 'Lobster',
                                 letterSpacing: 1.1,
@@ -206,8 +231,16 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                             controlAffinity: ListTileControlAffinity.leading,
                             checkColor: Colors.pink,
                             activeColor: Colors.white,
-                            value: true,
-                            onChanged: (value) {},
+                            value: isCheck,
+                            onChanged: (value) async {
+                              if (value == true) {
+                                setTrangThaiByDate(selectedDate);
+                                mucTieuApi.capNhatTrangThaiMucTieu(
+                                  idMucTieu: widget.idMucTieu,
+                                  date: selectedDate,
+                                );
+                              }
+                            },
                           ),
                         ),
                       ),
@@ -239,6 +272,10 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                             return CircleDateBox(
                               text: now.day.toString(),
                               color: Colors.green,
+                              onPressed: () {
+                                handleCircleDatePressed(
+                                    now, getTrangThaiByDate(now));
+                              },
                             );
                           }
 
@@ -246,16 +283,22 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                                   0 &&
                               chiTietMucTieu.ngayKT.difference(now).inDays >=
                                   0) {
-                            if (timKiemTrangThai(now) == true) {
+                            if (getTrangThaiByDate(now) == true) {
                               return CircleDateBox(
                                 text: now.day.toString(),
-                                color: Colors.red[200],
+                                color: Colors.pink[600],
+                                onPressed: () {
+                                  handleCircleDatePressed(now, true);
+                                },
                               );
                             }
 
                             return CircleDateBox(
                               text: now.day.toString(),
                               color: Colors.pink[200],
+                              onPressed: () {
+                                handleCircleDatePressed(now, false);
+                              },
                             );
                           } else
                             return null;
