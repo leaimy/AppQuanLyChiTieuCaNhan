@@ -18,6 +18,15 @@ class ChiTietChiTieu {
     return FontAwesomeIcons.chartPie;
   }
 
+  Color get iconColor {
+    if (nhom == 'Thức ăn') return Colors.green;
+    if (nhom == 'Bạn bè') return Colors.purple;
+    if (nhom == 'Quần áo') return Colors.blue;
+    if (nhom == 'Di chuyển') return Colors.amber;
+
+    return Colors.pink;
+  }
+
   ChiTietChiTieu({
     this.id = 0,
     this.chiTieuId = 0,
