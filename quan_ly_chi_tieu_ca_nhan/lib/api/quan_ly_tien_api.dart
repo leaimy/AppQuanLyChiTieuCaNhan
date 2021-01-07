@@ -18,6 +18,13 @@ class QuanLyTienApi {
       '$kURL/api/quanlytien/thongkekhoanchi';
   final String _urlThemNguonThu = "$kURL/api/quanlytien/nguonthu";
 
+  dynamic myEncode(dynamic item) {
+    if (item is DateTime) {
+      return item.toIso8601String();
+    }
+    return item;
+  }
+
   Future<List<ListQuanLyTien>> getAllQuanLyTien(int userID) async {
     http.Response response = await http.get(
       '$_url?user_id=$userID',
@@ -121,7 +128,7 @@ class QuanLyTienApi {
       "NgayKT": ngayKT,
     };
 
-    var bodyJson = jsonEncode(body);
+    var bodyJson = JsonEncoder(myEncode).convert(body);
     http.Response response = await http.post(
       _url,
       headers: <String, String>{

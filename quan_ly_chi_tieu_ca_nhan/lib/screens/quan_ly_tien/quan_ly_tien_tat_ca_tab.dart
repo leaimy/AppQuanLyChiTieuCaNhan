@@ -73,7 +73,9 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) => SingleChildScrollView(
-                  child: ThemQuanLyTienPage(),
+                  child: ThemQuanLyTienPage(
+                    idNguoiDung: widget.nguoiDung.id,
+                  ),
                   padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                 ),
