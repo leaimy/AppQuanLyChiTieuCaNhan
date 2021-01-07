@@ -43,9 +43,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
     QuanLyTienApi api = QuanLyTienApi();
     List<ListQuanLyTien> list = await api.getAllQuanLyTien(widget.nguoiDung.id);
 
-    setState(() {
-      dsQuanLyTien = list;
-    });
+    if (list != null)
+      setState(() {
+        dsQuanLyTien = list;
+      });
   }
 
   @override
@@ -73,7 +74,13 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) => SingleChildScrollView(
-                  child: ThemQuanLyTienPage(),
+                  child: ThemQuanLyTienPage(
+                    idNguoiDung: widget.nguoiDung.id,
+                    onSuccess: () {
+                      getThongKeTongQuan();
+                      getDanhSachQuanLyTien();
+                    },
+                  ),
                   padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                 ),
@@ -131,6 +138,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                         builder: (context) {
                           return QuanLyTienChiTietPage(
                             quanLyTienID: quanLyTien.id,
+                            onChanged: () {
+                              getThongKeTongQuan();
+                              getDanhSachQuanLyTien();
+                            },
                           );
                         },
                       ),

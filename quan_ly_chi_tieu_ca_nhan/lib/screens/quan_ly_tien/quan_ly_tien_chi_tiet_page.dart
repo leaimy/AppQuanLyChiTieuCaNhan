@@ -15,8 +15,9 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class QuanLyTienChiTietPage extends StatefulWidget {
   final int quanLyTienID;
+  final Function onChanged;
 
-  QuanLyTienChiTietPage({this.quanLyTienID});
+  QuanLyTienChiTietPage({this.quanLyTienID, this.onChanged});
 
   @override
   _QuanLyTienChiTietPageState createState() => _QuanLyTienChiTietPageState();
@@ -36,30 +37,33 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
     QuanLyTienThongKeChiTiet data =
         await _quanLyTienApi.getQuanLyTienThongKeChiTiet(widget.quanLyTienID);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         thongKe = data;
       });
+    }
   }
 
   void getDanhSachNguonThu() async {
     List<QuanLyTienThongKeNguonThu> data = await _quanLyTienApi
         .getQuanLyTienThongKeNguonThuTongQuan(widget.quanLyTienID);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         dsNguonThu = data;
       });
+    }
   }
 
   void getDanhSachKhoanChi() async {
     List<QuanLyTienThongKeKhoanChi> data = await _quanLyTienApi
         .getQuanLyTienThongKeKhoanChiTongQuan(widget.quanLyTienID);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         dsKhoanChi = data;
       });
+    }
   }
 
   List<TransactionItem> renderDanhSachNguonThu() {
@@ -136,6 +140,8 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                           getThongKe();
                           getDanhSachNguonThu();
                           getDanhSachKhoanChi();
+
+                          if (widget.onChanged != null) widget.onChanged();
                         },
                       );
                     },
@@ -227,11 +233,23 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
               NutBam(
                 textName: 'Xem lịch sử chi tiêu',
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return LichSuChiTieuPage(
-                      quanLyTienID: widget.quanLyTienID,
-                    );
-                  }));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return LichSuChiTieuPage(
+                          quanLyTienID: widget.quanLyTienID,
+                          onChanged: () {
+                            getThongKe();
+                            getDanhSachNguonThu();
+                            getDanhSachKhoanChi();
+
+                            if (widget.onChanged != null) widget.onChanged();
+                          },
+                        );
+                      },
+                    ),
+                  );
                 },
               )
             ],

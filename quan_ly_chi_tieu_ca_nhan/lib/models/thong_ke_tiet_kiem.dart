@@ -5,12 +5,13 @@ class ThongKeTietKiem {
   int soMTHoanThanh;
   int soMTChuaHoanThanh;
 
-  ThongKeTietKiem(
-      {this.idNguoiDung,
-      this.tongTienTietKiem,
-      this.tongTienDaTietKiem,
-      this.soMTHoanThanh,
-      this.soMTChuaHoanThanh});
+  ThongKeTietKiem({
+    this.idNguoiDung = 0,
+    this.tongTienTietKiem = 0,
+    this.tongTienDaTietKiem = 0,
+    this.soMTHoanThanh = 0,
+    this.soMTChuaHoanThanh = 0,
+  });
 
   factory ThongKeTietKiem.fromJson(Map<String, dynamic> json) {
     print(json);

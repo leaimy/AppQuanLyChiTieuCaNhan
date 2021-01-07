@@ -27,21 +27,17 @@ class _QuanLyMucTieuTietKiemTatCaTabState
     extends State<QuanLyMucTieuTietKiemTatCaTab> {
   final currencyFormat = NumberFormat('###,###,###,###');
   List<MucTieuTietKiem> dsMucTieu = [];
-  ThongKeTietKiem thongKeTietKiem = ThongKeTietKiem(
-    tongTienDaTietKiem: 0,
-    tongTienTietKiem: 0,
-    soMTChuaHoanThanh: 0,
-    soMTHoanThanh: 0,
-  );
+  ThongKeTietKiem thongKeTietKiem = ThongKeTietKiem();
 
   void getAllMucTieu() async {
     MucTieuApi mucTieuApi = MucTieuApi();
     List<MucTieuTietKiem> list =
         await mucTieuApi.getAllMucTieu(widget.nguoiDung.id);
 
-    setState(() {
-      dsMucTieu = list;
-    });
+    if (list != null)
+      setState(() {
+        dsMucTieu = list;
+      });
   }
 
   void getAllThongKeTietKiem() async {
@@ -49,9 +45,10 @@ class _QuanLyMucTieuTietKiemTatCaTabState
     ThongKeTietKiem thongKe =
         await mucTieuApi.thongKeTietKiem(widget.nguoiDung.id);
 
-    setState(() {
-      thongKeTietKiem = thongKe;
-    });
+    if (thongKe != null)
+      setState(() {
+        thongKeTietKiem = thongKe;
+      });
   }
 
   List<Widget> renderAllMucTieu() {
@@ -147,17 +144,27 @@ class _QuanLyMucTieuTietKiemTatCaTabState
             ),
           ),
           Expanded(
-              child: ListView(
-            children: renderAllMucTieu(),
-          )),
+            child: ListView(
+              children: renderAllMucTieu(),
+            ),
+          ),
           NutBam(
             textName: 'Thêm mục tiêu tiết kiệm',
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ThemMucTieuTietKiemPage(
-                  idNguoiDung: widget.nguoiDung.id,
-                );
-              }));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ThemMucTieuTietKiemPage(
+                      idNguoiDung: widget.nguoiDung.id,
+                      onSuccess: () {
+                        getAllMucTieu();
+                        getAllThongKeTietKiem();
+                      },
+                    );
+                  },
+                ),
+              );
             },
           ),
         ],

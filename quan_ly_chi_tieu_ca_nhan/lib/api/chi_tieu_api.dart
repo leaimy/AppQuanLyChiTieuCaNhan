@@ -9,6 +9,13 @@ class ChiTieuAPI {
   final String _urlChiTieu = "$kURL/api/chitieu";
   final String _urlChiTietChiTieu = '$kURL/api/chitieu/chitiet';
 
+  dynamic myEncode(dynamic item) {
+    if (item is DateTime) {
+      return item.toIso8601String();
+    }
+    return item;
+  }
+
   Future<List<ChiTieu>> layDanhSachChiTieu(int quanLyTienId) async {
     final http.Response response = await http.get(
       '$_urlChiTieu?quanlytien_id=$quanLyTienId',
@@ -63,7 +70,7 @@ class ChiTieuAPI {
       "NgayChiTieu": ngayChiTieu,
     };
 
-    var bodyJson = jsonEncode(body);
+    var bodyJson = JsonEncoder(myEncode).convert(body);
     http.Response response = await http.post(
       _urlChiTieu,
       headers: <String, String>{
@@ -71,6 +78,9 @@ class ChiTieuAPI {
       },
       body: bodyJson,
     );
+
+    // print(bodyJson);
+    // print(response.statusCode);
 
     if (response.statusCode == 200) {
       return true;

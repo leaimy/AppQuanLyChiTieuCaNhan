@@ -6,15 +6,17 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemQuanLyTienPage extends StatefulWidget {
   final int idNguoiDung;
-  ThemQuanLyTienPage({this.idNguoiDung});
+  final Function onSuccess;
+
+  ThemQuanLyTienPage({@required this.idNguoiDung, this.onSuccess});
 
   @override
   _ThemQuanLyTienPageState createState() => _ThemQuanLyTienPageState();
 }
 
 class _ThemQuanLyTienPageState extends State<ThemQuanLyTienPage> {
-  String ngayBD;
-  String ngayKT;
+  DateTime ngayBD = DateTime.now();
+  DateTime ngayKT = DateTime.now().add(Duration(days: 30));
   QuanLyTienApi quanLyTienApi = QuanLyTienApi();
 
   @override
@@ -58,14 +60,14 @@ class _ThemQuanLyTienPageState extends State<ThemQuanLyTienPage> {
                         lastDate: DateTime(2100),
                         initialValue: DateTime.now().toString(),
                         onChanged: (value) {
-                          ngayBD = value;
+                          ngayBD = DateTime.parse(value);
                         },
                         validator: (val) {
                           print(val);
                           return null;
                         },
                         onSaved: (value) {
-                          ngayBD = value;
+                          ngayBD = DateTime.parse(value);
                         },
                       ),
                     ],
@@ -88,14 +90,14 @@ class _ThemQuanLyTienPageState extends State<ThemQuanLyTienPage> {
                         initialValue:
                             DateTime.now().add(Duration(days: 1)).toString(),
                         onChanged: (value) {
-                          ngayKT = value;
+                          ngayKT = DateTime.parse(value);
                         },
                         validator: (val) {
                           print(val);
                           return null;
                         },
                         onSaved: (value) {
-                          ngayKT = value;
+                          ngayKT = DateTime.parse(value);
                         },
                       ),
                     ],
@@ -109,13 +111,14 @@ class _ThemQuanLyTienPageState extends State<ThemQuanLyTienPage> {
               onPressed: () async {
                 bool ketQua = await quanLyTienApi.themQuanLyTien(
                   idNguoiDung: widget.idNguoiDung,
-                  ngayBD: DateTime.parse(ngayBD),
-                  ngayKT: DateTime.parse(ngayKT),
+                  ngayBD: ngayBD,
+                  ngayKT: ngayKT,
                 );
 
-                if (ketQua == true)
+                if (ketQua == true) {
+                  if (widget.onSuccess != null) widget.onSuccess();
                   Navigator.pop(context);
-                else
+                } else
                   print("lỗi");
               },
             ),
