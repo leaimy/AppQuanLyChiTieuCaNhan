@@ -137,6 +137,9 @@ class QuanLyTienApi {
       body: bodyJson,
     );
 
+    print(bodyJson);
+    print(response.statusCode);
+
     if (response.statusCode == 200) {
       return true;
     }
