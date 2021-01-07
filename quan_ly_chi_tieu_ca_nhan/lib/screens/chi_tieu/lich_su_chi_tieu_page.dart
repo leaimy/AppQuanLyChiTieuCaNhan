@@ -56,10 +56,11 @@ class _LichSuChiTieuPageState extends State<LichSuChiTieuPage> {
   Future<void> getDanhSachChiTietChiTieu(int chiTieuId) async {
     var data = await chiTieuAPI.layDanhSachChiTietChiTieu(chiTieuId);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         dsChiTietChiTieu = data;
       });
+    }
   }
 
   void handleOnDateBoxPressed(int selectedIndex) {

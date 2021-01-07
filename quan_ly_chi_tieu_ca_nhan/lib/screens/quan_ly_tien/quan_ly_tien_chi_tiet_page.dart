@@ -37,30 +37,33 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
     QuanLyTienThongKeChiTiet data =
         await _quanLyTienApi.getQuanLyTienThongKeChiTiet(widget.quanLyTienID);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         thongKe = data;
       });
+    }
   }
 
   void getDanhSachNguonThu() async {
     List<QuanLyTienThongKeNguonThu> data = await _quanLyTienApi
         .getQuanLyTienThongKeNguonThuTongQuan(widget.quanLyTienID);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         dsNguonThu = data;
       });
+    }
   }
 
   void getDanhSachKhoanChi() async {
     List<QuanLyTienThongKeKhoanChi> data = await _quanLyTienApi
         .getQuanLyTienThongKeKhoanChiTongQuan(widget.quanLyTienID);
 
-    if (data != null)
+    if (data != null) {
       setState(() {
         dsKhoanChi = data;
       });
+    }
   }
 
   List<TransactionItem> renderDanhSachNguonThu() {

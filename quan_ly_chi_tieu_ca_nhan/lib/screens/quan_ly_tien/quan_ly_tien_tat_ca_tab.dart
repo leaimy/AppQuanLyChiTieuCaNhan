@@ -43,9 +43,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
     QuanLyTienApi api = QuanLyTienApi();
     List<ListQuanLyTien> list = await api.getAllQuanLyTien(widget.nguoiDung.id);
 
-    setState(() {
-      dsQuanLyTien = list;
-    });
+    if (list != null)
+      setState(() {
+        dsQuanLyTien = list;
+      });
   }
 
   @override

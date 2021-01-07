@@ -41,9 +41,10 @@ class _QuanLyMucTieuTietKiemChiTietPageState
     List<ChiTietNgayTietKiem> data =
         await mucTieuApi.getNgayTietKiem(widget.idMucTieu);
 
-    setState(() {
-      dsNgay = data;
-    });
+    if (data != null)
+      setState(() {
+        dsNgay = data;
+      });
   }
 
   bool getTrangThaiByDate(DateTime date) {
