@@ -5,6 +5,9 @@ GO
 -- FROM QuanLyTienHienCo
 -- GO
 
+/*
+    LẤY DANH SÁCH TẤT CẢ CÁC KẾ HOẠCH QUẢN LÝ TIỀN HIỆN CÓ
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -39,6 +42,13 @@ GO
 -- select * from QuanLyTienHienCo
 -- GO
 
+/*
+    THỐNG KÊ TỔNG QUAN TẤT CẢ KẾ HOẠCH QUẢN LÝ TIỀN CỦA 1 NGƯỜI DÙNG
+    CÁC TRƯỜNG THỐNG KÊ:
+        - Tổng số tiền đã quản lý
+        - Tổng số tiền đã chi tiêu
+        - Tổng số kế hoạch đã hoàn thành
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -67,6 +77,15 @@ GO
 
 -- select * from QuanLyTienHienCo
 
+/*
+    THỐNG KÊ CHI TIẾT 1 KẾ HOẠCH QUẢN LÝ TIỀN
+    CÁC TRƯỜNG THỐNG KÊ GỒM CÓ:
+        - Số tiền hiện có
+        - Số tiền đã sử dụng
+        - Ngày bắt đầu
+        - Ngày kết thúc
+        - Số ngày vượt hạn mức chi tiêu
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -137,8 +156,13 @@ GO
 EXECUTE dbo.usp_QuanLyTien_ThongKeChiTiet 1
 GO
 
--- Create a new stored procedure called 'usp_ThongKeNguonThuTongQuan' in schema 'dbo'
--- Drop the stored procedure if it already exists
+
+/*
+    - THỐNG KÊ TỔNG SỐ TIỀN THU THEO TỪNG NHÓM CỦA NGUỒN THU
+    - VÍ DỤ:
+        - Nguồn thu gia đình: Tổng số tiền 1.000.000
+        - Nguồn thu công việc: Tổng số tiền 500.000
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -163,8 +187,12 @@ GO
 EXECUTE dbo.usp_ThongKeNguonThuTongQuan 1
 GO
 
--- Create a new stored procedure called 'usp_ThongKeCacKhoanChiTongQuan' in schema 'dbo'
--- Drop the stored procedure if it already exists
+/*
+    THỐNG KÊ TỔNG SỐ TIỀN ĐÃ CHI THEO TỪNG NHÓM CỦA KHOẢN CHI
+    - VÍ DỤ:
+        - Nhóm chi tiêu thức ăn: Tổng số tiền đã chi 500.000
+        - Nhóm chi tiêu bạn bè: Tổng số tiền đã chi: 300.000
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -193,8 +221,9 @@ GO
 EXECUTE dbo.usp_ThongKeCacKhoanChiTongQuan 4
 GO
 
--- Create a new stored procedure called 'usp_QuanLyTien_LayTatCaChiTieu' in schema 'dbo'
--- Drop the stored procedure if it already exists
+/*
+    LẤY DANH SÁCH TẤT CẢ CÁC NGÀY CHI TIÊU CỦA 1 KẾ HOẠCH QUẢN LÝ TIỀN
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -217,8 +246,9 @@ GO
 EXECUTE dbo.usp_QuanLyTien_LayTatCaChiTieu 1 
 GO
 
--- Create a new stored procedure called 'usp_ChiTieu_LayTatCaChiTietChiTieu' in schema 'dbo'
--- Drop the stored procedure if it already exists
+/*
+    LẤY TẤT CẢ CÁC CHI TIẾT CHI TIÊU CỦA 1 NGÀY CHI TIÊU
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
