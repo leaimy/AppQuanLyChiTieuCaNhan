@@ -147,3 +147,25 @@ EXEC usp_TietKiem_ThongKeTietKiem 1
 GO
 
 
+CREATE PROC usp_TietKiem_GetTime
+@IdMucTieu INT
+AS
+BEGIN
+    SELECT * FROM ChiTietTietKiem
+    WHERE MucTieuTietKiem_Id = @IdMucTieu
+    ORDER BY Ngay ASC 
+END
+GO
+
+EXEC usp_TietKiem_GetTime 2
+GO
+
+--Them muc tieu tiet kiem
+CREATE PROC usp_TietKiem_ThemMucTieuTietKiem
+@TenMucTieu NVARCHAR(200), @MoTa NVARCHAR(200), @SoTienTietKiem DECIMAL, @NgayBD DATETIME, @NgayKT DATETIME, @LoaiTietKiem NVARCHAR(50),@idNguoiDung INT
+AS 
+BEGIN  
+    INSERT INTO MucTieuTietKiem (NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, NgayBD, NgayKT, LoaiTietKiem)
+    VALUES (@idNguoiDung, @TenMucTieu, @MoTa, @SoTienTietKiem, @NgayBD, @NgayKT,@LoaiTietKiem)
+END
+GO
