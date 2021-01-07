@@ -16,6 +16,7 @@ class QuanLyTienApi {
       '$kURL/api/quanlytien/thongkenguonthu';
   final String _urlThongKeKhoanchiTongQuan =
       '$kURL/api/quanlytien/thongkekhoanchi';
+  final String _urlThemNguonThu = "$kURL/api/quanlytien/nguonthu";
 
   Future<List<ListQuanLyTien>> getAllQuanLyTien(int userID) async {
     http.Response response = await http.get(
@@ -110,5 +111,50 @@ class QuanLyTienApi {
     }
 
     return dsKhoanChi;
+  }
+
+  Future<bool> themQuanLyTien(
+      {int idNguoiDung, DateTime ngayBD, DateTime ngayKT}) async {
+    var body = {
+      "IdNguoiDung": idNguoiDung,
+      "NgayBD": ngayBD,
+      "NgayKT": ngayKT,
+    };
+
+    var bodyJson = jsonEncode(body);
+    http.Response response = await http.post(
+      _url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: bodyJson,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> themNguonThu({int idQuanLyTien, int soTien, String nhom}) async {
+    var body = {
+      "QuanLyTienID": idQuanLyTien,
+      "SoTien": soTien,
+      "Nhom": nhom,
+    };
+
+    var bodyJson = jsonEncode(body);
+    http.Response response = await http.post(
+      _urlThemNguonThu,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: bodyJson,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
   }
 }

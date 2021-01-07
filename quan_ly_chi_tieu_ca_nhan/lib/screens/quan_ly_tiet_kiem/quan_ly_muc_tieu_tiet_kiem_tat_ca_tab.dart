@@ -154,7 +154,9 @@ class _QuanLyMucTieuTietKiemTatCaTabState
             textName: 'Thêm mục tiêu tiết kiệm',
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ThemMucTieuTietKiemPage();
+                return ThemMucTieuTietKiemPage(
+                  idNguoiDung: widget.nguoiDung.id,
+                );
               }));
             },
           ),

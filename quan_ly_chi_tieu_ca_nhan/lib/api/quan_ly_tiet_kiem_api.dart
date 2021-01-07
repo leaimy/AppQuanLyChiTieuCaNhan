@@ -80,4 +80,59 @@ class MucTieuApi {
 
     return dsNgay;
   }
+
+  Future<bool> themMucTieuTietKiem(
+      {int idNguoiDung,
+      String tenMucTieu,
+      String moTa,
+      int soTienTietKiem,
+      DateTime ngayBD,
+      DateTime ngayKT,
+      String loaiTietKiem}) async {
+    var body = {
+      "IdNguoiDung": idNguoiDung,
+      "TenMucTieu": tenMucTieu,
+      "MoTa": moTa,
+      "SoTienTietKiem": soTienTietKiem,
+      "NgayBD": ngayBD,
+      "NgayKT": ngayKT,
+      "Loai Tiet Kiem": loaiTietKiem,
+    };
+
+    print(body);
+
+    var bodyJson = jsonEncode(body);
+    http.Response response = await http.post(
+      _urlMucTieu,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: bodyJson,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> capNhatTrangThaiMucTieu({int idMucTieu, DateTime date}) async {
+    var body = {
+      "date": date,
+    };
+
+    var bodyJson = jsonEncode(body);
+    http.Response response = await http.put(
+      _urlMucTieu + '/' + idMucTieu.toString(),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: bodyJson,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
 }

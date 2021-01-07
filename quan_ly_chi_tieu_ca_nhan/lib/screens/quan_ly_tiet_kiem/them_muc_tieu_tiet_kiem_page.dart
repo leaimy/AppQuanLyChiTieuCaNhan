@@ -1,9 +1,33 @@
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem_api.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/components/muctieu_Item.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class ThemMucTieuTietKiemPage extends StatelessWidget {
+class ThemMucTieuTietKiemPage extends StatefulWidget {
+  final int idNguoiDung;
+  ThemMucTieuTietKiemPage({this.idNguoiDung});
+  @override
+  _ThemMucTieuTietKiemPageState createState() =>
+      _ThemMucTieuTietKiemPageState();
+}
+
+class _ThemMucTieuTietKiemPageState extends State<ThemMucTieuTietKiemPage> {
+  String tenMucTieu = "";
+  String loaiTietKiem = "Ngày";
+  DateTime ngayBD = DateTime.now();
+  DateTime ngayKT = DateTime.now().add(Duration(days: 30));
+  int soTien = 0;
+  String moTa = "";
+
+  MucTieuApi mucTieuApi = MucTieuApi();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +57,9 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
                     decoration: kTextFieldDecoration.copyWith(
                       hintText: 'Nhập tên mục tiêu',
                     ),
+                    onChanged: (value) {
+                      tenMucTieu = value;
+                    },
                   )
                 ],
               ),
@@ -88,9 +115,13 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
                                 ],
                               ),
                               Radio(
-                                value: false,
-                                groupValue: null,
-                                onChanged: (value) {},
+                                value: "Ngày",
+                                groupValue: loaiTietKiem,
+                                onChanged: (value) {
+                                  setState(() {
+                                    loaiTietKiem = value;
+                                  });
+                                },
                               ),
                             ],
                           ),
@@ -125,9 +156,13 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
                                 ],
                               ),
                               Radio(
-                                value: false,
-                                groupValue: null,
-                                onChanged: (value) {},
+                                value: "Tuần",
+                                groupValue: loaiTietKiem,
+                                onChanged: (value) {
+                                  setState(() {
+                                    loaiTietKiem = value;
+                                  });
+                                },
                               ),
                             ],
                           ),
@@ -157,12 +192,16 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2100),
                           initialValue: DateTime.now().toString(),
-                          onChanged: (val) => print(val),
+                          onChanged: (value) {
+                            ngayBD = DateTime.parse(value);
+                          },
                           validator: (val) {
                             print(val);
                             return null;
                           },
-                          onSaved: (val) => print(val),
+                          onSaved: (value) {
+                            ngayBD = DateTime.parse(value);
+                          },
                         )
                       ],
                     ),
@@ -183,12 +222,16 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
                           lastDate: DateTime(2100),
                           initialValue:
                               DateTime.now().add(Duration(days: 1)).toString(),
-                          onChanged: (val) => print(val),
+                          onChanged: (value) {
+                            ngayKT = DateTime.parse(value);
+                          },
                           validator: (val) {
                             print(val);
                             return null;
                           },
-                          onSaved: (val) => print(val),
+                          onSaved: (value) {
+                            ngayKT = DateTime.parse(value);
+                          },
                         ),
                       ],
                     ),
@@ -208,6 +251,9 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Nhập số tiền',
               ),
+              onChanged: (value) {
+                soTien = int.parse(value);
+              },
             ),
             SizedBox(height: 10.0),
             Text(
@@ -220,14 +266,30 @@ class ThemMucTieuTietKiemPage extends StatelessWidget {
               decoration: kTextFieldDecoration.copyWith(
                 hintText: 'Nhập mô tả',
               ),
+              onChanged: (value) {
+                moTa = value;
+              },
             ),
             SizedBox(height: 5.0),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: NutBam(
                   textName: 'Xác nhận thêm',
-                  onPressed: () {
-                    Navigator.pop(context);
+                  onPressed: () async {
+                    bool ketQua = await mucTieuApi.themMucTieuTietKiem(
+                      idNguoiDung: widget.idNguoiDung,
+                      tenMucTieu: tenMucTieu,
+                      moTa: moTa,
+                      soTienTietKiem: soTien,
+                      ngayBD: ngayBD,
+                      ngayKT: ngayKT,
+                      loaiTietKiem: loaiTietKiem,
+                    );
+
+                    if (ketQua == true)
+                      Navigator.pop(context);
+                    else
+                      print('Lỗi');
                   }),
             )
           ],

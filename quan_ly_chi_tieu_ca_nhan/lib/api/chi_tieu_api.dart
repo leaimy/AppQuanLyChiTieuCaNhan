@@ -50,4 +50,31 @@ class ChiTieuAPI {
 
     return dsChiTietChiTieu;
   }
+
+  Future<bool> themNguonThu(
+      {String nhom,
+      String tenChiTieu,
+      int soTien,
+      DateTime ngayChiTieu}) async {
+    var body = {
+      "Nhom": nhom,
+      "TenChiTieu": tenChiTieu,
+      "SoTien": soTien,
+      "NgayChiTieu": ngayChiTieu,
+    };
+
+    var bodyJson = jsonEncode(body);
+    http.Response response = await http.post(
+      _urlChiTieu,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: bodyJson,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    }
+    return false;
+  }
 }
