@@ -147,17 +147,27 @@ class _QuanLyMucTieuTietKiemTatCaTabState
             ),
           ),
           Expanded(
-              child: ListView(
-            children: renderAllMucTieu(),
-          )),
+            child: ListView(
+              children: renderAllMucTieu(),
+            ),
+          ),
           NutBam(
             textName: 'Thêm mục tiêu tiết kiệm',
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ThemMucTieuTietKiemPage(
-                  idNguoiDung: widget.nguoiDung.id,
-                );
-              }));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ThemMucTieuTietKiemPage(
+                      idNguoiDung: widget.nguoiDung.id,
+                      onSuccess: () {
+                        getAllMucTieu();
+                        getAllThongKeTietKiem();
+                      },
+                    );
+                  },
+                ),
+              );
             },
           ),
         ],

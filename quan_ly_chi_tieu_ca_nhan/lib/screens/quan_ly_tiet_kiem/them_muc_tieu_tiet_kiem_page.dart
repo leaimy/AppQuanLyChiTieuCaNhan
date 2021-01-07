@@ -7,7 +7,9 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemMucTieuTietKiemPage extends StatefulWidget {
   final int idNguoiDung;
-  ThemMucTieuTietKiemPage({this.idNguoiDung});
+  final Function onSuccess;
+
+  ThemMucTieuTietKiemPage({this.idNguoiDung, this.onSuccess});
   @override
   _ThemMucTieuTietKiemPageState createState() =>
       _ThemMucTieuTietKiemPageState();
@@ -274,23 +276,25 @@ class _ThemMucTieuTietKiemPageState extends State<ThemMucTieuTietKiemPage> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: NutBam(
-                  textName: 'Xác nhận thêm',
-                  onPressed: () async {
-                    bool ketQua = await mucTieuApi.themMucTieuTietKiem(
-                      idNguoiDung: widget.idNguoiDung,
-                      tenMucTieu: tenMucTieu,
-                      moTa: moTa,
-                      soTienTietKiem: soTien,
-                      ngayBD: ngayBD,
-                      ngayKT: ngayKT,
-                      loaiTietKiem: loaiTietKiem,
-                    );
+                textName: 'Xác nhận thêm',
+                onPressed: () async {
+                  bool ketQua = await mucTieuApi.themMucTieuTietKiem(
+                    idNguoiDung: widget.idNguoiDung,
+                    tenMucTieu: tenMucTieu,
+                    moTa: moTa,
+                    soTienTietKiem: soTien,
+                    ngayBD: ngayBD,
+                    ngayKT: ngayKT,
+                    loaiTietKiem: loaiTietKiem,
+                  );
 
-                    if (ketQua == true)
-                      Navigator.pop(context);
-                    else
-                      print('Lỗi');
-                  }),
+                  if (ketQua == true) {
+                    if (widget.onSuccess != null) widget.onSuccess();
+                    Navigator.pop(context);
+                  } else
+                    print('Lỗi');
+                },
+              ),
             )
           ],
         ),
