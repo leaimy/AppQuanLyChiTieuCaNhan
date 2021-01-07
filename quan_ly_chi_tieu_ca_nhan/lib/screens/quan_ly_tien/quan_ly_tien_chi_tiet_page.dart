@@ -130,7 +130,14 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return ThemKhoanThuPage();
+                      return ThemKhoanThuPage(
+                        idQuanLyTien: widget.quanLyTienID,
+                        onSuccess: () {
+                          getThongKe();
+                          getDanhSachNguonThu();
+                          getDanhSachKhoanChi();
+                        },
+                      );
                     },
                   ));
                 },

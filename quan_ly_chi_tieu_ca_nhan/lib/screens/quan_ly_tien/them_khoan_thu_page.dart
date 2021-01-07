@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tien_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class ThemKhoanThuPage extends StatelessWidget {
+class ThemKhoanThuPage extends StatefulWidget {
+  final int idQuanLyTien;
+  final Function onSuccess;
+  ThemKhoanThuPage({this.idQuanLyTien, this.onSuccess});
+
+  @override
+  _ThemKhoanThuPageState createState() => _ThemKhoanThuPageState();
+}
+
+class _ThemKhoanThuPageState extends State<ThemKhoanThuPage> {
+  int soTien = 0;
+  String nguonThu = "Gia đình";
+
+  QuanLyTienApi quanLyTienApi = QuanLyTienApi();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +42,9 @@ class ThemKhoanThuPage extends StatelessWidget {
                 decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Nhập số tiền',
                 ),
+                onChanged: (value) {
+                  soTien = int.parse(value);
+                },
               ),
               SizedBox(height: 30.0),
               Container(
@@ -77,9 +95,13 @@ class ThemKhoanThuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Gia đình",
+                                  groupValue: nguonThu,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nguonThu = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -111,9 +133,13 @@ class ThemKhoanThuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Học bổng",
+                                  groupValue: nguonThu,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nguonThu = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -145,9 +171,13 @@ class ThemKhoanThuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Công việc",
+                                  groupValue: nguonThu,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nguonThu = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -179,9 +209,13 @@ class ThemKhoanThuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Khác",
+                                  groupValue: nguonThu,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nguonThu = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -195,8 +229,18 @@ class ThemKhoanThuPage extends StatelessWidget {
               SizedBox(height: 30.0),
               NutBam(
                 textName: 'Thêm',
-                onPressed: () {
-                  Navigator.pop(context);
+                onPressed: () async {
+                  bool ketQua = await quanLyTienApi.themNguonThu(
+                    idQuanLyTien: widget.idQuanLyTien,
+                    soTien: soTien,
+                    nhom: nguonThu,
+                  );
+
+                  if (ketQua == true) {
+                    widget.onSuccess();
+                    Navigator.pop(context);
+                  } else
+                    print("lỗi");
                 },
               )
             ],

@@ -128,7 +128,9 @@ class _HomeTabState extends State<HomeTab> {
                 color: Colors.green,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ThemMucTieuTietKiemPage();
+                    return ThemMucTieuTietKiemPage(
+                      idNguoiDung: widget.nguoiDung.id,
+                    );
                   }));
                 },
               ),

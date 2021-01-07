@@ -51,7 +51,7 @@ class ChiTieuAPI {
     return dsChiTietChiTieu;
   }
 
-  Future<bool> themNguonThu(
+  Future<bool> themChiTieu(
       {String nhom,
       String tenChiTieu,
       int soTien,

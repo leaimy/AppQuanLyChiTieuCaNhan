@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/api/chi_tieu_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
@@ -11,6 +12,9 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
   String tenChiTieu = "";
   String nhom = "Thức ăn";
   int soTien = 0;
+
+  ChiTieuAPI chiTieuAPI = ChiTieuAPI();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +42,9 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: 'Nhập tiêu đề khoản chi',
                       ),
+                      onChanged: (value) {
+                        tenChiTieu = value;
+                      },
                     )
                   ],
                 ),
@@ -276,6 +283,9 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: 'Nhập số tiền đã chi',
                       ),
+                      onChanged: (value) {
+                        soTien = int.parse(value);
+                      },
                     )
                   ],
                 ),
@@ -283,9 +293,17 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
               SizedBox(height: 30.0),
               NutBam(
                   textName: 'Thêm chi tiêu',
-                  onPressed: () {
-                    Navigator.pop(context);
-                  })
+                  onPressed: () async {
+                    bool ketQua = await chiTieuAPI.themChiTieu(
+                      tenChiTieu: tenChiTieu,
+                      nhom: nhom,
+                      soTien: soTien,
+                    );
+                    if (ketQua == true)
+                      Navigator.pop(context);
+                    else
+                      print("lỗi");
+                  }),
             ],
           ),
         ),
