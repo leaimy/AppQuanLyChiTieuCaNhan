@@ -53,7 +53,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
       }
     }
 
-    return false;
+    return null;
   }
 
   void setTrangThaiByDate(DateTime date) {
@@ -283,7 +283,8 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                                   0 &&
                               chiTietMucTieu.ngayKT.difference(now).inDays >=
                                   0) {
-                            if (getTrangThaiByDate(now) == true) {
+                            bool trangThai = getTrangThaiByDate(now);
+                            if (trangThai == true) {
                               return CircleDateBox(
                                 text: now.day.toString(),
                                 color: Colors.pink[600],
@@ -291,15 +292,17 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                                   handleCircleDatePressed(now, true);
                                 },
                               );
+                            } else if (trangThai == false) {
+                              return CircleDateBox(
+                                text: now.day.toString(),
+                                color: Colors.pink[200],
+                                onPressed: () {
+                                  handleCircleDatePressed(now, false);
+                                },
+                              );
                             }
 
-                            return CircleDateBox(
-                              text: now.day.toString(),
-                              color: Colors.pink[200],
-                              onPressed: () {
-                                handleCircleDatePressed(now, false);
-                              },
-                            );
+                            return null;
                           } else
                             return null;
                         },
