@@ -65,5 +65,34 @@ namespace Server.DAO
 			return new ChiTietMucTieuDTO();
 		}
 
+		public List<ChiTietThoiGianTietKiemDTO> GetThoiGianTietKiem(int idMucTieu)
+		{
+			string query = "EXEC usp_TietKiem_GetTime @IdMucTieu";
+			object[] param = new object[]{ idMucTieu};
+
+			DataTable data = DataProvider.Instance.ExecuteQuery(query, param);
+			List<ChiTietThoiGianTietKiemDTO> dates = new List<ChiTietThoiGianTietKiemDTO>();
+
+			foreach (DataRow row in data.Rows)
+			{
+				ChiTietThoiGianTietKiemDTO date = new ChiTietThoiGianTietKiemDTO(row);
+
+				dates.Add(date);
+			}
+
+			return dates;
+		}
+
+		public bool ThemMucTieuTietKiem()
+		{
+			string query = string.Format("");
+			object[] param = new object[] { };
+			int row = DataProvider.Instance.ExecuteNonQuery(query, param);
+
+			if (row > 0)
+				return true;
+			return false;
+		}
+
 	}
 }

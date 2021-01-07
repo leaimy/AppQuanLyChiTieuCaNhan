@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_muc_tieu.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_ngay_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/list_muc_tieu.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/thong_ke_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
@@ -10,6 +11,7 @@ class MucTieuApi {
   final String _urlMucTieu = "$kURL/api/tietkiem";
   final String _urlThongKe = "$kURL/api/tietkiem/thongketietkiem";
   final String _urlChiTietMucTieu = "$kURL/api/tietkiem/chitietmuctieu";
+  final String _urlChiTietNgay = "$kURL/api/tietkiem/chitietngay";
 
   Future<List<MucTieuTietKiem>> getAllMucTieu(int idNguoiDung) async {
     final http.Response response = await http.get(
@@ -56,5 +58,26 @@ class MucTieuApi {
     if (response.statusCode != 200) return null;
 
     return ChiTietMucTieu.fromJson(jsonDecode(response.body));
+  }
+
+  Future<List<ChiTietNgayTietKiem>> getNgayTietKiem(int idMucTieu) async {
+    final http.Response response = await http.get(
+      '$_urlChiTietNgay?id_muctieu=$idMucTieu',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode != 200) return [];
+
+    List<dynamic> list = jsonDecode(response.body);
+
+    List<ChiTietNgayTietKiem> dsNgay = [];
+    for (var item in list) {
+      ChiTietNgayTietKiem ngay = ChiTietNgayTietKiem.fromJson(item);
+      dsNgay.add(ngay);
+    }
+
+    return dsNgay;
   }
 }

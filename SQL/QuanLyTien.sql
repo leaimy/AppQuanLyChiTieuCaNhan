@@ -1,6 +1,7 @@
 CREATE DATABASE QuanLyChiTieuTietKiem
 GO 
 
+
 USE QuanLyChiTieuTietKiem
 GO
 
@@ -22,7 +23,7 @@ CREATE TABLE MucTieuTietKiem
     TenMucTieu NVARCHAR(200) NOT NULL,
     MoTa NVARCHAR(200),
     SoTienCanTietKiem DECIMAL NOT NULL,
-    SoTienDaTietKiemDuoc DECIMAL NOT NULL,
+    SoTienDaTietKiemDuoc DECIMAL NOT NULL DEFAULT 0,
     NgayBD DATETIME NOT NULL,
     NgayKT DATETIME NOT NULL,
     TrangThai BIT DEFAULT 0,

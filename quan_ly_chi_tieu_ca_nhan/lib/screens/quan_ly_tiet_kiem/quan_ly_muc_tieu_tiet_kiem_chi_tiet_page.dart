@@ -6,10 +6,8 @@ import 'package:quan_ly_chi_tieu_ca_nhan/api/quan_ly_tiet_kiem_api.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/card_chi_tiet_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/circle_date_box.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_muc_tieu.dart';
+import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_ngay_tiet_kiem.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
-
-var ngayBD = new DateTime(2020, 10, 20);
-var ngayKT = new DateTime(2020, 12, 25);
 
 class QuanLyMucTieuTietKiemChiTietPage extends StatefulWidget {
   final int idMucTieu;
@@ -24,6 +22,10 @@ class _QuanLyMucTieuTietKiemChiTietPageState
   final dateFormat = new DateFormat('dd-MM-yyyy');
   final currencyFormat = NumberFormat('###,###,###,###');
   ChiTietMucTieu chiTietMucTieu = ChiTietMucTieu();
+  List<ChiTietNgayTietKiem> dsNgay = [];
+  DateTime ngayBD = DateTime.now();
+  DateTime ngayKT = DateTime.now();
+
   void getChiTietMucTieu() async {
     MucTieuApi mucTieuApi = MucTieuApi();
     ChiTietMucTieu data = await mucTieuApi.chiTietMucTieu(widget.idMucTieu);
@@ -33,9 +35,30 @@ class _QuanLyMucTieuTietKiemChiTietPageState
       });
   }
 
+  void getChiTietNgay() async {
+    MucTieuApi mucTieuApi = MucTieuApi();
+    List<ChiTietNgayTietKiem> data =
+        await mucTieuApi.getNgayTietKiem(widget.idMucTieu);
+
+    setState(() {
+      dsNgay = data;
+    });
+  }
+
+  bool timKiemTrangThai(DateTime date) {
+    for (var item in dsNgay) {
+      if (item.ngayTietKiem.difference(date).inDays == 0) {
+        return item.trangThai;
+      }
+    }
+
+    return false;
+  }
+
   @override
   void initState() {
     getChiTietMucTieu();
+    getChiTietNgay();
     super.initState();
   }
 
@@ -47,7 +70,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: Icon(
-              FontAwesomeIcons.solidBell,
+              FontAwesomeIcons.bell,
               color: Colors.yellow,
             ),
           )
@@ -79,7 +102,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                       iconColor: Colors.orange,
                     ),
                     CardChiTietTietKiem(
-                      tieuDe: 'Mô tả',
+                      tieuDe: 'Động lực',
                       giaTri: chiTietMucTieu.moTa,
                       giaTriColor: Colors.blue,
                       icon: FontAwesomeIcons.heartbeat,
@@ -202,7 +225,6 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                         // selectedDateTime: _currentDate,
                         daysHaveCircularBorder: true,
                         customDayBuilder: (
-                          /// you can provide your own build function to make custom day containers
                           bool isSelectable,
                           int index,
                           bool isSelectedDay,
@@ -213,28 +235,29 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                           bool isThisMonthDay,
                           DateTime now,
                         ) {
-                          // print(now);
-                          if (isToday) {
+                          print(now);
+                          if (isToday == true) {
                             return CircleDateBox(
                               text: now.day.toString(),
                               color: Colors.green,
                             );
                           }
-                          if (ngayBD.year <= now.year &&
-                              now.year <= ngayKT.year) {
-                            if (ngayBD.month <= now.month &&
-                                now.month <= ngayKT.month) {
-                              if (now.month == ngayKT.month &&
-                                  now.day > ngayKT.day) return null;
-                              if (now.month == ngayBD.month &&
-                                  now.day < ngayBD.day) return null;
 
+                          if (chiTietMucTieu.ngayBD.difference(now).inDays <=
+                                  0 &&
+                              chiTietMucTieu.ngayKT.difference(now).inDays >=
+                                  0) {
+                            if (timKiemTrangThai(now) == true) {
                               return CircleDateBox(
                                 text: now.day.toString(),
-                                color: Colors.pink[100],
+                                color: Colors.red[200],
                               );
-                            } else
-                              return null;
+                            }
+
+                            return CircleDateBox(
+                              text: now.day.toString(),
+                              color: Colors.pink[200],
+                            );
                           } else
                             return null;
                         },

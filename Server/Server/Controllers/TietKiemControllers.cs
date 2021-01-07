@@ -57,5 +57,27 @@ namespace Server.Controllers
 			return Ok(chiTietMucTieu);
 		}
 
+
+		[HttpGet("chitietngay")]
+		public ActionResult<List<ChiTietThoiGianTietKiemDTO>> ChiTietNgay()
+		{
+			string id_muctieu = HttpContext.Request.Query["id_muctieu"].ToString();
+			if (String.IsNullOrWhiteSpace(id_muctieu))
+				return BadRequest();
+
+			int idMucTieu = Convert.ToInt32(id_muctieu);
+
+			List<ChiTietThoiGianTietKiemDTO> dsNgay = TietKiemDAO.Instance.GetThoiGianTietKiem(idMucTieu);
+
+			return Ok(dsNgay);
+		}
+
+		
 	}
 }
+
+
+
+
+
+
