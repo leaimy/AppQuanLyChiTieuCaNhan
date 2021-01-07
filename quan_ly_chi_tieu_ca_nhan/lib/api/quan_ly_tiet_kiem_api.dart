@@ -103,7 +103,7 @@ class MucTieuApi {
       "SoTienTietKiem": soTienTietKiem,
       "NgayBD": ngayBD,
       "NgayKT": ngayKT,
-      "Loai Tiet Kiem": loaiTietKiem,
+      "LoaiTietKiem": loaiTietKiem,
     };
 
     var bodyJson = JsonEncoder(myEncode).convert(body);
