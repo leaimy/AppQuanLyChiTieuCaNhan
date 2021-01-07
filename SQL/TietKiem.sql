@@ -169,8 +169,8 @@ BEGIN
 END
 GO
 
-EXEC usp_TietKiem_GetTime 2
-GO
+-- EXEC usp_TietKiem_GetTime 2
+-- GO
 
 /*
     THÊM 1 MỤC TIÊU TIẾT KIỆM MỚI
@@ -226,9 +226,21 @@ END
 GO
 
 -- EXEC usp_TietKiem_ThemMucTieuTietKiem 
+-- GO
+
+/*
+    CẬP NHẬT TRẠNG THÁI MỤC TIÊU TIẾT IỆM THEO NGÀY
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_CapNhatTrangThaiMucTieu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_CapNhatTrangThaiMucTieu
 GO
 
---Cap nhat trang thai chi tiet muc tieu
 CREATE PROC usp_TietKiem_CapNhatTrangThaiMucTieu
 @idMucTieu INT, @Date DATETIME
 AS 
@@ -239,4 +251,4 @@ BEGIN
 END
 GO
 
--- EXEC usp_TietKiem_CapNhatTrangThaiMucTieu
+
