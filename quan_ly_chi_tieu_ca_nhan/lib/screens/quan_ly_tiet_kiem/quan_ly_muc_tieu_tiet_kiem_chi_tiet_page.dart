@@ -68,9 +68,12 @@ class _QuanLyMucTieuTietKiemChiTietPageState
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
-            child: Icon(
-              FontAwesomeIcons.bell,
-              color: Colors.yellow,
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                FontAwesomeIcons.bell,
+                color: Colors.yellow,
+              ),
             ),
           )
         ],
@@ -231,7 +234,7 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                           bool isThisMonthDay,
                           DateTime now,
                         ) {
-                          print(now);
+                          // print(now);
                           if (isToday == true) {
                             return CircleDateBox(
                               text: now.day.toString(),

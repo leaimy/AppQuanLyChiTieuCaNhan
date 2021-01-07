@@ -270,20 +270,48 @@ GO
 EXECUTE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu 1 
 GO
 
---Them quan ly tien
+/*
+    THÊM MỚI KẾ HOẠCH QUẢN LÝ TIỀN
+    TẠI 1 THỜI ĐIỂM CHỈ CÓ DUY NHẤT 1 KẾ HOẠCH QUẢN LÝ TIỀN CHƯA HOÀN THÀNH
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_QuanLyTien_ThemQuanLyTien'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_QuanLyTien_ThemQuanLyTien
+GO
+
 CREATE PROC usp_QuanLyTien_ThemQuanLyTien
 @IdNguoiDung INT, @ngayBD DATETIME, @ngayKT DATETIME
 AS
 BEGIN
+    IF (EXISTS(SELECT * FROM QuanLyTienHienCo WHERE TrangThai = 0))
+        RETURN
+
     INSERT INTO QuanLyTienHienCo (NguoiDung_Id, NgayBD, NgayKT)
     VALUES (@IdNguoiDung, @ngayBD, @ngayKT)
 END
 GO
 
--- EXEC usp_QuanLyTien_ThemQuanLyTien
+-- EXECUTE dbo.usp_QuanLyTien_ThemQuanLyTien 1 
 -- GO
 
---Them nguon thu
+/*
+    THÊM 1 NGUỒN THU MỚI VÀO KẾ HOẠCH QUẢN LÝ TIỀN HIỆN CÓ
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_ThemNguonThu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_ThemNguonThu
+GO
+
 CREATE PROC usp_ThemNguonThu
 @IdQuanLyTien INT, @SoTien DECIMAL, @Nhom NVARCHAR(100)
 AS
@@ -307,7 +335,18 @@ GO
 -- EXEC usp_ThemNguonThu
 -- GO
 
---Them chi tiet chi tieu
+/*
+    THÊM 1 CHI TIẾT CHI TIÊU MỚI
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_ChiTieu_ThemChiTietChiTieu'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_ChiTieu_ThemChiTietChiTieu
+GO
 CREATE PROC usp_ChiTieu_ThemChiTietChiTieu
 @Ten NVARCHAR(200), @Nhom NVARCHAR(200), @SoTien DECIMAL, @NgayChiTieu DATETIME
 AS
@@ -360,7 +399,3 @@ BEGIN
     WHERE Id = @IdQuanLyTien
 END
 GO
-
--- EXEC usp_ChiTieu_ThemChiTietChiTieu
-
--- SELECT * FROM ChiTietChiTieu

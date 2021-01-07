@@ -13,6 +13,13 @@ class MucTieuApi {
   final String _urlChiTietMucTieu = "$kURL/api/tietkiem/chitietmuctieu";
   final String _urlChiTietNgay = "$kURL/api/tietkiem/chitietngay";
 
+  dynamic myEncode(dynamic item) {
+    if (item is DateTime) {
+      return item.toIso8601String();
+    }
+    return item;
+  }
+
   Future<List<MucTieuTietKiem>> getAllMucTieu(int idNguoiDung) async {
     final http.Response response = await http.get(
       '$_urlMucTieu?user_id=$idNguoiDung',
@@ -101,7 +108,7 @@ class MucTieuApi {
 
     print(body);
 
-    var bodyJson = jsonEncode(body);
+    var bodyJson = JsonEncoder(myEncode).convert(body);
     http.Response response = await http.post(
       _urlMucTieu,
       headers: <String, String>{
