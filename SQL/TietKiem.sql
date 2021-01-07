@@ -89,6 +89,16 @@ CREATE PROC usp_TietKiem_GetChiTietMucTieu
 @Id INT
 AS
 BEGIN
+    DECLARE @SoNgayDaTietKiem INT 
+    DECLARE @SoNgayChuaTietKiem INT 
+
+    SET @SoNgayDaTietKiem = dbo.ufnDemSoNgayTietKiemDaHoanThanh(@Id)
+    SET @SoNgayChuaTietKiem = dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@Id)
+
+    DECLARE @TrangThai BIT = 0
+    IF (@SoNgayChuaTietKiem = 0)
+        SET @TrangThai = 1
+
     SELECT 
     Id,
     NguoiDung_Id,
@@ -98,11 +108,11 @@ BEGIN
     SoTienDaTietKiemDuoc,
     NgayBD,
     NgayKT,
-    TrangThai,
+    @TrangThai AS TrangThai,
     LoaiTietKiem,
     CreatedAt,
-    dbo.ufnDemSoNgayTietKiemDaHoanThanh(@Id) AS SoNgayHoanThanh,
-    dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@Id) AS SoNgayChuaHoanThanh
+    @SoNgayDaTietKiem AS SoNgayHoanThanh,
+    @SoNgayChuaTietKiem AS SoNgayChuaHoanThanh
     FROM MucTieuTietKiem
     WHERE Id = @Id
 END
@@ -249,6 +259,21 @@ BEGIN
     UPDATE ChiTietTietKiem
     SET TrangThai = 1
     WHERE MucTieuTietKiem_Id = @idMucTieu AND DATEDIFF(DAY, Ngay, @Date) = 0
+
+    DECLARE @SoTien DECIMAL = 0
+    SELECT @SoTien = @SoTien FROM ChiTietTietKiem
+    WHERE MucTieuTietKiem_Id = @idMucTieu AND DATEDIFF(DAY, Ngay, @Date) = 0
+
+    DECLARE @SoTienTietKiemHienTai DECIMAL
+    SELECT @SoTienTietKiemHienTai = SoTienDaTietKiemDuoc FROM MucTieuTietKiem
+    WHERE Id = @idMucTieu
+
+    DECLARE @SoTienDaTietKiemMoi DECIMAL
+    SET @SoTienDaTietKiemMoi = @SoTienTietKiemHienTai + @SoTien
+
+    UPDATE MucTieuTietKiem
+    SET SoTienDaTietKiemDuoc = @SoTienDaTietKiemMoi
+    WHERE Id = @idMucTieu
 END
 GO
 

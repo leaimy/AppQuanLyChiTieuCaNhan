@@ -10,7 +10,9 @@ import 'package:quan_ly_chi_tieu_ca_nhan/models/chi_tiet_ngay_tiet_kiem.dart';
 
 class QuanLyMucTieuTietKiemChiTietPage extends StatefulWidget {
   final int idMucTieu;
-  QuanLyMucTieuTietKiemChiTietPage({this.idMucTieu});
+  final Function onChanged;
+
+  QuanLyMucTieuTietKiemChiTietPage({this.idMucTieu, this.onChanged});
   @override
   _QuanLyMucTieuTietKiemChiTietPageState createState() =>
       _QuanLyMucTieuTietKiemChiTietPageState();
@@ -235,11 +237,17 @@ class _QuanLyMucTieuTietKiemChiTietPageState
                             value: isCheck,
                             onChanged: (value) async {
                               if (value == true) {
+                                if (selectedDate
+                                        .difference(DateTime.now())
+                                        .inDays >
+                                    0) return;
                                 setTrangThaiByDate(selectedDate);
-                                mucTieuApi.capNhatTrangThaiMucTieu(
+                                await mucTieuApi.capNhatTrangThaiMucTieu(
                                   idMucTieu: widget.idMucTieu,
                                   date: selectedDate,
                                 );
+                                if (widget.onChanged != null)
+                                  widget.onChanged();
                               }
                             },
                           ),

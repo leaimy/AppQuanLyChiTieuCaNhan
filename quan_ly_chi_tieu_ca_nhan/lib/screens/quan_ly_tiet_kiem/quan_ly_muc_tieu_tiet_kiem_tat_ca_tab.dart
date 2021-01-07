@@ -67,6 +67,10 @@ class _QuanLyMucTieuTietKiemTatCaTabState
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return QuanLyMucTieuTietKiemChiTietPage(
               idMucTieu: muctieu.id,
+              onChanged: () {
+                getAllMucTieu();
+                getAllThongKeTietKiem();
+              },
             );
           }));
         },

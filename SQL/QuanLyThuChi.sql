@@ -288,7 +288,7 @@ CREATE PROC usp_QuanLyTien_ThemQuanLyTien
 @IdNguoiDung INT, @ngayBD DATETIME, @ngayKT DATETIME
 AS
 BEGIN
-    IF (EXISTS(SELECT * FROM QuanLyTienHienCo WHERE TrangThai = 0))
+    IF (EXISTS(SELECT * FROM QuanLyTienHienCo WHERE TrangThai = 0 AND NguoiDung_Id = @IdNguoiDung))
         RETURN
 
     INSERT INTO QuanLyTienHienCo (NguoiDung_Id, NgayBD, NgayKT)
