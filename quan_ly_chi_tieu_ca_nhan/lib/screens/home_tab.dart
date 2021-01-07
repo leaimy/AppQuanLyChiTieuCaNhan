@@ -75,46 +75,6 @@ class _HomeTabState extends State<HomeTab> {
             opacity: 0.7,
             child: QuickActionBox(
               icon: Icon(
-                Icons.alarm,
-                color: Colors.pink[800],
-              ),
-              title: Text(
-                'Bật thông báo 😘',
-                style: TextStyle(fontFamily: 'Lobster'),
-              ),
-              iconBackGroundColor: Colors.pink[100],
-              actionIcon: CircleIconBox(
-                icon: Icons.add,
-                color: Colors.green,
-                onPressed: () async {
-                  await localNotifyManager.showNotification(
-                    title: 'Thông báo',
-                    body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
-                    payload: 'New Payload',
-                  );
-
-                  // await localNotifyManager.scheduleNotification(
-                  //   title: 'Thông báo',
-                  //   body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
-                  //   payload: 'New Payload',
-                  // );
-
-                  // await localNotifyManager.showDailyAtTimeNotification(
-                  //   title: 'Thông báo',
-                  //   body: 'Bạn đã vượt quá hạn mức chi tiêu hôm nay',
-                  //   payload: 'New Payload',
-                  // );
-
-                  // await localNotifyManager.cancelAllNotification();
-                },
-              ),
-            ),
-          ),
-          SizedBox(height: 15.0),
-          Opacity(
-            opacity: 0.7,
-            child: QuickActionBox(
-              icon: Icon(
                 Icons.card_travel,
                 color: Colors.pink[800],
               ),
