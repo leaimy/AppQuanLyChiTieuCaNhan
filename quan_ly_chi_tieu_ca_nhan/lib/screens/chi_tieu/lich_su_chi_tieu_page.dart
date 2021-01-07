@@ -153,7 +153,7 @@ class _LichSuChiTieuPageState extends State<LichSuChiTieuPage> {
                     return TransactionItem(
                       barColor: colorPicker.random(),
                       icon: dsChiTietChiTieu[index].icon,
-                      iconColor: colorPicker.random(),
+                      iconColor: dsChiTietChiTieu[index].iconColor,
                       amount:
                           '- ${currencyFormat.format(dsChiTietChiTieu[index].soTien)}',
                       title: '${dsChiTietChiTieu[index].ten}',

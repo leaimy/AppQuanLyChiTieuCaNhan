@@ -1,14 +1,15 @@
 USE QuanLyChiTieuTietKiem
 GO
 
-
+/*
+    HÀM ĐẾM SỐ NGÀY TIẾT KIỆM ĐÃ HOÀN THÀNH CỦA 1 MỤC TIÊU TIẾT KIỆM
+*/
 IF OBJECT_ID (N'dbo.ufnDemSoNgayTietKiemDaHoanThanh', N'FN') IS NOT NULL  
     DROP FUNCTION ufnDemSoNgayTietKiemDaHoanThanh;  
 GO  
 CREATE FUNCTION dbo.ufnDemSoNgayTietKiemDaHoanThanh(@tietKiemID int)  
 RETURNS int   
 AS   
--- Returns the stock level for the product.  
 BEGIN  
     DECLARE @soNgay int;  
     
@@ -23,13 +24,15 @@ BEGIN
 END; 
 GO
 
+/*
+    HÀM ĐẾM SỐ NGÀY TIẾT KIỆM CHƯA HOÀN THÀNH CỦA 1 MỤC TIÊU TIẾT KIỆM
+*/
 IF OBJECT_ID (N'dbo.ufnDemSoNgayTietKiemChuaHoanThanh', N'FN') IS NOT NULL  
     DROP FUNCTION ufnDemSoNgayTietKiemChuaHoanThanh;  
 GO  
 CREATE FUNCTION dbo.ufnDemSoNgayTietKiemChuaHoanThanh(@tietKiemID int)  
 RETURNS int   
 AS   
--- Returns the stock level for the product.  
 BEGIN  
     DECLARE @soNgay int;  
     
@@ -44,8 +47,9 @@ BEGIN
 END; 
 GO
 
--- Create a new stored procedure called 'usp_TietKiem_GetAllMucTieu' in schema 'dbo'
--- Drop the stored procedure if it already exists
+/*
+    LẤY DANH SÁCH TẤT CẢ MỤC TIÊU TIẾT KIỆM THUỘC VỀ 1 NGƯỜI DÙNG
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -56,7 +60,6 @@ WHERE SPECIFIC_SCHEMA = N'dbo'
 DROP PROCEDURE dbo.usp_TietKiem_GetAllMucTieu
 GO
 
--- Hiển thị tất cả mục tiêu
 CREATE PROC usp_TietKiem_GetAllMucTieu
 @IdNguoiDung INT
 AS
@@ -69,8 +72,9 @@ GO
 EXEC usp_TietKiem_GetAllMucTieu 1
 GO
 
--- Create a new stored procedure called 'usp_TietKiem_GetChiTietMucTieu' in schema 'dbo'
--- Drop the stored procedure if it already exists
+/*
+    LẤY THÔNG TIN CHI TIẾT VỀ 1 MỤC TIÊU TIẾT KIỆM
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -102,12 +106,18 @@ BEGIN
     WHERE Id = @Id
 END
 GO
--- example to execute the stored procedure we just created
+
 EXECUTE dbo.usp_TietKiem_GetChiTietMucTieu 1 
 GO
 
--- Create a new stored procedure called 'usp_TietKiem_ThongKeTietKiem' in schema 'dbo'
--- Drop the stored procedure if it already exists
+/*
+    THỐNG KÊ TỔNG QUAN CÁC MỤC TIÊU TIẾT KIỆM CỦA 1 NGƯỜI DÙNG
+    CÁC TRƯỜNG THỐNG KÊ GỒM CÓ:
+        - Tổng số tiền tiết kiệm
+        - Tổng số tiền đã tiết kiệm được
+        - Tổng số mục tiêu tiết kiệm đã hoàn thành
+        - Tổng số mục tiêu tiết kiệm chưa hoàn thành
+*/
 IF EXISTS (
 SELECT *
     FROM INFORMATION_SCHEMA.ROUTINES
@@ -136,6 +146,18 @@ GO
 EXEC usp_TietKiem_ThongKeTietKiem 1
 GO
 
+/*
+    LẤY DANH SÁCH TẤT CẢ CÁC THEO DÕI CHI TIẾT TIẾT KIỆM THUỘC VỀ 1 MỤC TIÊU TIẾT KIỆM
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_GetTime'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_GetTime
+GO
 
 CREATE PROC usp_TietKiem_GetTime
 @IdMucTieu INT
@@ -150,9 +172,25 @@ GO
 EXEC usp_TietKiem_GetTime 2
 GO
 
---Them muc tieu tiet kiem
+/*
+    THÊM 1 MỤC TIÊU TIẾT KIỆM MỚI
+*/
+IF EXISTS (
+SELECT *
+    FROM INFORMATION_SCHEMA.ROUTINES
+WHERE SPECIFIC_SCHEMA = N'dbo'
+    AND SPECIFIC_NAME = N'usp_TietKiem_ThemMucTieuTietKiem'
+    AND ROUTINE_TYPE = N'PROCEDURE'
+)
+DROP PROCEDURE dbo.usp_TietKiem_ThemMucTieuTietKiem
+GO
 CREATE PROC usp_TietKiem_ThemMucTieuTietKiem
-@TenMucTieu NVARCHAR(200), @MoTa NVARCHAR(200), @SoTienTietKiem DECIMAL, @NgayBD DATETIME, @NgayKT DATETIME, @LoaiTietKiem NVARCHAR(50),@idNguoiDung INT
+    @TenMucTieu NVARCHAR(200), 
+    @MoTa NVARCHAR(200), 
+    @SoTienTietKiem DECIMAL, 
+    @NgayBD DATETIME, 
+    @NgayKT DATETIME, @LoaiTietKiem NVARCHAR(50),
+    @idNguoiDung INT
 AS 
 BEGIN  
     INSERT INTO MucTieuTietKiem (NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, NgayBD, NgayKT, LoaiTietKiem)

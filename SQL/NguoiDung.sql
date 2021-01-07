@@ -1,6 +1,9 @@
 USE QuanLyChiTieuTietKiem
 GO
 
+/*
+    LẤY DANH SÁCH TẤT CẢ NGƯỜI DÙNG TRONG CSDL
+*/
 CREATE PROC USP_NguoiDung_GetAll
 AS
     SELECT * FROM NguoiDung
@@ -8,6 +11,9 @@ GO
 
 -- EXEC USP_NguoiDung_GetAll
 
+/*
+    LẤY THÔNG TIN VỀ NGƯỜI DÙNG THÔNG QUA MÃ ĐỊNH DANH
+*/
 CREATE PROC USP_NguoiDung_GetById
 @Id INT
 AS
@@ -18,6 +24,9 @@ GO
 
 -- EXEC USP_NguoiDung_GetById 1
 
+/*
+    THÊM MỚI 1 TÀI KHOẢN NGƯỜI DÙNG
+*/
 CREATE PROC USP_NguoiDung_Insert
 @TenDangNhap VARCHAR(100),
 @MatKhau VARCHAR(100),
@@ -34,6 +43,9 @@ GO
 -- EXEC USP_NguoiDung_Insert 'hieuntctk422@gmail.com', 'nth', N'Trọng Hiếu', 'avatar'
 -- DELETE FROM NguoiDung WHERE email = 'hieuntctk422@gmail.com'
 
+/*
+    ĐĂNG NHẬP NGƯỜI DÙNG
+*/
 CREATE PROC usp_NguoiDung_Select
 @TenDangNhap VARCHAR(100),
 @MatKhau VARCHAR(100)
@@ -44,6 +56,9 @@ BEGIN
 END
 GO
 
+/*
+    LẤY THÔNG TIN NGƯỜI DÙNG THÔNG QUA TÊN ĐĂNG NHẬP
+*/
 CREATE PROC usp_NguoiDung_GetByLoginName
 @TenDangNhap VARCHAR(100)
 AS
