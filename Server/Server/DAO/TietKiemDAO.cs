@@ -85,6 +85,13 @@ namespace Server.DAO
 
 		public bool ThemMucTieuTietKiem(ThemMucTieuDTO themMucTieuDTO)
 		{
+			Console.WriteLine(themMucTieuDTO.IdNguoiDung);
+			Console.WriteLine(themMucTieuDTO.LoaiTietKiem);
+			Console.WriteLine(themMucTieuDTO.MoTa);
+			Console.WriteLine(themMucTieuDTO.NgayBD);
+			Console.WriteLine(themMucTieuDTO.NgayKT);
+			Console.WriteLine(themMucTieuDTO.SoTienTietKiem);
+			Console.WriteLine(themMucTieuDTO.TenMucTieu);
 			string query = string.Format("EXEC usp_TietKiem_ThemMucTieuTietKiem @TenMucTieu , @MoTa , @SoTienTietKiem , @NgayBD , @NgayKT , @LoaiTietKiem , @idNguoiDung");
 			object[] param = new object[] {themMucTieuDTO.TenMucTieu,themMucTieuDTO.MoTa,themMucTieuDTO.SoTienTietKiem,themMucTieuDTO.NgayBD, themMucTieuDTO.NgayKT,themMucTieuDTO.LoaiTietKiem,themMucTieuDTO.IdNguoiDung};
 			int row = DataProvider.Instance.ExecuteNonQuery(query, param);

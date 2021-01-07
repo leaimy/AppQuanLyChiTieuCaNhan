@@ -30,11 +30,11 @@ namespace Server.DTO
 
 		public ThongKeTietKiemDTO(DataRow row)
 		{
-			IdNguoiDung = (int)row["Id"];
-			TongTienTietKiem = (decimal)row["SoTienCanTietKiem"];
-			TongTienDaTietKiem = (decimal)row["SoTienDaTietKiemDuoc"];
-			SoMTHoanThanh = (int)row["SoMucTieuHoanThanh"];
-			SoMTChuaHoanThanh = (int)row["SoMucTieuChuaHoanThanh"];
+			IdNguoiDung = Convert.ToInt32(row["Id"].ToString());
+			TongTienTietKiem = Convert.ToDecimal(row["SoTienCanTietKiem"].ToString());
+			TongTienDaTietKiem = Convert.ToDecimal(row["SoTienDaTietKiemDuoc"].ToString());
+			SoMTHoanThanh = Convert.ToInt32(row["SoMucTieuHoanThanh"].ToString());
+			SoMTChuaHoanThanh = Convert.ToInt32(row["SoMucTieuChuaHoanThanh"].ToString());
 		}
 	}
 }

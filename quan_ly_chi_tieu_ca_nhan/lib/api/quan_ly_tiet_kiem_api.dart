@@ -106,8 +106,6 @@ class MucTieuApi {
       "Loai Tiet Kiem": loaiTietKiem,
     };
 
-    print(body);
-
     var bodyJson = JsonEncoder(myEncode).convert(body);
     http.Response response = await http.post(
       _urlMucTieu,
@@ -116,6 +114,10 @@ class MucTieuApi {
       },
       body: bodyJson,
     );
+
+    print(bodyJson);
+
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       return true;
