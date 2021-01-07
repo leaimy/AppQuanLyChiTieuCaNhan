@@ -241,4 +241,97 @@ GO
 EXECUTE dbo.usp_ChiTieu_LayTatCaChiTietChiTieu 1 
 GO
 
+--Them quan ly tien
+CREATE PROC usp_QuanLyTien_ThemQuanLyTien
+@IdNguoiDung INT, @ngayBD DATETIME, @ngayKT DATETIME
+AS
+BEGIN
+    INSERT INTO QuanLyTienHienCo (NguoiDung_Id, NgayBD, NgayKT)
+    VALUES (@IdNguoiDung, @ngayBD, @ngayKT)
+END
+GO
 
+-- EXEC usp_QuanLyTien_ThemQuanLyTien
+-- GO
+
+--Them nguon thu
+CREATE PROC usp_ThemNguonThu
+@IdQuanLyTien INT, @SoTien DECIMAL, @Nhom NVARCHAR(100)
+AS
+BEGIN
+    INSERT INTO ChiTietNguonThu (QuanLyTienHienCo_Id, SoTien, Nhom)
+    VALUES (@IdQuanLyTien, @SoTien, @Nhom)
+    
+    DECLARE @SoTienHienCo DECIMAL = 0
+    SELECT @SoTienHienCo = SoTienHienCo FROM QuanLyTienHienCo 
+    WHERE Id = @IdQuanLyTien
+
+    DECLARE @SoTienHienCoMoi DECIMAL = 0
+    SET @SoTienHienCoMoi = @SoTienHienCo + @SoTien
+
+    UPDATE QuanLyTienHienCo
+    SET SoTienHienCo = @SoTienHienCoMoi
+    WHERE Id = @IdQuanLyTien
+END
+GO
+
+-- EXEC usp_ThemNguonThu
+-- GO
+
+--Them chi tiet chi tieu
+CREATE PROC usp_ChiTieu_ThemChiTietChiTieu
+@Ten NVARCHAR(200), @Nhom NVARCHAR(200), @SoTien DECIMAL, @NgayChiTieu DATETIME
+AS
+BEGIN
+    DECLARE @IdQuanLyTien INT
+    SELECT @IdQuanLyTien = Id FROM QuanLyTienHienCo
+    WHERE TrangThai = 0
+
+    IF(@IdQuanLyTien IS NULL)
+        RETURN
+
+
+    DECLARE @IdChiTieu INT
+    SELECT @IdChiTieu = Id FROM ChiTieu
+    WHERE DATEDIFF(DAY, Ngay, @NgayChiTieu) = 0
+
+    IF(@IdChiTieu IS NULL)
+    BEGIN
+        INSERT INTO ChiTieu(QuanLyTienHienCo_Id, Ngay, TongChi)
+        VALUES (@IdQuanLyTien, @NgayChiTieu, 0)
+
+        SELECT @IdChiTieu = Id FROM ChiTieu
+        WHERE DATEDIFF(DAY, Ngay, @NgayChiTieu) = 0
+    END
+
+
+    INSERT INTO ChiTietChiTieu(ChiTieu_Id, Ten, Nhom, SoTien)
+    VALUES (@IdChiTieu, @Ten, @Nhom, @SoTien)
+
+    DECLARE @TongChiHienTai DECIMAL
+    SELECT @TongChiHienTai = TongChi FROM ChiTieu
+    WHERE Id = @IdChiTieu
+
+    DECLARE @TongChiMoi DECIMAL
+    SET @TongChiMoi = @TongChiHienTai + @SoTien
+
+    UPDATE ChiTieu
+    SET TongChi = @TongChiMoi
+    WHERE Id=@IdChiTieu
+
+    DECLARE @SoTienDaSuDung DECIMAL
+    SELECT @SoTienDaSuDung = SoTienDaSuDung FROM QuanLyTienHienCo
+    WHERE Id = @IdQuanLyTien
+
+    DECLARE @SoTienSuDungMoi DECIMAL
+    SET @SoTienSuDungMoi = @SoTienDaSuDung + @SoTien
+
+    UPDATE QuanLyTienHienCo
+    SET SoTienDaSuDung = @SoTienSuDungMoi
+    WHERE Id = @IdQuanLyTien
+END
+GO
+
+-- EXEC usp_ChiTieu_ThemChiTietChiTieu
+
+-- SELECT * FROM ChiTietChiTieu

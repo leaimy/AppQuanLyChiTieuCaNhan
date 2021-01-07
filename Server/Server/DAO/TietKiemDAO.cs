@@ -83,10 +83,21 @@ namespace Server.DAO
 			return dates;
 		}
 
-		public bool ThemMucTieuTietKiem()
+		public bool ThemMucTieuTietKiem(ThemMucTieuDTO themMucTieuDTO)
 		{
-			string query = string.Format("");
-			object[] param = new object[] { };
+			string query = string.Format("EXEC usp_TietKiem_ThemMucTieuTietKiem @TenMucTieu , @MoTa , @SoTienTietKiem , @NgayBD , @NgayKT , @LoaiTietKiem , @idNguoiDung");
+			object[] param = new object[] {themMucTieuDTO.TenMucTieu,themMucTieuDTO.MoTa,themMucTieuDTO.SoTienTietKiem,themMucTieuDTO.NgayBD, themMucTieuDTO.NgayKT,themMucTieuDTO.LoaiTietKiem,themMucTieuDTO.IdNguoiDung};
+			int row = DataProvider.Instance.ExecuteNonQuery(query, param);
+
+			if (row > 0)
+				return true;
+			return false;
+		}
+
+		public bool CapNhatTrangThaiMucTieu(int idMucTieu, DateTime ngay)
+		{
+			string query = string.Format("EXEC usp_TietKiem_CapNhatTrangThaiMucTieu @idMucTieu , @Date");
+			object[] param = new object[] { idMucTieu, ngay };
 			int row = DataProvider.Instance.ExecuteNonQuery(query, param);
 
 			if (row > 0)

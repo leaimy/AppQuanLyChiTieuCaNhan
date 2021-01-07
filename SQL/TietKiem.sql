@@ -157,5 +157,48 @@ AS
 BEGIN  
     INSERT INTO MucTieuTietKiem (NguoiDung_Id, TenMucTieu, MoTa, SoTienCanTietKiem, NgayBD, NgayKT, LoaiTietKiem)
     VALUES (@idNguoiDung, @TenMucTieu, @MoTa, @SoTienTietKiem, @NgayBD, @NgayKT,@LoaiTietKiem)
+
+    DECLARE @IdMucTieu INT
+    SELECT @IdMucTieu = MAX(Id) FROM MucTieuTietKiem
+
+    DECLARE @counter INT;
+    
+    IF(@loaiTietKiem=N'Ngày')
+        SET @counter = DATEDIFF(DAY, @NgayBD, @NgayKT);
+    ELSE
+        SET @counter = DATEDIFF(WEEK, @NgayBD, @NgayKT);
+
+    DECLARE @amount DECIMAL
+    SELECT @amount = @SoTienTietKiem / @counter
+
+    SELECT @amount = (@amount / 1000 + 1)
+    SELECT @amount = @amount * 1000
+
+    WHILE  (@NgayBD <= @NgayKT)
+        BEGIN
+            INSERT ChiTietTietKiem (MucTieuTietKiem_Id, SoTien, Ngay, TrangThai)
+            VALUES (@IdMucTieu, @amount, @NgayBD, 0)
+
+        IF(@loaiTietKiem=N'Ngày')
+            SET @NgayBD = DATEADD(DAY, 1, @NgayBD)
+        ELSE
+            SET @NgayBD = DATEADD(WEEK, 1, @NgayBD)
+    END
 END
 GO
+
+-- EXEC usp_TietKiem_ThemMucTieuTietKiem 
+GO
+
+--Cap nhat trang thai chi tiet muc tieu
+CREATE PROC usp_TietKiem_CapNhatTrangThaiMucTieu
+@idMucTieu INT, @Date DATETIME
+AS 
+BEGIN
+    UPDATE ChiTietTietKiem
+    SET TrangThai = 1
+    WHERE MucTieuTietKiem_Id = @idMucTieu AND DATEDIFF(DAY, Ngay, @Date) = 0
+END
+GO
+
+-- EXEC usp_TietKiem_CapNhatTrangThaiMucTieu
