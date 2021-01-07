@@ -99,6 +99,8 @@ class MucTieuApi {
       "Loai Tiet Kiem": loaiTietKiem,
     };
 
+    print(body);
+
     var bodyJson = jsonEncode(body);
     http.Response response = await http.post(
       _urlMucTieu,
