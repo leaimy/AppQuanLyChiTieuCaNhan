@@ -52,9 +52,9 @@ BEGIN
 
     DECLARE @counter INT;
     IF(@loaiTietKiem=N'Ngày')
-    SET @counter = DATEDIFF(DAY,@begin_date,@end_date);
-ELSE
-    SET @counter = DATEDIFF(WEEK,@begin_date,@end_date);
+        SET @counter = DATEDIFF(DAY,@begin_date,@end_date);
+    ELSE
+        SET @counter = DATEDIFF(WEEK,@begin_date,@end_date);
 
     DECLARE @amount DECIMAL
     SELECT @amount = @saving_amount / @counter

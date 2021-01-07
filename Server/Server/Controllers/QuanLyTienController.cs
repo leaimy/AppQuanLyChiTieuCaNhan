@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Server.DAO;
 using Server.DTO;
 using System;
@@ -8,78 +8,96 @@ using System.Threading.Tasks;
 
 namespace Server.Controllers
 {
-  [ApiController]
-  [Route("api/quanlytien")]
-  public class QuanLyTienController : ControllerBase
-  {
-    [HttpGet]
-    public ActionResult<List<QuanLyTienDTO>> GetAllMucTieu()
-    {
-      string user_id = HttpContext.Request.Query["user_id"].ToString();
-      if (String.IsNullOrWhiteSpace(user_id))
-        return BadRequest();
+	[ApiController]
+	[Route("api/quanlytien")]
+	public class QuanLyTienController : ControllerBase
+	{
+		[HttpGet]
+		public ActionResult<List<QuanLyTienDTO>> GetAllMucTieu()
+		{
+			string user_id = HttpContext.Request.Query["user_id"].ToString();
+			if (String.IsNullOrWhiteSpace(user_id))
+				return BadRequest();
 
-      int userID = Convert.ToInt32(user_id);
+			int userID = Convert.ToInt32(user_id);
 
-      List<QuanLyTienDTO> dsTietKiem = QuanLyTienDAO.Instance.GetAllQuanLyTien(userID);
+			List<QuanLyTienDTO> dsTietKiem = QuanLyTienDAO.Instance.GetAllQuanLyTien(userID);
 
-      return Ok(dsTietKiem);
-    }
+			return Ok(dsTietKiem);
+		}
 
-    [HttpGet("thongketongquan")]
-    public ActionResult<QuanLyTienThongKeTongQuanDTO> ThongKeTongQuan()
-    {
-      string user_id = HttpContext.Request.Query["user_id"].ToString();
-      if (String.IsNullOrWhiteSpace(user_id))
-        return BadRequest();
+		[HttpGet("thongketongquan")]
+		public ActionResult<QuanLyTienThongKeTongQuanDTO> ThongKeTongQuan()
+		{
+			string user_id = HttpContext.Request.Query["user_id"].ToString();
+			if (String.IsNullOrWhiteSpace(user_id))
+				return BadRequest();
 
-      int userID = Convert.ToInt32(user_id);
+			int userID = Convert.ToInt32(user_id);
 
-      QuanLyTienThongKeTongQuanDTO thongKe = QuanLyTienDAO.Instance.ThongKeTongQuan(userID);
+			QuanLyTienThongKeTongQuanDTO thongKe = QuanLyTienDAO.Instance.ThongKeTongQuan(userID);
 
-      return Ok(thongKe);
-    }
+			return Ok(thongKe);
+		}
 
-    [HttpGet("thongkechitiet")]
-    public ActionResult<QuanLyTienThongKeChiTietDTO> ThongKeChiTiet()
-    {
-      string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
-      if (String.IsNullOrWhiteSpace(quanLyTien_id))
-        return BadRequest();
+		[HttpGet("thongkechitiet")]
+		public ActionResult<QuanLyTienThongKeChiTietDTO> ThongKeChiTiet()
+		{
+			string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
+			if (String.IsNullOrWhiteSpace(quanLyTien_id))
+				return BadRequest();
 
-      int quanLyTienID = Convert.ToInt32(quanLyTien_id);
+			int quanLyTienID = Convert.ToInt32(quanLyTien_id);
 
-      QuanLyTienThongKeChiTietDTO thongKe = QuanLyTienDAO.Instance.ThongKeChiTiet(quanLyTienID);
+			QuanLyTienThongKeChiTietDTO thongKe = QuanLyTienDAO.Instance.ThongKeChiTiet(quanLyTienID);
 
-      return Ok(thongKe);
-    }
+			return Ok(thongKe);
+		}
 
-    [HttpGet("thongkenguonthu")]
-    public ActionResult<List<QuanLyTienThongKeNguonThuDTO>> ThongKeNguonThuTongQuan()
-    {
-      string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
-      if (String.IsNullOrWhiteSpace(quanLyTien_id))
-        return BadRequest();
+		[HttpGet("thongkenguonthu")]
+		public ActionResult<List<QuanLyTienThongKeNguonThuDTO>> ThongKeNguonThuTongQuan()
+		{
+			string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
+			if (String.IsNullOrWhiteSpace(quanLyTien_id))
+				return BadRequest();
 
-      int quanLyTienID = Convert.ToInt32(quanLyTien_id);
+			int quanLyTienID = Convert.ToInt32(quanLyTien_id);
 
-      List<QuanLyTienThongKeNguonThuDTO> dsNguonThu = QuanLyTienDAO.Instance.ThongKeNguonThuTongQuan(quanLyTienID);
+			List<QuanLyTienThongKeNguonThuDTO> dsNguonThu = QuanLyTienDAO.Instance.ThongKeNguonThuTongQuan(quanLyTienID);
 
-      return Ok(dsNguonThu);
-    }
+			return Ok(dsNguonThu);
+		}
 
-    [HttpGet("thongkekhoanchi")]
-    public ActionResult<List<QuanLyTienThongKeKhoanChiDTO>> ThongKeKhoanChiTongQuan()
-    {
-      string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
-      if (String.IsNullOrWhiteSpace(quanLyTien_id))
-        return BadRequest();
+		[HttpGet("thongkekhoanchi")]
+		public ActionResult<List<QuanLyTienThongKeKhoanChiDTO>> ThongKeKhoanChiTongQuan()
+		{
+			string quanLyTien_id = HttpContext.Request.Query["quanlytien_id"].ToString();
+			if (String.IsNullOrWhiteSpace(quanLyTien_id))
+				return BadRequest();
 
-      int quanLyTienID = Convert.ToInt32(quanLyTien_id);
+			int quanLyTienID = Convert.ToInt32(quanLyTien_id);
 
-      List<QuanLyTienThongKeKhoanChiDTO> dsKhoanChi = QuanLyTienDAO.Instance.ThongKeCacKhoanChiTongQuan(quanLyTienID);
+			List<QuanLyTienThongKeKhoanChiDTO> dsKhoanChi = QuanLyTienDAO.Instance.ThongKeCacKhoanChiTongQuan(quanLyTienID);
 
-      return Ok(dsKhoanChi);
-    }
-  }
+			return Ok(dsKhoanChi);
+		}
+
+		[HttpPost()]
+		public ActionResult<string> ThemQuanLyTien(ThemQuanLyTienDTO quanLyTienMoi)
+		{
+			bool ketQua = QuanLyTienDAO.Instance.ThemQuanLyTien(quanLyTienMoi);
+			if (ketQua == false)
+				return BadRequest("Thêm thất bại");
+			return Ok("Thêm thành công");
+		}
+
+		[HttpPost("nguonthu")]
+		public ActionResult<string> ThemNguonThu(QuanLyTienThongKeNguonThuDTO nguonThuMoi)
+		{
+			bool ketQua = QuanLyTienDAO.Instance.ThemNguonThu(nguonThuMoi);
+			if (ketQua == false)
+				return BadRequest("Thêm thất bại");
+			return Ok("Thêm thành công");
+		}
+	}
 }

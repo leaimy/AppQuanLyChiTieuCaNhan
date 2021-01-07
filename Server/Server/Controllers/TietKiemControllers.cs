@@ -72,7 +72,29 @@ namespace Server.Controllers
 			return Ok(dsNgay);
 		}
 
-		
+		[HttpPost()]
+		public ActionResult<string> ThemMucTieu(ThemMucTieuDTO mucTieuMoi)
+		{
+			bool ketQua = TietKiemDAO.Instance.ThemMucTieuTietKiem(mucTieuMoi);
+			if (ketQua == false)
+				return BadRequest("Thêm thất bại");
+			return Ok("Thêm thành công");
+		}
+
+		[HttpPut("{id}")]
+		public ActionResult<string> CapNhatTrangThai(int id, CapNhatTrangThaiMucTieuDTO capNhatTrangThaiMucTieu)
+		{
+			Console.WriteLine(id);
+
+			bool ketQua = TietKiemDAO.Instance.CapNhatTrangThaiMucTieu(id, capNhatTrangThaiMucTieu.Date);
+
+			if (ketQua == false)
+				return BadRequest("Cập nhật không thành công");
+
+			return Ok("Cập nhật thành công");
+		}
+
+
 	}
 }
 

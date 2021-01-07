@@ -6,61 +6,50 @@ using System.Threading.Tasks;
 
 namespace Server.DTO
 {
-	public class ChiTietMucTieuDTO
+	public class ThemMucTieuDTO
 	{
-		public int Id { get; set; }
+		private string loaiTietKiem;
+
 		public int IdNguoiDung { get; set; }
 		public string TenMucTieu { get; set; }
 		public string MoTa { get; set; }
 		public decimal SoTienTietKiem { get; set; }
-		public decimal SoTienDaTietKiem { get; set; }
 		public DateTime NgayBD { get; set; }
 		public DateTime NgayKT { get; set; }
-		public bool TrangThai { get; set; }
-		public int SoNgayHoanThanh { get; set; }
-		public int SoNgayChuaHoanThanh { get; set; }
-		private string loaiTietKiem;
+
 		public string LoaiTietKiem
 		{
 			get { return loaiTietKiem.First().ToString().ToUpper() + loaiTietKiem.Substring(1); }
 			set { loaiTietKiem = value.ToLower(); }
 		}
 
-		public ChiTietMucTieuDTO()
+		public ThemMucTieuDTO()
 		{
 
 		}
 
-		public ChiTietMucTieuDTO(int id, int idNguoiDung, string tenMucTieu, string moTa, decimal soTienTietKiem, decimal soTienDaTietKiem, DateTime ngayBD, DateTime ngayKT, bool trangThai, string loaiTietKiem, int soNgayHoanThanh, int soNgayChuaHoanThanh)
+		public ThemMucTieuDTO(int idNguoiDung, string tenMucTieu, string moTa, decimal soTienTietKiem, DateTime ngayBD, DateTime ngayKT, string loaiTietKiem)
 		{
-			Id = id;
 			IdNguoiDung = idNguoiDung;
 			TenMucTieu = tenMucTieu;
 			MoTa = moTa;
 			SoTienTietKiem = soTienTietKiem;
-			SoTienDaTietKiem = soTienDaTietKiem;
 			NgayBD = ngayBD;
 			NgayKT = ngayKT;
-			TrangThai = trangThai;
 			LoaiTietKiem = loaiTietKiem;
-			SoNgayHoanThanh = soNgayHoanThanh;
-			SoNgayChuaHoanThanh = soNgayChuaHoanThanh;
 		}
 
-		public ChiTietMucTieuDTO(DataRow row)
+		public ThemMucTieuDTO(DataRow row)
 		{
-			Id = (int)row["Id"];
 			IdNguoiDung = (int)row["NguoiDung_Id"];
 			TenMucTieu = row["TenMucTieu"].ToString();
 			MoTa = row["MoTa"].ToString();
 			SoTienTietKiem = (decimal)row["SoTienCanTietKiem"];
-			SoTienDaTietKiem = (decimal)row["SoTienDaTietKiemDuoc"];
 			NgayBD = (DateTime)row["NgayBD"];
 			NgayKT = (DateTime)row["NgayKT"];
-			TrangThai = (bool)row["TrangThai"];
 			LoaiTietKiem = row["LoaiTietKiem"].ToString();
-			SoNgayHoanThanh = (int)row["SoNgayHoanThanh"];
-			SoNgayChuaHoanThanh = (int)row["SoNgayChuaHoanThanh"];
 		}
+
+
 	}
 }
