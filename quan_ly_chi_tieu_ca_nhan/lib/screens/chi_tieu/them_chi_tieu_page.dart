@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
-class ThemChiTieuPage extends StatelessWidget {
+class ThemChiTieuPage extends StatefulWidget {
+  @override
+  _ThemChiTieuPageState createState() => _ThemChiTieuPageState();
+}
+
+class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
+  String tenChiTieu = "";
+  String nhom = "Thức ăn";
+  int soTien = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +91,13 @@ class ThemChiTieuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Thức ăn",
+                                  groupValue: nhom,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nhom = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -117,9 +129,13 @@ class ThemChiTieuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Bạn bè",
+                                  groupValue: nhom,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nhom = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -151,9 +167,13 @@ class ThemChiTieuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Quần áo",
+                                  groupValue: nhom,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nhom = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -185,9 +205,13 @@ class ThemChiTieuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Di chuyển",
+                                  groupValue: nhom,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nhom = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
@@ -219,9 +243,13 @@ class ThemChiTieuPage extends StatelessWidget {
                                   ],
                                 ),
                                 Radio(
-                                  value: false,
-                                  groupValue: null,
-                                  onChanged: (value) {},
+                                  value: "Khác",
+                                  groupValue: nhom,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      nhom = value;
+                                    });
+                                  },
                                 ),
                               ],
                             ),
