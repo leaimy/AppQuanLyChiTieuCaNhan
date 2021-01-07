@@ -21,9 +21,14 @@ namespace Server.DTO
 
     public QuanLyTienThongKeTongQuanDTO(DataRow row)
     {
-      TongSoTienDaQuanLy = Convert.ToDecimal(row["TongSoTienDaQuanLy"].ToString());
-      TongSoTienDaChiTieu = Convert.ToDecimal(row["TongSoTienDaChiTieu"].ToString());
-      TongSoKeHoachQuanLyDaHoanThanh = Convert.ToInt32(row["TongSoKeHoachQuanLyDaHoanThanh"].ToString());
+      if (!string.IsNullOrWhiteSpace(row["TongSoTienDaQuanLy"].ToString()))
+        TongSoTienDaQuanLy = Convert.ToDecimal(row["TongSoTienDaQuanLy"].ToString());
+
+      if (!string.IsNullOrWhiteSpace(row["TongSoTienDaChiTieu"].ToString()))
+        TongSoTienDaChiTieu = Convert.ToDecimal(row["TongSoTienDaChiTieu"].ToString());
+
+      if (!string.IsNullOrWhiteSpace(row["TongSoKeHoachQuanLyDaHoanThanh"].ToString()))
+        TongSoKeHoachQuanLyDaHoanThanh = Convert.ToInt32(row["TongSoKeHoachQuanLyDaHoanThanh"].ToString());
     }
   }
 }
