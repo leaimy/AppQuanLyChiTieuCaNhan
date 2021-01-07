@@ -4,6 +4,10 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemChiTieuPage extends StatefulWidget {
+  final Function onSuccess;
+
+  ThemChiTieuPage({this.onSuccess});
+
   @override
   _ThemChiTieuPageState createState() => _ThemChiTieuPageState();
 }
