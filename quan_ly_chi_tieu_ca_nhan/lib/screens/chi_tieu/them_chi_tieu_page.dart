@@ -304,9 +304,10 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
                     soTien: soTien,
                     ngayChiTieu: DateTime.now(),
                   );
-                  if (ketQua == true)
+                  if (ketQua == true) {
+                    if (widget.onSuccess != null) widget.onSuccess();
                     Navigator.pop(context);
-                  else
+                  } else
                     print("lỗi");
                 },
               ),

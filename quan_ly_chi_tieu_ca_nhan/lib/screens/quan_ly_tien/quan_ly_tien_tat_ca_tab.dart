@@ -75,6 +75,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                 builder: (context) => SingleChildScrollView(
                   child: ThemQuanLyTienPage(
                     idNguoiDung: widget.nguoiDung.id,
+                    onSuccess: () {
+                      getThongKeTongQuan();
+                      getDanhSachQuanLyTien();
+                    },
                   ),
                   padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -133,6 +137,10 @@ class _QuanLyTienTatCaTabState extends State<QuanLyTienTatCaTab> {
                         builder: (context) {
                           return QuanLyTienChiTietPage(
                             quanLyTienID: quanLyTien.id,
+                            onChanged: () {
+                              getThongKeTongQuan();
+                              getDanhSachQuanLyTien();
+                            },
                           );
                         },
                       ),

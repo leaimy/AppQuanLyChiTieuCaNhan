@@ -6,7 +6,9 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemQuanLyTienPage extends StatefulWidget {
   final int idNguoiDung;
-  ThemQuanLyTienPage({@required this.idNguoiDung});
+  final Function onSuccess;
+
+  ThemQuanLyTienPage({@required this.idNguoiDung, this.onSuccess});
 
   @override
   _ThemQuanLyTienPageState createState() => _ThemQuanLyTienPageState();
@@ -113,9 +115,10 @@ class _ThemQuanLyTienPageState extends State<ThemQuanLyTienPage> {
                   ngayKT: ngayKT,
                 );
 
-                if (ketQua == true)
+                if (ketQua == true) {
+                  if (widget.onSuccess != null) widget.onSuccess();
                   Navigator.pop(context);
-                else
+                } else
                   print("lỗi");
               },
             ),

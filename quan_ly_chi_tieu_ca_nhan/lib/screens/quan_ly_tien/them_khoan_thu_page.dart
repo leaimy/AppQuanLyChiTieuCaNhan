@@ -7,6 +7,7 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 class ThemKhoanThuPage extends StatefulWidget {
   final int idQuanLyTien;
   final Function onSuccess;
+
   ThemKhoanThuPage({this.idQuanLyTien, this.onSuccess});
 
   @override
@@ -237,7 +238,7 @@ class _ThemKhoanThuPageState extends State<ThemKhoanThuPage> {
                   );
 
                   if (ketQua == true) {
-                    widget.onSuccess();
+                    if (widget.onSuccess != null) widget.onSuccess();
                     Navigator.pop(context);
                   } else
                     print("lỗi");
