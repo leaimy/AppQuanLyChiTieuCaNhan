@@ -58,16 +58,19 @@ class ChiTieuAPI {
     return dsChiTietChiTieu;
   }
 
-  Future<bool> themChiTieu(
-      {String nhom,
-      String tenChiTieu,
-      int soTien,
-      DateTime ngayChiTieu}) async {
+  Future<bool> themChiTieu({
+    String nhom,
+    String tenChiTieu,
+    int soTien,
+    DateTime ngayChiTieu,
+    int idNguoiDung,
+  }) async {
     var body = {
       "Nhom": nhom,
       "TenChiTieu": tenChiTieu,
       "SoTien": soTien,
       "NgayChiTieu": ngayChiTieu,
+      "IdNguoiDung": idNguoiDung,
     };
 
     var bodyJson = JsonEncoder(myEncode).convert(body);

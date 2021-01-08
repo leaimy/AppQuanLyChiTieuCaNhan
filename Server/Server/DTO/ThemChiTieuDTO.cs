@@ -12,18 +12,20 @@ namespace Server.DTO
     public decimal SoTien { get; set; }
     public DateTime NgayChiTieu { get; set; }
     public string Nhom { get; set; }
+    public int IdNguoiDung { get; set; }
 
     public ThemChiTieuDTO()
     {
 
     }
 
-    public ThemChiTieuDTO(string tenChiTieu, decimal soTien, DateTime ngayChiTieu, string nhom)
+    public ThemChiTieuDTO(string tenChiTieu, decimal soTien, DateTime ngayChiTieu, string nhom, int idNguoDung)
     {
       TenChiTieu = tenChiTieu;
       SoTien = soTien;
       NgayChiTieu = ngayChiTieu;
       Nhom = nhom;
+      IdNguoiDung = IdNguoiDung;
     }
   }
 }

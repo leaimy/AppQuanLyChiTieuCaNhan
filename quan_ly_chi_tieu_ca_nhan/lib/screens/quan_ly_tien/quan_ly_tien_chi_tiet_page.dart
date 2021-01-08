@@ -15,9 +15,14 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class QuanLyTienChiTietPage extends StatefulWidget {
   final int quanLyTienID;
+  final int idNguoiDung;
   final Function onChanged;
 
-  QuanLyTienChiTietPage({this.quanLyTienID, this.onChanged});
+  QuanLyTienChiTietPage({
+    @required this.quanLyTienID,
+    @required this.idNguoiDung,
+    this.onChanged,
+  });
 
   @override
   _QuanLyTienChiTietPageState createState() => _QuanLyTienChiTietPageState();
@@ -239,6 +244,7 @@ class _QuanLyTienChiTietPageState extends State<QuanLyTienChiTietPage> {
                       builder: (context) {
                         return LichSuChiTieuPage(
                           quanLyTienID: widget.quanLyTienID,
+                          idNguoiDung: widget.idNguoiDung,
                           onChanged: () {
                             getThongKe();
                             getDanhSachNguonThu();

@@ -4,9 +4,10 @@ import 'package:quan_ly_chi_tieu_ca_nhan/components/nut_bam.dart';
 import 'package:quan_ly_chi_tieu_ca_nhan/utils/constants.dart';
 
 class ThemChiTieuPage extends StatefulWidget {
+  final int idNguoiDung;
   final Function onSuccess;
 
-  ThemChiTieuPage({this.onSuccess});
+  ThemChiTieuPage({@required this.idNguoiDung, this.onSuccess});
 
   @override
   _ThemChiTieuPageState createState() => _ThemChiTieuPageState();
@@ -303,6 +304,7 @@ class _ThemChiTieuPageState extends State<ThemChiTieuPage> {
                     nhom: nhom,
                     soTien: soTien,
                     ngayChiTieu: DateTime.now(),
+                    idNguoiDung: widget.idNguoiDung,
                   );
                   if (ketQua == true) {
                     if (widget.onSuccess != null) widget.onSuccess();

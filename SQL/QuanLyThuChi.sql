@@ -72,7 +72,7 @@ BEGIN
 END
 GO
 
-EXEC usp_QuanLyTien_ThongKeTongQuan 1
+EXEC usp_QuanLyTien_ThongKeTongQuan 7
 GO
 
 -- select * from QuanLyTienHienCo
@@ -348,12 +348,14 @@ WHERE SPECIFIC_SCHEMA = N'dbo'
 DROP PROCEDURE dbo.usp_ChiTieu_ThemChiTietChiTieu
 GO
 CREATE PROC usp_ChiTieu_ThemChiTietChiTieu
-@Ten NVARCHAR(200), @Nhom NVARCHAR(200), @SoTien DECIMAL, @NgayChiTieu DATETIME
+@Ten NVARCHAR(200), @Nhom NVARCHAR(200), @SoTien DECIMAL, @NgayChiTieu DATETIME, @IdNguoiDung INT
 AS
 BEGIN
     DECLARE @IdQuanLyTien INT
     SELECT @IdQuanLyTien = Id FROM QuanLyTienHienCo
-    WHERE TrangThai = 0
+    WHERE TrangThai = 0 AND NguoiDung_Id = @IdNguoiDung
+
+    -- select * from QuanLyTienHienCo where TrangThai = 0 and NguoiDung_Id = 10
 
     IF(@IdQuanLyTien IS NULL)
         RETURN
@@ -361,7 +363,7 @@ BEGIN
 
     DECLARE @IdChiTieu INT
     SELECT @IdChiTieu = Id FROM ChiTieu
-    WHERE DATEDIFF(DAY, Ngay, @NgayChiTieu) = 0
+    WHERE DATEDIFF(DAY, Ngay, @NgayChiTieu) = 0 AND QuanLyTienHienCo_Id = @IdQuanLyTien
 
     IF(@IdChiTieu IS NULL)
     BEGIN
@@ -369,7 +371,7 @@ BEGIN
         VALUES (@IdQuanLyTien, @NgayChiTieu, 0)
 
         SELECT @IdChiTieu = Id FROM ChiTieu
-        WHERE DATEDIFF(DAY, Ngay, @NgayChiTieu) = 0
+        WHERE DATEDIFF(DAY, Ngay, @NgayChiTieu) = 0 AND QuanLyTienHienCo_Id = @IdQuanLyTien
     END
 
 
@@ -401,4 +403,4 @@ END
 GO
 
 SELECT * FROM QuanLyTienHienCo
-SELECT * FROM ChiTieu WHERE QuanLyTienHienCo_Id = 8
+SELECT * FROM ChiTieu WHERE QuanLyTienHienCo_Id = 12

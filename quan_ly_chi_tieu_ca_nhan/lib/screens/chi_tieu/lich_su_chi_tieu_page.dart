@@ -12,9 +12,14 @@ import 'package:quan_ly_chi_tieu_ca_nhan/utils/color_picker.dart';
 
 class LichSuChiTieuPage extends StatefulWidget {
   final int quanLyTienID;
+  final int idNguoiDung;
   final Function onChanged;
 
-  LichSuChiTieuPage({@required this.quanLyTienID, this.onChanged});
+  LichSuChiTieuPage({
+    @required this.quanLyTienID,
+    @required this.idNguoiDung,
+    this.onChanged,
+  });
 
   @override
   _LichSuChiTieuPageState createState() => _LichSuChiTieuPageState();
@@ -112,6 +117,7 @@ class _LichSuChiTieuPageState extends State<LichSuChiTieuPage> {
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
                       return ThemChiTieuPage(
+                        idNguoiDung: widget.idNguoiDung,
                         onSuccess: () {
                           getDanhSachChiTieu();
                           if (widget.onChanged != null) widget.onChanged();

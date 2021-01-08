@@ -119,7 +119,7 @@ class _ThemQuanLyTienPageState extends State<ThemQuanLyTienPage> {
                   if (widget.onSuccess != null) widget.onSuccess();
                   Navigator.pop(context);
                 } else
-                  print("lỗi");
+                  Navigator.pop(context);
               },
             ),
           ],
