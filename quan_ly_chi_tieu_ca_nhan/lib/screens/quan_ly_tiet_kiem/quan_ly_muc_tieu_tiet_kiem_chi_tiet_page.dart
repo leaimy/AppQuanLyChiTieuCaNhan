@@ -294,7 +294,8 @@ class _QuanLyMucTieuTietKiemChiTietPageState
 
                           if (chiTietMucTieu.ngayBD.compareTo(now) <= 0 &&
                               chiTietMucTieu.ngayKT.compareTo(now) >= 0) {
-                            if (now.compareTo(DateTime.now()) > 0)
+                            if (now.compareTo(DateTime.now()) > 0 &&
+                                getTrangThaiByDate(now) != null)
                               return CircleDateBox(
                                 text: now.day.toString(),
                                 color: Colors.pink[200],
